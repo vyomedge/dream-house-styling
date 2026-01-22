@@ -38,9 +38,9 @@ export default function ContactForm({ hide }) {
   };
 
   return (
-    <div className="mx-w-[600px] mx-auto bg-[#F5F9FF] p-6 rounded-lg">
-      <h5 className="responsiveheading5 font-bold text-[#1f3d2b] mb-1">{`Send Us a Message`}</h5>
-      <p className="responsive-text text-[#1f3d2b] mb-6">{`Please fill in the form below and our team will get in touch within 24 hours.`}</p>
+    <div className="mx-w-[600px] mx-auto border-1 border-white p-6 rounded-lg">
+      <h5 className="responsiveheading5 font-bold text-white mb-1">{`Send Us a Message`}</h5>
+      <p className="responsive-text text-gray-300 mb-6">{`Please fill in the form below and our team will get in touch within 24 hours.`}</p>
       {success && (
         <p className="responsive-text text-green-600 mb-4">{`Your message has been sent successfully!`}</p>
       )}
@@ -106,7 +106,7 @@ export default function ContactForm({ hide }) {
           <textarea
             rows="3"
             placeholder="Message"
-            className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
+            className="w-full rounded-md border border-gray-300 px-3 py-2  focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
             {...register("message", {
               minLength: {
                 value: 10,

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaFilter } from "react-icons/fa";
 import ProductCard from "./ProductCard";
 
+
 const productsData = [
     {
         id: 1,
@@ -14,6 +15,7 @@ const productsData = [
         room: "Living Room",
         color: "white",
         image: "/wallpaper1.jpg",
+        discription: " Premium floral design wallpaper perfect for living rooms and bedrooms",
     },
     {
         id: 2,
@@ -23,6 +25,7 @@ const productsData = [
         room: "Office",
         color: "blue",
         image: "/wallpaper2.jpg",
+        discription: " Premium floral design wallpaper perfect for living rooms and bedrooms",
     },
     {
         id: 3,
@@ -32,6 +35,7 @@ const productsData = [
         room: "Bedroom",
         color: "black",
         image: "/wallpaper3.jpg",
+        discription: " Premium floral design wallpaper perfect for living rooms and bedrooms",
     },
 ];
 
@@ -76,9 +80,10 @@ export default function ProductListing() {
         if (filters.color && filters.color !== item.color) return false;
 
         if (filters.price === "under5000" && item.price >= 5000) return false;
-        if (filters.price === "10000to5000" && (item.price < 5000 || item.price > 10000)) return false;
-        if (filters.price === "20000to10000" && (item.price < 10000 || item.price > 20000)) return false;
-        if (filters.price === "above20000" && (item.price < 20000)) return false;
+        if (filters.price === "5000to10000" && (item.price < 5000 || item.price > 10000)) return false;
+        if (filters.price === "10000to20000" && (item.price < 10000 || item.price > 20000)) return false;
+        if (filters.price === "above20000" && item.price < 20000) return false;
+
 
         return true;
     });
@@ -209,6 +214,7 @@ const FilterPanel = ({ filters, setFilters, handleCheckbox }) => (
             <Radio label="₹5,000 - ₹10,000" onChange={() => setFilters({ ...filters, price: "5000to10000" })} />
             <Radio label="₹10,000 - ₹20,000" onChange={() => setFilters({ ...filters, price: "10000to20000" })} />
             <Radio label="Above ₹20,000" onChange={() => setFilters({ ...filters, price: "above20000" })} />
+
         </FilterBlock>
     </div>
 );

@@ -1,29 +1,29 @@
+"use client";
+
 import Image from "next/image";
 
-export default function ProductCard() {
+export default function ProductCard({ product }) {
   return (
-    <div className="max-w-[300] bg-white rounded-xl border border-gray-200 shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_12px_28px_rgba(0,0,0,0.15)] group">
-      <div className="relative h-[180] w-full overflow-hidden rounded-t-xl">
+    <div className="group">
+      <div className="relative aspect-[4/4] rounded-xl overflow-hidden bg-[#15242a] mb-4">
         <Image
-          src="/wallpaper1.jpg"
-          alt="Elegant Floral Wallpaper"
+          src={product.image}
+          alt={product.title}
           fill
-          className=" object-cover transition-transform duration-500 ease-out group-hover:scale-110" />
-      </div>
-
-      <div className="p-4">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="text-[15px] font-semibold text-black leading-snug"> {` Elegant Floral `} {""}<br />{` Wallpaper`}</h3>
-          <p className="text-[11px] bg-[#00D4C8] text-[#101d22] px-2 py-3 rounded-md ">{`Customizable`}</p>
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div className="absolute top-4 right-4 bg-[#00D4C8]/90 text-[#101d22] px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase">
+          {product.type}
         </div>
-        <p className="text-[13px] text-gray-600 mt-2 "> {`Premium floral design wallpaper perfect for living rooms and bedrooms`}</p>
-        <div className="flex items-center justify-between mt-4">
-          <p className="text-[16px] font-semibold text-[#101d22]">{`₹2,500`}</p>
-          <p className="text-[13px] text-gray-500 transition-all duration-300 group-hover:text-[#101d22] group-hover:translate-x-1 ">
-            {` View Details →`}
-          </p>
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span className="text-white text-sm font-medium tracking-wide">
+            View Details →
+          </span>
         </div>
       </div>
+      <h3 className="responsiveheading6 font-semibold! text-white group-hover:text-[#00D4C8] transition-colors leading-snug"> {product.title}</h3>
+      <p className="text-white/50 text-sm mt-1">{product.discription}</p>
+      <p className="text-[#00D4C8] font-bold mt-2"> ₹{product.price.toLocaleString("en-IN")}</p>
     </div>
   );
 }

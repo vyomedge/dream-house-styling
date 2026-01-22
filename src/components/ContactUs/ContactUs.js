@@ -19,7 +19,7 @@ const bannerContent = {
             value: "contact-form"
         }
     ],
-    backgroundImg: "/ractangle.jpg"
+    backgroundImg: "/contactusbanner.jpeg"
 };
 
 const faqs = [

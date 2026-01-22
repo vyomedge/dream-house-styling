@@ -31,7 +31,7 @@ export default function ProductDetail() {
                   /
                   <span className="text-gray-400">{` Elegant Floral Wallpaper`}</span>
                 </div>
-                <Link href="/Catogory" className="inline-flex items-center gap-2 text-sm text-[#00D4C8] mb-6"> <FaArrowLeft /> {`Back to Category`}</Link>
+                <Link href="/category" className="inline-flex items-center gap-2 text-sm text-[#00D4C8] mb-6"> <FaArrowLeft /> {`Back to Category`}</Link>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
                   <div>
                     <div className="relative w-full  h-[320] sm:h-[420] rounded-xl overflow-hidden border border-gray-200">
