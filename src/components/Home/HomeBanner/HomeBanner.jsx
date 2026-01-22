@@ -14,7 +14,7 @@ const HomeBanner = () => {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to right, rgba(20, 30, 50, 0.95) 0%, rgba(20, 30, 50, 0.7) 50%, transparent 100%)",
+              "linear-gradient(to right, rgb(16 29 34 / 86%) 0%, rgb(18 30 35 / 70%) 50%, transparent 100%)",
           }}
         />
 

@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar";
 import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import { useCart } from "@/Context/CartContext";
+import HeaderMagaDropDown from "./HeaderMagaDropDown";
 
 const Header = () => {
   const { items, fetchCartItems } = useCart();
@@ -25,10 +26,10 @@ const Header = () => {
   }, []);
 
   return (
-    <header class="sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/80 backdrop-blur-md">
-      <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <div class="flex items-center gap-12">
-          <div class="flex items-center gap-3">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/80 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="flex items-center gap-12 h-full">
+          <div className="flex items-center gap-3">
             <Link href={"/"}>
               <Image
                 src={logo}
@@ -43,42 +44,47 @@ const Header = () => {
               />
             </Link>
           </div>
-          <nav class="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8 h-full">
             <a
-              class="text-sm font-medium hover:text-primary transition-colors"
+              className="text-sm font-medium hover:text-(--primaryColor) transition-colors"
               href="#"
             >
               Collections
             </a>
-            <a
-              class="text-sm font-medium hover:text-primary transition-colors"
-              href="#"
+
+            <div class="mega-menu-trigger h-full flex items-center group">
+              <button class="text-sm font-medium hover:text-(--primaryColor) cursor-pointer transition-colors flex items-center gap-1 h-full">
+                Shop
+                <span class="material-symbols-outlined text-sm">
+                  expand_more
+                </span>
+              </button>
+              <HeaderMagaDropDown />
+            </div>
+
+            <Link
+              className="text-sm font-medium hover:text-(--primaryColor) transition-colors"
+              href="about-us"
             >
-              Shop by Room
-            </a>
+              About Us
+            </Link>
             <a
-              class="text-sm font-medium hover:text-primary transition-colors"
-              href="#"
+              className="text-sm font-medium hover:text-(--primaryColor) transition-colors"
+              href="contact-us"
             >
-              Textures
-            </a>
-            <a
-              class="text-sm font-medium hover:text-primary transition-colors"
-              href="#"
-            >
-              Bespoke
+              Contact
             </a>
           </nav>
         </div>
-        <div class="flex items-center gap-6">
-          <div class="relative hidden lg:block">
+        <div className="flex items-center gap-6">
+          <div className="relative hidden lg:block">
             <SearchBar />
           </div>
-          <button class="material-symbols-outlined text-white/70 hover:text-white">
+          <button className="material-symbols-outlined text-white/70 hover:text-white">
             favorite
           </button>
           <Link href={"/add-to-cart"}>
-            <button class="cursor-pointer  material-symbols-outlined text-white/70 hover:text-white relative mb-2">
+            <button className="cursor-pointer  material-symbols-outlined text-white/70 hover:text-white relative mb-2">
               <Badge
                 badgeContent={items.length}
                 sx={{
@@ -92,8 +98,8 @@ const Header = () => {
               </Badge>
             </button>
           </Link>
-          <button class="bg-[#00D4C8] hover:bg-[#00D4C8]/90 text-white px-5 py-2 rounded-lg text-sm font-bold transition-all cursor-pointer">
-            Sign In
+          <button className="bg-[#00D4C8] hover:bg-[#00D4C8]/90 text-white px-5 py-2 rounded-lg text-sm font-bold transition-all cursor-pointer">
+            <Link href={"/login"}>Sign In</Link>
           </button>
         </div>
       </div>

@@ -24,7 +24,7 @@ const Footer = () => {
           }}
         ></div>
         <div className="relative max-w-7xl mx-auto px-6 pt-32 pb-16">
-          <div className="glass p-12 rounded-2xl max-w-4xl mx-auto mb-32 text-center border border-white/20">
+          <div className="glass2 p-12 rounded-2xl max-w-4xl mx-auto mb-32 text-center border border-white/20">
             <h4 className="text-4xl font-bold text-white mb-4 uppercase tracking-tighter">
               Join the Aesthetic Circle
             </h4>

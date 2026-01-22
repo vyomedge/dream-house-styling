@@ -295,3 +295,65 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+
+
+
+
+        
+.glass {
+    background: rgba(16, 29, 34, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.soft-shadow {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+.soft-shadow:hover {
+    box-shadow: 0 15px 40px -12px rgba(17, 164, 212, 0.2);
+}
+.mega-menu-trigger:hover .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.glass2 {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: #ffffff;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+
+
+.glass-modal {
+    background: rgba(16, 29, 34, 0.7);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(17, 164, 212, 0.2);
+}
+
+.otp-input:focus {
+    box-shadow: 0 0 20px rgba(17, 164, 212, 0.4);
+}
+
+.bg-background-dark {
+    --tw-bg-opacity: 1;
+    background-color: rgba(16, 29, 34, 0.445);
+     backdrop-filter: blur(10px);
+}
+
+    
