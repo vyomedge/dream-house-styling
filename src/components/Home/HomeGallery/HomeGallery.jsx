@@ -1,46 +1,53 @@
+"use client";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-
+import Cookies from "universal-cookie";
 import patternFloral from "@/assets/pattern-floral.jpg";
 import patternGeometric from "@/assets/pattern-geometric.jpg";
 import patternTextured from "@/assets/pattern-textured.jpg";
 import patternAbstract from "@/assets/pattern-abstract.jpg";
 import patternMinimalist from "@/assets/pattern-minimalist.jpg";
-
-const categories = [
-  {
-    name: "Floral",
-    description: "Timeless natural patterns",
-    image: patternFloral,
-    className: "row-span-2 aspect-[3/4] md:aspect-auto",
-  },
-  {
-    name: "Geometric",
-    description: "Bold lines and modern shapes",
-    image: patternGeometric,
-    className: "aspect-square",
-  },
-  {
-    name: "Textured",
-    description: "Subtle depth and dimension",
-    image: patternTextured,
-    className: "aspect-square",
-  },
-  {
-    name: "Minimalist",
-    description: "Simple serenity",
-    image: patternMinimalist,
-    className: "aspect-[4/3]",
-  },
-  {
-    name: "Abstract",
-    description: "Unique artistic expressions",
-    image: patternAbstract,
-    className: "aspect-[4/3]",
-  },
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Categories = () => {
+  const [categories, SetCategory] = useState([]);
+
+  console.log({ categories });
+
+  const cookies = new Cookies();
+  const token_data = cookies.get("Vendor_Token");
+
+  const fetchActiveCategory = async () => {
+    try {
+      const response = await axios.get(
+        "http://127.0.0.1:1331/VendorPanel/ActiveCategory/",
+        {
+          headers: {
+            Authorization: `Bearer ${token_data}`,
+          },
+        },
+      );
+
+      console.log("data", response.data.data);
+
+      const newdata = response.data.data.map((item) => ({
+        ...item,
+        name: item.name,
+        className: "aspect-[4/3]",
+        image: patternFloral,
+      }));
+      console.log("newData", newdata);
+      SetCategory(newdata);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchActiveCategory();
+  }, []);
+
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

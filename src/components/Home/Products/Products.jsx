@@ -1,36 +1,9 @@
+"use client";
+import { useCart } from "@/Context/CartContext";
+import axios from "axios";
 import { ArrowUpRight } from "lucide-react";
-import productMidnight from "@/assets/product-midnight-bloom.jpg";
-import productArtDeco from "@/assets/product-art-deco.jpg";
-import productDesert from "@/assets/product-desert-sands.jpg";
-import productSlate from "@/assets/product-slate-linen.jpg";
-import Image from "next/image";
-
-const products = [
-  {
-    name: "Midnight Bloom",
-    price: "$45.00",
-    unit: "sq meter",
-    image: productMidnight,
-  },
-  {
-    name: "Art Deco Gold",
-    price: "$52.00",
-    unit: "sq meter",
-    image: productArtDeco,
-  },
-  {
-    name: "Desert Sands",
-    price: "$38.00",
-    unit: "sq meter",
-    image: productDesert,
-  },
-  {
-    name: "Slate Linen",
-    price: "$42.00",
-    unit: "sq meter",
-    image: productSlate,
-  },
-];
+import { useEffect, useState } from "react";
+import Cookies from "universal-cookie";
 
 const products2 = [
   {
@@ -68,8 +41,62 @@ const products2 = [
       "https://lh3.googleusercontent.com/aida-public/AB6AXuCaRjBNps1PYUsZkYtbdAP92adYfUbrTdP_dXxe7T7RldoSWV5Z9LRwYuI3ASyQ5zhkvPmzopUoeGxWtUeqobxwPugacxRC5rLErXyo8pBVTfno4__jFdkZWBIjFknhqHSkO9IZIy7WTeUEpuqyIaVdjFAxQlqSXKsRx1LU7Elc_RC6XtYuhVZ_02YLtqY0Lr3uV4P-fPml9-Oyn-sp4ncl-5N-7VQ_IOSG3hPVn0H2tsWanfYKZpOa8ONBJ3iq3V5Bod-xCGdU8gQ",
   },
 ];
+const productImages = products2.map((product) => product.image);
+const getRandomImage = () => {
+  return productImages[Math.floor(Math.random() * productImages.length)];
+};
 
 const Products = () => {
+  const [products, setProducts] = useState([]);
+  const cookies = new Cookies();
+  const token_data = cookies.get("Vendor_Token");
+  const { addToCart } = useCart();
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:1331/VendorPanel/Get-Product/212`,
+        {
+          headers: {
+            Authorization: `Bearer ${token_data}`,
+          },
+        },
+      );
+      setProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const handleAddToCart = async (cartdata) => {
+    console.log("cardData", cartdata?.Prices[0].Price[0].SalePrice);
+    const data = {
+      Cart_Quantity: 1,
+      category: cartdata?.category_name,
+      Sub_Category_id: cartdata?.Sub_Category_id,
+      Store_id: cartdata?.Store_id,
+      TotalPrice: cartdata?.Prices[0].Price[0].SalePrice,
+      Price: cartdata?.Prices,
+      Image_id: 4,
+      Country: "India",
+      State: cartdata?.Store_Country,
+      City: cartdata?.Store_City,
+      Copuon: cartdata?.copuon,
+      free: "no",
+      Brand_Id: cartdata?.Brand_id,
+      Product_id: cartdata?.id,
+    };
+    try {
+      await addToCart(data);
+    } catch (error) {
+      console.error("Error in adding products into cart:", error);
+    }
+  };
+
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -77,23 +104,24 @@ const Products = () => {
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-2">
             Featured Products
           </h2>
+
           <p className="text-muted-foreground">
             Our best-selling designs curated for your home.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {products2.map((product) => (
-            <div key={product.id} className="group">
+          {products.map((product, idx) => (
+            <div key={idx} className="group">
               <div className="relative aspect-[3/4] rounded-xl overflow-hidden soft-shadow bg-[#15242a] mb-6">
                 {/* Image */}
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                  style={{ backgroundImage: `url(${product.image})` }}
+                  style={{ backgroundImage: `url(${getRandomImage()})` }}
                 />
 
                 {/* Badge */}
-                {product.badge && (
+                {product?.badge && (
                   <div className="absolute top-4 right-4 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase">
                     {product.badge}
                   </div>
@@ -106,7 +134,10 @@ const Products = () => {
                       visibility
                     </span>
                   </button>
-                  <button className="flex cursor-pointer bg-white  text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors">
+                  <button
+                    onClick={() => handleAddToCart(product)}
+                    className="flex cursor-pointer bg-white  text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors"
+                  >
                     <span className="material-symbols-outlined  ">
                       shopping_cart
                     </span>
@@ -116,13 +147,17 @@ const Products = () => {
 
               {/* Content */}
               <h5 className="text-lg font-bold group-hover:text-(--primaryColor) transition-colors">
-                {product.title}
+                {product.Product_Name}
               </h5>
-              <p className="text-white/40 text-sm mt-1 uppercase tracking-wider">
-                {product.subtitle}
-              </p>
+              <p
+                className="text-white/40 text-sm mt-1 uppercase tracking-wider"
+                dangerouslySetInnerHTML={{
+                  __html: product.Product_Description,
+                }}
+              />
+
               <p className="text-(--primaryColor) font-bold mt-2">
-                {product.price}
+                ₹{product.Prices[0].Price[0].SalePrice}
               </p>
             </div>
           ))}
