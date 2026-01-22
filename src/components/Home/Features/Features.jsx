@@ -26,13 +26,23 @@ const Features = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="flex flex-col glass2 items-start p-6 bg-background border text-[#fff] border-[#fff] rounded-lg transition-all duration-300 hover:shadow-md"
+              className="  w-full   flex justify-center items-center  z-50"
             >
-              <feature.icon className="w-6 h-6 text-primary mb-3 " />
-              <h3 className="font-semibold mb-1">{feature.title}</h3>
-              <p className="text-sm text-muted-foreground">
-                {feature.description}
-              </p>
+              <div className="relative inset-0 bg-pattern filter blur-xl scale-110 brightness-50"></div>
+              <div className="fixed inset-0 bg-linear-to-tr from-charcoal-dark/90 via-transparent to-charcoal-dark/90"></div>
+              <div className=" w-full max-w-lg px-6">
+                <div className="glass-modal p-10 rounded-[1rem]  relative overflow-hidden group">
+                  <div className="absolute -top-24 -right-24 w-48 h-48 bg-(--primaryColor)/20 blur-[80px] rounded-full"></div>
+                  <feature.icon className="w-8 h-8 text-primary mb-3 " />
+                  <h3 className="font-semibold mb-1 text-2xl">
+                    {feature.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {feature.description}
+                  </p>
+                  <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-(--primaryColor)/10 blur-[80px] rounded-full"></div>
+                </div>
+              </div>
             </div>
           ))}
         </div>
