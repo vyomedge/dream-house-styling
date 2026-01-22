@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function DistributorSupportCards() {
   return (
-    <div className="custom-container  mx-auto mt-10 px-4 py-3">
+    <div className="custom-container  mx-auto mt-10 px-4 py-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="border border-cyan-400 bg-[#F1F7FF]">
           <div className="flex justify-between items-center gap-[6vmin] px-5 py-3 md:px-10 md:py-8">

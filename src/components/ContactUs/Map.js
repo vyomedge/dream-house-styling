@@ -1,9 +1,9 @@
 export default function Map() {
     return (
-        <section className="bg-[#f4fafb] py-16">
+        <section className=" py-10 sm:py-16">
             <div className="max-w-7xl mx-auto px-4 text-center">
-                <h2 className="text-3xl md:text-4xl font-serif text-[#5b3a1d]">{`We’d Love to Welcome You`}</h2>
-                <p className="mt-4 text-gray-600  mx-auto">{` Step into our Dream Home Styling work place and explore beautiful interiors. Use the map below to plan your visit.`}</p>
+                <h2 className="text-3xl md:text-4xl font-serif text-white">{`We’d Love to Welcome You`}</h2>
+                <p className="mt-4 text-gray-300  mx-auto">{` Step into our Dream Home Styling work place and explore beautiful interiors. Use the map below to plan your visit.`}</p>
                 <div className="mt-10 rounded-xl overflow-hidden shadow-lg border">
                     <iframe
                         title="Dream Home Styling Location"

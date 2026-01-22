@@ -75,10 +75,12 @@ export default function ProductDetailDiscription() {
                         </button>
                     ))}
                 </div>
-                {activeTab === "Description" &&
-                    activeData.content.map((text, i) => (
-                        <p key={i}>{text}</p>
-                    ))}
+                <div className="text-sm text-gray-700 leading-relaxed space-y-4">
+               {activeTab === "Description" &&
+            activeData?.content.map((text, i) => (
+              <p key={i}>{text}</p>
+            ))}
+                    </div>
 
                 {/* Content */}
                 <div className="text-sm text-gray-700 leading-relaxed space-y-4 ">

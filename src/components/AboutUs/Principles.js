@@ -31,10 +31,10 @@ const principles = [
 
 export default function Principles() {
   return (
-    <section className=" bg-gray-50 py-20">
+    <section className="  py-20">
       <div className="custom-container max-w-7xl mx-auto px-6 text-center">
-        <h2 className="responsiveheading2 font-semibold text-gray-900">{`THE PRINCIPLES WE LIVE BY`}</h2>
-        <p className="responsive-text mt-4  mx-auto text-gray-500">{`Our work is guided by values that define how we design, customize, and deliver every project.`} </p>
+        <h2 className="responsiveheading2 font-semibold text-white">{`THE PRINCIPLES WE LIVE BY`}</h2>
+        <p className="responsive-text mt-4  mx-auto text-gray-300">{`Our work is guided by values that define how we design, customize, and deliver every project.`} </p>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {principles.map((item, index) => {
             const Icon = item.icon;

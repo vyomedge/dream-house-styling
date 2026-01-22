@@ -85,68 +85,68 @@ export default function ProductListing() {
 
     return (
         <div className="bg-[#101d22]">
-        <section className="custom-container py-10 sm:py-14">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6">
-                <div className="mb-6">
-                    <h2 className="responsiveheading2 font-semibold! text-[#00D4C8]"> {`Designer Wallpapers`} </h2>
-                    <p className="responsive-text text-gray-100 mt-2 "> {`Explore our premium collection of customizable wallpapers crafted to elevate modern interiors with timeless elegance.`}</p>
-                </div>
-                {/* Filter Button (xs / sm / md ONLY) */}
-                <div className="relative mb-6 lg:hidden" ref={dropdownRef}>
-                    <button
-                        onClick={() => setOpen(!open)}
-                        className="flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm text-[#00D4C8] shadow-sm " >
-                        <FaFilter /> {` Filters`}
-                    </button>
+            <section className="custom-container py-10 sm:py-14">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                    <div className="mb-6">
+                        <h2 className="responsiveheading2 font-semibold! text-[#00D4C8]"> {`Designer Wallpapers`} </h2>
+                        <p className="responsive-text text-gray-100 mt-2 "> {`Explore our premium collection of customizable wallpapers crafted to elevate modern interiors with timeless elegance.`}</p>
+                    </div>
+                    {/* Filter Button (xs / sm / md ONLY) */}
+                    <div className="relative mb-6 lg:hidden" ref={dropdownRef}>
+                        <button
+                            onClick={() => setOpen(!open)}
+                            className="flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm text-[#00D4C8] shadow-sm " >
+                            <FaFilter /> {` Filters`}
+                        </button>
 
-                    {open && (
-                        <div className="absolute z-50 mt-3 w-full sm:w-[320px]">
-                            <FilterPanel
-                                filters={filters}
-                                setFilters={setFilters}
-                                handleCheckbox={handleCheckbox}
-                            />
-                        </div>
-                    )}
-                </div>
+                        {open && (
+                            <div className="absolute z-50 mt-3 w-full sm:w-[320px]">
+                                <FilterPanel
+                                    filters={filters}
+                                    setFilters={setFilters}
+                                    handleCheckbox={handleCheckbox}
+                                />
+                            </div>
+                        )}
+                    </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                    {/* Filters (ONLY OPEN ON lg+) */}
-                    <aside className="hidden lg:block lg:col-span-1">
-                        <div className="  rounded-xl p-6 sticky top-16">
-                            <FilterPanel
-                                filters={filters}
-                                setFilters={setFilters}
-                                handleCheckbox={handleCheckbox}
-                            />
-                        </div>
-                    </aside>
-                    {/* Products */}
-                    <div className="lg:col-span-3">
-                        <p className="text-sm text-gray-300 mb-4">{`Showing`} {" "}{filteredProducts.length}{""}{` products`} </p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-                            {filteredProducts.map((product) => (
-                                <Link
-                                    key={product.id}
-                                    href={`/category/${product.id}`}
-                                    className="block"
-                                >
-                                    <ProductCard product={product} />
-                                </Link>
-                            ))}
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                        {/* Filters (ONLY OPEN ON lg+) */}
+                        <aside className="hidden lg:block lg:col-span-1">
+                            <div className="  rounded-xl p-6 sticky top-16">
+                                <FilterPanel
+                                    filters={filters}
+                                    setFilters={setFilters}
+                                    handleCheckbox={handleCheckbox}
+                                />
+                            </div>
+                        </aside>
+                        {/* Products */}
+                        <div className="lg:col-span-3">
+                            <p className="text-sm text-gray-900 mb-4">{`Showing`} {" "}{filteredProducts.length}{""}{` products`} </p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+                                {filteredProducts.map((product) => (
+                                    <Link
+                                        key={product.id}
+                                        href={`/category/${product.id}`}
+                                        className="block"
+                                    >
+                                        <ProductCard product={product} />
+                                    </Link>
+                                ))}
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
         </div>
     );
 }
 
 /* FILTER PANEL */
 const FilterPanel = ({ filters, setFilters, handleCheckbox }) => (
-    <div className="bg-white border border-gray-300 rounded-xl p-5 shadow-xl">
+    <div className=" border border-gray-300 rounded-xl p-5 shadow-xl">
         <h3 className="flex items-center gap-2 font-semibold text-[#00D4C8] mb-4"><FaFilter />{` Filters`} </h3>
         <FilterBlock title="Type">
             {["Premium", "Standard", "Economy"].map((t) => (
@@ -215,20 +215,20 @@ const FilterPanel = ({ filters, setFilters, handleCheckbox }) => (
 
 const FilterBlock = ({ title, children }) => (
     <div className="mb-5">
-        <h4 className="text-sm font-semibold mb-3 text-gray-700"> {title}</h4>
+        <h4 className="text-sm font-semibold mb-3 text-gray-100"> {title}</h4>
         {children}
     </div>
 );
 
 const Checkbox = ({ label, onChange }) => (
-    <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer">
+    <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer text-gray-300">
         <input type="checkbox" onChange={onChange} />
         {label}
     </label>
 );
 
 const Radio = ({ label, onChange }) => (
-    <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer">
+    <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer text-gray-300">
         <input type="radio" name="price" onChange={onChange} />
         {label}
     </label>
