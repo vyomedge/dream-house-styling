@@ -6,7 +6,7 @@ const HomeBanner = () => {
       <div
         className="relative min-h-[500px] md:min-h-[600px] bg-cover bg-center"
         style={{
-          backgroundImage: `url(https://lh3.googleusercontent.com/aida-public/AB6AXuDDw1PkMNSn3pBwOO3877SlbW7NZqo3FAmQMis0mqhti8REedjyeRulb-VjepoCvqlJfLK_xK45ECywhg2en7SFYQ4G5uUbRIN0eAJ0NZh6LHq-rTJvQVW1zh8jRT2zqodlEy9jJdna6G85tlAiY--1JbsrWCvm_IQo2egBU2E2yJ1UvTy_HqWYs4hjCNxr2_p6coV3RM7lXInDpNBo86dWr0HPUe5ktkbrZzZp7B0rpzbr6vESLo-BiEQ5j_5WSeowo0Fk9ogLuOs)`,
+          backgroundImage: `url("/1.jpg")`,
         }}
       >
         {/* Overlay gradient */}
