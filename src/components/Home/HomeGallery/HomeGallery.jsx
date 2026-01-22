@@ -63,7 +63,7 @@ const Categories = () => {
           </div>
 
           <a
-            href="#"
+            href="/category"
             className="hidden md:flex items-center gap-1 text-primary hover:underline font-medium"
           >
             View All Collections

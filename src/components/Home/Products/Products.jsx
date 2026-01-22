@@ -129,11 +129,11 @@ const Products = () => {
 
                 {/* Hover Actions */}
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                  <button className="flex cursor-pointer bg-white text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors">
+                  {/* <button className="flex cursor-pointer bg-white text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors">
                     <span className="material-symbols-outlined ">
                       visibility
                     </span>
-                  </button>
+                  </button> */}
                   <button
                     onClick={() => handleAddToCart(product)}
                     className="flex cursor-pointer bg-white  text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors"
