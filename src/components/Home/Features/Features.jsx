@@ -26,7 +26,7 @@ const Features = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="  w-full   flex justify-center items-center  z-50"
+              className="  w-full   flex justify-center items-center "
             >
               <div className="relative inset-0 bg-pattern filter blur-xl scale-110 brightness-50"></div>
               <div className="fixed inset-0 bg-linear-to-tr from-charcoal-dark/90 via-transparent to-charcoal-dark/90"></div>
