@@ -36,17 +36,17 @@ export default function CommonBanner({
                     <h1 className="responsive-heading font-bold leading-tight">
                         {title}{" "}
                         {highlight && (
-                            <span className="block text-[#00D4C8]">{highlight}</span>
+                            <span className="dm-sans block text-[#00D4C8]">{highlight}</span>
                         )}
                     </h1>
                     {subtitle && (
-                        <p className="mt-6 text-gray-200 text-base responsive-text"> {subtitle} </p>
+                        <p className="font-poppins mt-6 text-gray-200 text-base responsive-text"> {subtitle} </p>
                     )}
                     {subtitle1 && (
-                        <p className="mt-1 text-gray-200 text-base responsive-text"> {subtitle1} </p>
+                        <p className="font-poppins mt-1 text-gray-200 text-base responsive-text"> {subtitle1} </p>
                     )}
                     {subtitle2 && (
-                        <p className="mt-1 text-gray-200 text-base responsive-text"> {subtitle2}</p>
+                        <p className="font-poppins mt-1 text-gray-200 text-base responsive-text"> {subtitle2}</p>
                     )}
                     {subtitle3 && (
                         <p className="mt-1 text-gray-200 text-base responsive-text"> {subtitle3} </p>

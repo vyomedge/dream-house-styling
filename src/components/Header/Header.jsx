@@ -27,21 +27,18 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/80 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="custom-container mx-auto px-6 h-20 flex items-center justify-between">
         <div className="flex items-center gap-12 h-full">
           <div className="flex items-center gap-3">
-            <Link href={"/"}>
-              <Image
-                src={logo}
-                alt="Inhyma Logo"
-                height={40}
-                width={140}
-                style={{
-                  objectFit: "contain",
-                  cursor: "pointer",
-                  height: "40px",
-                }}
-              />
+            <Link href="/">
+              <div className="relative w-[120px] md:w-[150px] h-[150px]  md:h-[147px] mb-2 sm:mb-4 ">
+                <Image
+                  src="/images/logo.png"
+                  alt="DHS Logo"
+                  fill
+                  className=" object-contain"
+                />
+              </div>
             </Link>
           </div>
           <nav className="hidden md:flex items-center gap-8 h-full">
@@ -52,10 +49,10 @@ const Header = () => {
               Collections
             </a>
 
-            <div class="mega-menu-trigger h-full flex items-center group">
-              <button class="text-sm font-medium hover:text-(--primaryColor) cursor-pointer transition-colors flex items-center gap-1 h-full">
+            <div className="mega-menu-trigger h-full flex items-center group">
+              <button className="text-sm font-medium hover:text-(--primaryColor) cursor-pointer transition-colors flex items-center gap-1 h-full">
                 Shop
-                <span class="material-symbols-outlined text-sm">
+                <span className="material-symbols-outlined text-sm">
                   expand_more
                 </span>
               </button>

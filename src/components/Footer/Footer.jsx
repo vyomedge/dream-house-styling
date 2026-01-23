@@ -1,9 +1,11 @@
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
   return (
     <>
-      <footer className="relative w-full overflow-hidden text-white/80">
+      <footer className="custom-container relative w-full overflow-hidden text-white/80">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30"
           data-alt="Dark dramatic floral wallpaper pattern with deep reds and purples"
@@ -47,12 +49,16 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
             <div className="col-span-1 lg:col-span-1">
               <div className="flex items-center gap-3 text-white mb-6">
-                <span className="material-symbols-outlined text-primary text-3xl">
-                  grid_view
-                </span>
-                <h1 className="text-xl font-black uppercase tracking-tighter">
-                  Luxe Walls
-                </h1>
+                <Link href="/">
+                  <div className="relative w-[100px] md:w-[100px] h-[150px]  md:h-[127px] mb-2 sm:mb-4 ">
+                    <Image
+                      src="/images/logo.png"
+                      alt="DHS Logo"
+                      fill
+                      className=" object-contain"
+                    />
+                  </div>
+                </Link>
               </div>
               <p className="text-sm leading-relaxed mb-6 italic">
                 "Redefining vertical surfaces with a blend of haute couture and

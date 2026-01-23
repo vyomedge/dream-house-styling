@@ -31,59 +31,59 @@ const products = [
 const EmptyCartPage = () => {
   return (
     <main>
-      <section class="relative w-full h-[70vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
+      <section className="relative w-full h-[70vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
           <img
             alt="Minimalist empty room"
-            class="w-full h-full object-cover opacity-40 grayscale"
+            className="w-full h-full object-cover opacity-40 grayscale"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDddcDj73KuwXyb7KKAnTSyl34IzI47kZA_b4LQzdGYTa5SnPL78XZbwMJY-g1nMloSV9yV3wSWOZxnOT-6uXssvnLq1ix81sWXMqAG3kNwdojVo_p0sc6H3Izg5f-hMSJ3bQYk6dZsvUOEbgBGLsB8sh_IDACh7UjcNMS_yWhZ1MtsBskUyr0dkgCWGUiX1jY3wY0rlV4Y7ln02ScJ_Akf_3s2InCAVmoFDMK94UntSnLTN-okxr7LZ0Y5McQZo-uKqpedJutevys"
           />
           <div
-            class="absolute inset-0"
+            className="absolute inset-0"
             style={{
               background:
                 "linear-gradient(to bottom, rgba(10, 18, 21, 0.2) 0%, rgba(18, 29, 33, 1) 100%)",
             }}
           ></div>
         </div>
-        <div class="relative z-10 text-center px-6 max-w-2xl mx-auto">
-          <span class="material-symbols-outlined text-primary text-6xl mb-8 block opacity-50">
+        <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
+          <span className="material-symbols-outlined text-primary text-6xl mb-8 block opacity-50">
             shopping_cart_off
           </span>
-          <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6 leading-none">
+          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6 leading-none">
             Your Selection is Empty
           </h2>
-          <p class="text-white/60 text-lg md:text-xl font-light mb-12 tracking-wide">
+          <p className="text-white/60 text-lg md:text-xl font-light mb-12 tracking-wide">
             It looks like you haven't discovered your perfect wall yet. Let us
             help you find the texture for your next vision.
           </p>
           <Link
-            class="inline-block bg-[#00D4C8] hover:bg-[#00D4C8]/90 text-white font-black px-12 py-5 rounded-full uppercase tracking-[0.2em] text-sm transition-all shadow-xl shadow-primary/20"
+            className="inline-block bg-[#00D4C8] hover:bg-[#00D4C8]/90 text-white font-black px-12 py-5 rounded-full uppercase tracking-[0.2em] text-sm transition-all shadow-xl shadow-primary/20"
             href="/"
           >
             Start Browsing
           </Link>
         </div>
       </section>
-      <section class="max-w-7xl mx-auto px-6 py-24">
-        <div class="flex items-center justify-between mb-12">
+      <section className="max-w-7xl mx-auto px-6 py-24">
+        <div className="flex items-center justify-between mb-12">
           <div>
-            <h3 class="text-3xl font-black uppercase tracking-tighter">
+            <h3 className="text-3xl font-black uppercase tracking-tighter">
               Curated Picks
             </h3>
-            <p class="text-white/40 uppercase tracking-[0.3em] text-[10px] mt-2 font-bold">
+            <p className="text-white/40 uppercase tracking-[0.3em] text-[10px] mt-2 font-bold">
               Recommended for your refined taste
             </p>
           </div>
-          <div class="h-[1px] flex-1 bg-white/10 mx-12 hidden md:block"></div>
+          <div className="h-[1px] flex-1 bg-white/10 mx-12 hidden md:block"></div>
           <a
-            class="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-white transition-colors"
+            className="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-white transition-colors"
             href="#"
           >
             View All Collections
           </a>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((item, index) => (
             <div key={index} className="group cursor-pointer">
               <div className="aspect-[4/5] overflow-hidden rounded-2xl mb-4 bg-white/5 relative">
