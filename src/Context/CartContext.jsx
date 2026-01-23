@@ -51,7 +51,7 @@ export const CartProvider = ({ children }) => {
       dispatch({ type: "SET_LOADING" });
 
       const res = await axios.post(
-        "http://127.0.0.1:1331/UserPanel/Add-AddtoCart/",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Add-AddtoCart/`,
         payload,
         {
           headers: {
@@ -73,7 +73,7 @@ export const CartProvider = ({ children }) => {
       dispatch({ type: "SET_LOADING" });
 
       const res = await axios.get(
-        "http://127.0.0.1:1331/UserPanel/Get-Addtocart/",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Addtocart/`,
         {
           headers: {
             Authorization: `Bearer ${access_token}`,
@@ -95,7 +95,7 @@ export const CartProvider = ({ children }) => {
       dispatch({ type: "SET_LOADING" });
 
       const res = await axios.post(
-        `http://127.0.0.1:1331/UserPanel/Update-AddtoCart/${cartId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Update-AddtoCart/${cartId}`,
         payload,
         {
           headers: {
@@ -117,7 +117,7 @@ export const CartProvider = ({ children }) => {
       dispatch({ type: "SET_LOADING" });
 
       const res = await axios.delete(
-        `http://127.0.0.1:1331/UserPanel/DeleteAddtoCart/${cartItemId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/DeleteAddtoCart/${cartItemId}`,
         {
           headers: {
             Authorization: `Bearer ${access_token}`,

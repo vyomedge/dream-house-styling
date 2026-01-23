@@ -46,6 +46,8 @@ const getRandomImage = () => {
   return productImages[Math.floor(Math.random() * productImages.length)];
 };
 
+console.log("hiiiiiiii");
+
 const Products = () => {
   const [products, setProducts] = useState([]);
   const cookies = new Cookies();
@@ -55,7 +57,7 @@ const Products = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:1331/VendorPanel/Get-Product/212`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/VendorPanel/Get-Product/212`,
         {
           headers: {
             Authorization: `Bearer ${token_data}`,

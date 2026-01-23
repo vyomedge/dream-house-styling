@@ -21,7 +21,7 @@ const Categories = () => {
   const fetchActiveCategory = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:1331/VendorPanel/ActiveCategory/",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/VendorPanel/ActiveCategory/`,
         {
           headers: {
             Authorization: `Bearer ${token_data}`,
