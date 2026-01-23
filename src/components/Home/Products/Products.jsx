@@ -46,18 +46,16 @@ const getRandomImage = () => {
   return productImages[Math.floor(Math.random() * productImages.length)];
 };
 
-console.log("hiiiiiiii");
-
 const Products = () => {
   const [products, setProducts] = useState([]);
   const cookies = new Cookies();
-  const token_data = cookies.get("Vendor_Token");
+  const token_data = cookies.get("Access_Token");
   const { addToCart } = useCart();
 
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/VendorPanel/Get-Product/212`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Product/`,
         {
           headers: {
             Authorization: `Bearer ${token_data}`,

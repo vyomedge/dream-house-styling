@@ -12,13 +12,12 @@ import axios from "axios";
 
 const Categories = () => {
   const [categories, SetCategory] = useState([]);
-
-  console.log({ categories });
-
+  const [Loading, setLoading] = useState(false);
   const cookies = new Cookies();
-  const token_data = cookies.get("Vendor_Token");
+  const token_data = cookies.get("Access_Token");
 
   const fetchActiveCategory = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/VendorPanel/ActiveCategory/`,
@@ -40,6 +39,7 @@ const Categories = () => {
       console.log("newData", newdata);
       SetCategory(newdata);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching categories:", error);
     }
   };
