@@ -16,7 +16,7 @@ stages:
       - job: DeployDev
         displayName: "Deploy to Vercel - Dev"
         variables:
-          VERCEL_PROJECT_ID: "prj_nEXttifnecOFXWlFQTbQ7NwS2qtG"
+          VERCEL_PROJECT_ID: "prj_nd0VoXO7F2HnYslSmURngJunRdXm"
           VERCEL_ORG_ID: "gPLVlvJxaFI0eeU4D9A2btu2"
           VERCEL_TOKEN: "Oxzyj2uSHdqSC1jSPuNLs427"
 
