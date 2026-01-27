@@ -19,11 +19,11 @@ export default function JoinJourney() {
           <p className="responsive-text mt-4 max-w-xl mx-auto text-gray-200 text-sm md:text-base">
             {`Explore our collections or connect with our team for customized home décor and interior design services in Bhopal.`} </p>
           <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <button className="rounded-lg bg-[#00D4C8] px-6 py-3 text-sm font-semibold text-gray-900 hover:bg-cyan-500 transition">
+            <button className="rounded-lg bg-[#cd6632] px-6 py-3 text-sm font-semibold text-gray-900 hover:bg-[#cd6632]/90 transition">
               {` Explore Collections`}
             </button>
 
-            <button className="rounded-lg border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white hover:bg-[#00D4C8] transition">
+            <button className="rounded-lg border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white hover:bg-[#cd6632] transition">
               {` Book Free Consultation`}
             </button>
           </div>

@@ -19,7 +19,12 @@ const bannerContent = {
             value: "contact-form"
         }
     ],
-    backgroundImg: "/contactusbanner.jpeg"
+    backgroundImg: "/contactusbanner.jpeg",
+    // Fixed syntax below: use colon : and simple array []
+    breadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Contact Us", href: null } 
+    ]
 };
 
 const faqs = [

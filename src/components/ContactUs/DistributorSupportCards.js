@@ -18,7 +18,7 @@ export default function DistributorSupportCards() {
                 <li>{`Upholstery & Carpets`}</li>
                 <li>{`Complete interior solutions`}</li>
               </ul>
-              <button className="bg-[#00D4C8] hover:bg-cyan-300 text-white responsive-text px-4 py-1.5 w-full mt-3">
+              <button className="bg-[#cd6632] hover:bg-[#cd6632]/80 text-white responsive-text px-4 py-1.5 w-full mt-3">
                 {`Schedule a free consultation today.`}
               </button>
             </div>
@@ -47,7 +47,7 @@ export default function DistributorSupportCards() {
                 <li>{`Custom order support`}</li>
               </ul>
               <p className="text-[#1f3d2b] text-[16px] mb-3">{`Call us or send a message — we’re happy to help.`}</p>
-              <button className="bg-[#00D4C8] hover:bg-cyan-300 text-white responsive-text px-4 py-1.5 w-[120]">{`Apply Now`}</button>
+              <button className="bg-[#cd6632] hover:bg-[#cd6632]/80 text-white responsive-text px-4 py-1.5 w-[120]">{`Apply Now`}</button>
             </div>
 
             <div className="relative w-[15vmin] h-[15vmin] md:w-[10vmin] md:h-[10vmin]">

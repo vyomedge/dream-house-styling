@@ -89,18 +89,18 @@ export default function ProductListing() {
     });
 
     return (
-        <div className="bg-[#101d22]">
+        <div>
             <section className="custom-container py-10 sm:py-14">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6">
                     <div className="mb-6">
-                        <h2 className="responsiveheading2 font-semibold! text-[#00D4C8]"> {`Designer Wallpapers`} </h2>
-                        <p className="responsive-text text-gray-100 mt-2 "> {`Explore our premium collection of customizable wallpapers crafted to elevate modern interiors with timeless elegance.`}</p>
+                        <h2 className="responsiveheading2 font-semibold! text-[#cd6632]"> {`Designer Wallpapers`} </h2>
+                        <p className="responsive-text text-gray-500 mt-2 "> {`Explore our premium collection of customizable wallpapers crafted to elevate modern interiors with timeless elegance.`}</p>
                     </div>
                     {/* Filter Button (xs / sm / md ONLY) */}
                     <div className="relative mb-6 lg:hidden" ref={dropdownRef}>
                         <button
                             onClick={() => setOpen(!open)}
-                            className="flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm text-[#00D4C8] shadow-sm " >
+                            className="flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm text-[#cd6632] shadow-sm " >
                             <FaFilter /> {` Filters`}
                         </button>
 
@@ -152,7 +152,7 @@ export default function ProductListing() {
 /* FILTER PANEL */
 const FilterPanel = ({ filters, setFilters, handleCheckbox }) => (
     <div className=" border border-gray-300 rounded-xl p-5 shadow-xl">
-        <h3 className="flex items-center gap-2 font-semibold text-[#00D4C8] mb-4"><FaFilter />{` Filters`} </h3>
+        <h3 className="flex items-center gap-2 font-semibold text-[#cd6632] mb-4"><FaFilter />{` Filters`} </h3>
         <FilterBlock title="Type">
             {["Premium", "Standard", "Economy"].map((t) => (
                 <Checkbox
@@ -221,20 +221,20 @@ const FilterPanel = ({ filters, setFilters, handleCheckbox }) => (
 
 const FilterBlock = ({ title, children }) => (
     <div className="mb-5">
-        <h4 className="text-sm font-semibold mb-3 text-gray-100"> {title}</h4>
+        <h4 className="text-sm font-semibold mb-3 text-gray-700"> {title}</h4>
         {children}
     </div>
 );
 
 const Checkbox = ({ label, onChange }) => (
-    <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer text-gray-300">
+    <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer text-gray-600">
         <input type="checkbox" onChange={onChange} />
         {label}
     </label>
 );
 
 const Radio = ({ label, onChange }) => (
-    <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer text-gray-300">
+    <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer text-gray-600">
         <input type="radio" name="price" onChange={onChange} />
         {label}
     </label>

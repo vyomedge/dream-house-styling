@@ -107,7 +107,7 @@ const SearchBar = () => {
           display: "flex",
           justifyContent: "center",
           px: 1,
-          mt: isMobile && 2,
+         mb: isMobile ? 2 : 0,
         }}
       >
         <Box
@@ -153,12 +153,12 @@ const SearchBar = () => {
             onKeyDown={handleKeyDown}
           /> */}
 
-          <div class="relative hidden lg:block w-full">
-            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/40 text-sm">
+          <div className="relative hidden lg:block w-full">
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/40 text-sm">
               search
             </span>
             <input
-              class="bg-white/5 border-white/10 rounded-full pl-10 pr-4 py-2 text-sm focus:ring-primary focus:border-primary w-64 transition-all"
+              className="bg-white/5 border-white/10 rounded-full pl-10 pr-4 py-2 text-sm focus:ring-primary focus:border-primary w-64 transition-all"
               placeholder="Search aesthetics..."
               type="text"
             />

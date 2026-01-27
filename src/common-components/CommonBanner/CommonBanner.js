@@ -26,27 +26,29 @@ export default function CommonBanner({
                         className="object-cover object-center"
                     />
                 )}
-                 <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black/60" />
+                <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black/60" />
                 <div className="custom-container relative z-10 text-center px-6 max-w-4xl text-white">
                     {tag && (
-                        <span className="inline-block mb-5 px-4 py-1 rounded-full text-xs tracking-widest uppercase text-[#00D4C8] border border-cyan-400/40 bg-cyan-400/10">
+                        <span className="inline-block mb-5 px-4 py-1 rounded-full text-xs tracking-widest uppercase text-[#cd6632] border border-[#cd6632] bg-[#cd6632]/10">
                             {tag}
                         </span>
                     )}
                     <h1 className="responsive-heading font-bold leading-tight">
-                        {title}{" "}
+                        {title}
                         {highlight && (
-                            <span className="block text-[#00D4C8]">{highlight}</span>
+                            <span className="dm-sans text-[#cd6632] ml-2">
+                                {highlight}
+                            </span>
                         )}
                     </h1>
                     {subtitle && (
-                        <p className="mt-6 text-gray-200 text-base responsive-text"> {subtitle} </p>
+                        <p className="font-poppins mt-6 text-gray-200 text-base responsive-text"> {subtitle} </p>
                     )}
                     {subtitle1 && (
-                        <p className="mt-1 text-gray-200 text-base responsive-text"> {subtitle1} </p>
+                        <p className="font-poppins mt-1 text-gray-200 text-base responsive-text"> {subtitle1} </p>
                     )}
                     {subtitle2 && (
-                        <p className="mt-1 text-gray-200 text-base responsive-text"> {subtitle2}</p>
+                        <p className="font-poppins mt-1 text-gray-200 text-base responsive-text"> {subtitle2}</p>
                     )}
                     {subtitle3 && (
                         <p className="mt-1 text-gray-200 text-base responsive-text"> {subtitle3} </p>
@@ -62,8 +64,8 @@ export default function CommonBanner({
                                     {item.href ? (
                                         <Link
                                             href={item.href}
-                                            className="hover:text-[#00D4C8]"
-                                            >
+                                            className="hover:text-[#cd6632]"
+                                        >
                                             {item.label}
                                         </Link>
                                     ) : (

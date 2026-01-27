@@ -148,7 +148,7 @@ const Login = () => {
                 {/* SUBMIT */}
                 <button
                   type="submit"
-                  className="w-full bg-[#00D4C8] hover:bg-[#00D4C8]/80 cursor-pointer text-white font-black uppercase tracking-widest text-sm py-5 rounded-lg transition-all shadow-lg shadow-primary/20 active:scale-[0.98]"
+                  className="w-full bg-[#cd6632] hover:bg-[#cd6632]/80cursor-pointer text-white font-black uppercase tracking-widest text-sm py-5 rounded-lg transition-all shadow-lg shadow-primary/20 active:scale-[0.98]"
                 >
                   {Loading ? "Verifying..." : "Sign In"}
                 </button>

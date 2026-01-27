@@ -13,7 +13,8 @@ const socialLinks = [
 export default function Address() {
   return (
     <div className="relative py-16 overflow-hidden">
-      <div className="absolute inset-0 bg-[url('/house.png')] bg-cover bg-center blur-[3px] scale-105" aria-hidden="true" />
+      <div className="absolute inset-0 
+      bg-cover bg-center blur-[3px] scale-105" aria-hidden="true" />
       <div className="absolute inset-0 bg-white/70" aria-hidden="true" />
       <div className="relative mx-w-[600px] mx-auto p-6">
         <h6 className=" dm_sans responsiveheading6 text-[#1f3d2b]">{`  Visit Our Store –`}{" "}
@@ -60,3 +61,6 @@ export default function Address() {
     </div>
   );
 }
+
+      // bg-[url('/house.png')] 
+
