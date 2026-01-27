@@ -39,8 +39,8 @@ export default function ContactForm({ hide }) {
 
   return (
     <div className="mx-w-[600px] mx-auto border-1 border-white p-6 rounded-lg">
-      <h5 className="responsiveheading5 font-bold text-white mb-1">{`Send Us a Message`}</h5>
-      <p className="responsive-text text-gray-300 mb-6">{`Please fill in the form below and our team will get in touch within 24 hours.`}</p>
+      <h5 className="responsiveheading5 font-bold text-gray-500 mb-1">{`Send Us a Message`}</h5>
+      <p className="responsive-text text-gray-400 mb-6">{`Please fill in the form below and our team will get in touch within 24 hours.`}</p>
       {success && (
         <p className="responsive-text text-green-600 mb-4">{`Your message has been sent successfully!`}</p>
       )}
@@ -55,7 +55,7 @@ export default function ContactForm({ hide }) {
           <input
             type="text"
             placeholder="Full Name (required)"
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
+            className="w-full rounded-md border border-gray-500 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
             {...register("fullName", {
               required: "Full name is required",
               minLength: { value: 2, message: "Name is too short" },
@@ -70,7 +70,7 @@ export default function ContactForm({ hide }) {
           <input
             type="email"
             placeholder="Email (required)"
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
+            className="w-full rounded-md border border-gray-500 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
             {...register("email", {
               required: "Email is required",
               pattern: {
@@ -88,7 +88,7 @@ export default function ContactForm({ hide }) {
           <input
             type="text"
             placeholder="Phone (required)"
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
+            className="w-full rounded-md border border-gray-500 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
             {...register("phone", {
               required: "Phone number is required",
               pattern: {
@@ -106,7 +106,7 @@ export default function ContactForm({ hide }) {
           <textarea
             rows="3"
             placeholder="Message"
-            className="w-full rounded-md border border-gray-300 px-3 py-2  focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
+            className="w-full rounded-md border border-gray-500 px-3 py-2  focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
             {...register("message", {
               minLength: {
                 value: 10,
@@ -120,7 +120,7 @@ export default function ContactForm({ hide }) {
         </div>
         <button type="submit"
           disabled={isSubmitting}
-          className="w-full bg-[#00D4C8] text-white py-3 rounded-md hover:bg-cyan-300 transition disabled:opacity-70">
+          className="w-full bg-[#cd6632] hover:bg-[#cd6632]/80 text-white py-3 rounded-md  transition disabled:opacity-70">
           {isSubmitting ? "Submitting..." : "Submit Enquiry"}
         </button>
       </form>

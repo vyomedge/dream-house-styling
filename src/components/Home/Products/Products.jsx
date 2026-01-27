@@ -98,16 +98,12 @@ const Products = () => {
   };
 
   return (
-    <section className="py-16">
+    <div className="bg-[#FBC19A]">
+    <section className="py-8 md:py-10 lg:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-2">
-            Featured Products
-          </h2>
-
-          <p className="text-muted-foreground">
-            Our best-selling designs curated for your home.
-          </p>
+          <h2 className="responsiveheading2 font-semibold! tracking-tight mb-2 text-gray-700">{` Featured Products`}</h2>
+          <p className="text-muted-foreground text-gray-600"> {` Our best-selling designs curated for your home.`}</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -139,7 +135,7 @@ const Products = () => {
                     className="flex cursor-pointer bg-white  text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors"
                   >
                     <span className="material-symbols-outlined  ">
-                      shopping_cart
+                     {` shopping_cart`}
                     </span>
                   </button>
                 </div>
@@ -163,14 +159,15 @@ const Products = () => {
           ))}
         </div>
 
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-10 text-gray-700">
           <button className="border border-foreground bg-transparent text-foreground px-6 py-3 rounded-md font-medium transition-all duration-300 hover:bg-foreground hover:text-background inline-flex items-center gap-2">
-            Load More Products
+           {` Load More Products`}
             <ArrowUpRight className="w-4 h-4" />
           </button>
         </div>
       </div>
     </section>
+    </div>
   );
 };
 

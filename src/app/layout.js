@@ -23,12 +23,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en"  className="dark" >
+    <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#101d22] text-whitee`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        {children}
+        <CartProvider>
+          <LayoutWrapper>{children}</LayoutWrapper>
           <ToastContainer
             position="top-right"
             autoClose={3000}
@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
             closeOnClick
             pauseOnHover
           />
-        <Footer />
+        </CartProvider>
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const HomeBanner = () => {
   return (
@@ -23,36 +24,36 @@ const HomeBanner = () => {
             <span
               className="inline-block px-4 py-1 rounded-full text-sm font-medium mb-6"
               style={{
-                backgroundColor: "rgba(0, 212, 200, 0.2)",
-                color: "#00D4C8",
-              }}
-            >
-              NEW COLLECTION 2024
+                backgroundColor: "#f2e3dc",
+                color: "#cd6632",
+              }}>
+             {` NEW COLLECTION 2024`}
             </span>
 
             <h1
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
               style={{ color: "#ffffff" }}
             >
-              Transform Your Space
+             Transform Your Space
             </h1>
 
             <p
-              className="text-lg mb-8 max-w-md"
+              className="responsiveheading6 mb-8 max-w-md"
               style={{ color: "rgba(255, 255, 255, 0.85)" }}
             >
-              Discover premium quality wallpapers designed for the modern home.
-              Sustainable materials, effortless installation.
+            {`Discover premium wallpapers, curtains, blinds, upholstery, and carpets—crafted to match your style, space, and lifestyle. From single walls to complete interiors, we help you create spaces that feel truly yours.`}
             </p>
 
             <div className="flex flex-wrap gap-4">
+              <Link href="/category">
               <button
                 className="px-8 py-4 rounded-md font-medium text-lg transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 shadow-lg"
-                style={{ backgroundColor: "#00D4C8", color: "#ffffff" }}
+                style={{ backgroundColor: "#cd6632", color: "#ffffff" }}
               >
-                Shop Now
+               Shop Collections
                 <ArrowRight className="w-5 h-5" />
               </button>
+              </Link>
               <button
                 className="px-8 py-4 rounded-md font-medium text-lg transition-all duration-300 hover:bg-white/10"
                 style={{
@@ -60,7 +61,7 @@ const HomeBanner = () => {
                   color: "#ffffff",
                 }}
               >
-                Free Samples
+                 Get Free Consultation
               </button>
             </div>
           </div>

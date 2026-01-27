@@ -151,7 +151,7 @@ const SignUp = () => {
 
               {/* SUBMIT */}
               <button
-                className="w-full bg-[#00D4C8] hover:bg-[#00D4C8]/80 mt-4 cursor-pointer text-deep-charcoal font-black uppercase tracking-widest text-sm py-5 rounded-lg transition-all shadow-lg shadow-cyan-blue/10 active:scale-[0.98]"
+                className="w-full bg-[#cd6632] hover:bg-[#cd6632]/80 mt-4 cursor-pointer text-deep-charcoal font-black uppercase tracking-widest text-sm py-5 rounded-lg transition-all shadow-lg shadow-cyan-blue/10 active:scale-[0.98]"
                 type="submit"
               >
                 {Loading ? "Creating..." : "Create Account"}

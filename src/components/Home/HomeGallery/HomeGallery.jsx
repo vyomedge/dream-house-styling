@@ -49,25 +49,19 @@ const Categories = () => {
   }, []);
 
   return (
-    <section className="py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 bg-[#FBC19A]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
         {/* Header */}
         <div className="flex items-end justify-between mb-8">
           <div>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-2">
-              Browse by Category
-            </h2>
-            <p className="text-muted-foreground">
-              Find the perfect pattern for every room in your house.
-            </p>
+            <h2 className="responsiveheading2 font-semibold! tracking-tight mb-2 text-gray-600">{` Browse by Category`}</h2>
+            <p className="text-muted-foreground responsive-text">{`Find the perfect pattern for every room in your house.`}</p>
           </div>
 
-          <a
-            href="/category"
-            className="hidden md:flex items-center gap-1 text-primary hover:underline font-medium"
-          >
-            View All Collections
-            <ArrowUpRight className="w-4 h-4" />
+          <a href="/category"
+            className="hidden md:flex items-center gap-1 responsive-text hover:underline font-medium" >
+            {` View All Collections`}
+            <ArrowUpRight className="w-5 h-5" />
           </a>
         </div>
 
@@ -88,10 +82,10 @@ const Categories = () => {
 
               {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-4">
-                <h3 className="text-white text-lg font-semibold">
+                <h3 className="text-black responsiveheading3 font-semibold!">
                   {item.name}
                 </h3>
-                <p className="text-white/70 text-sm">{item.description}</p>
+                <p className="text-white/70 responsive-text">{item.description}</p>
               </div>
             </div>
           ))}
@@ -100,10 +94,10 @@ const Categories = () => {
         {/* Mobile CTA */}
         <a
           href="#"
-          className="flex md:hidden items-center justify-center gap-1 text-primary hover:underline font-medium mt-6"
+          className="flex md:hidden items-center justify-center gap-1 responsive-text hover:underline font-medium mt-6"
         >
-          View All Collections
-          <ArrowUpRight className="w-4 h-4" />
+          {` View All Collections`}
+          <ArrowUpRight className="w-5 h-5" />
         </a>
       </div>
     </section>

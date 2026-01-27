@@ -26,12 +26,12 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/80 backdrop-blur-md">
-      <div className="custom-container mx-auto px-6 h-20 flex items-center justify-between">
+    <header className=" bg-[#101d22] sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/80 backdrop-blur-md py-3">
+      <div className="custom-container mx-auto px-6! h-20 py-2 flex items-center justify-between">
         <div className="flex items-center gap-12 h-full">
           <div className="flex items-center gap-3">
             <Link href="/">
-              <div className="relative w-[120px] md:w-[150px] h-[150px]  md:h-[147px] mb-2 sm:mb-4 ">
+              <div className="relative w-[120px] md:w-[150px] h-[150px]  md:h-[130px] mb-2 sm:mb-4 ">
                 <Image
                   src="/images/logo.png"
                   alt="DHS Logo"
@@ -44,7 +44,7 @@ const Header = () => {
           <nav className="hidden md:flex items-center gap-8 h-full">
             <a
               className="text-sm font-medium hover:text-(--primaryColor) transition-colors"
-              href="#"
+              href="/category"
             >
               Collections
             </a>
@@ -95,7 +95,7 @@ const Header = () => {
               </Badge>
             </button>
           </Link>
-          <button className="bg-[#00D4C8] hover:bg-[#00D4C8]/90 text-white px-5 py-2 rounded-lg text-sm font-bold transition-all cursor-pointer">
+          <button className="bg-[#cd6632] hover:bg-[#ad6d4c]/90 text-white px-5 py-2 rounded-lg text-sm font-bold transition-all cursor-pointer">
             <Link href={"/login"}>Sign In</Link>
           </button>
         </div>

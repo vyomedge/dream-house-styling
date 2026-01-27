@@ -61,7 +61,7 @@ export default function ProductDetailDiscription() {
         <section className="custom-container mx-auto px-4 sm:px-6 mt-16 mb-20">
             <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 sm:p-8">
                 {/* Tabs */}
-                <div className="flex gap-2  bg-[#00D4C8] w-fit m-auto  mb-6 sm:m-0 sm:mb-6 rounded-full p-1">
+                <div className="flex gap-2  bg-[#cd6632] w-fit m-auto  mb-6 sm:m-0 sm:mb-6 rounded-full p-1">
                     {tabs.map((tab) => (
                         <button
                             key={tab.key}

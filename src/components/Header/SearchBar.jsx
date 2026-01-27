@@ -107,7 +107,7 @@ const SearchBar = () => {
           display: "flex",
           justifyContent: "center",
           px: 1,
-          mt: isMobile && 2,
+         mb: isMobile ? 2 : 0,
         }}
       >
         <Box
