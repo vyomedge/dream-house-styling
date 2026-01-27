@@ -112,7 +112,10 @@ const Footer = () => {
                   </div>
                 </Link>
               </div>
-              <p className="text-sm leading-relaxed mb-6 italic"> {` Dream Home Styling (DHS) — Customized wallpapers, curtains, blinds, upholstery, carpets, and interior solutions in Bhopal & Indore.`} </p>
+              <p className="text-sm leading-relaxed mb-2 italic"> {` Dream Home Styling (DHS) — Customized wallpapers, curtains, blinds, upholstery, carpets, and interior solutions in Bhopal & Indore.`} </p>
+             <a href="tel:+917509666466" className="hover:cursor-pointer" >
+             <p className="text-sm leading-relaxed mb-6 italic">{`📍 Neelbad, Bhopal | 📞 075096 66466`}</p> 
+                  </a>
               <div className="flex items-center gap-3.5 text-sm md:text-base font-responsive "></div>
               <p className="text-sm leading-relaxed mb-1 ">{`Follow Us : `}</p>
               <div className="flex gap-2 sm:gap-3  md:mt-2">
@@ -171,11 +174,11 @@ const Footer = () => {
             </div>
 
             <div>
-              <h5 className="text-white font-bold uppercase tracking-widest text-sm mb-6"> {`Contact`}</h5>
+              <h5 className="text-white font-bold uppercase tracking-widest text-sm mb-6"> {`Visit Our Store – Bhopal`}</h5>
               <ul className="space-y-4 text-sm">
                 <li className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-gold text-sm">location_on</span>
-                  <span>{`Neelbad, Bhopal`}</span>
+                  <span className="material-symbols-outlined text-gold text-sm">location_on  </span>
+                  <span>{`Ground Floor, Maran Complex, Shop No. 9 ,Opposite HP Petrol Pump, Neelbad Squar, Bhopal, Madhya Pradesh – 462044`}</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="material-symbols-outlined text-gold text-sm"> mail </span>
@@ -189,8 +192,11 @@ const Footer = () => {
                     075096 66466
                   </a>
                 </li>
+                 <li className="flex items-start gap-3">
+                  <span className="material-symbols-outlined text-gold text-sm"> pin_drop </span>
+                 <p> {`Serving : Bhopal • Indore`}</p>
+                </li>
               </ul>
-
             </div>
           </div>
           <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em]  text-white/30">
