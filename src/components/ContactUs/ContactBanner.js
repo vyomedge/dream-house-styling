@@ -11,8 +11,8 @@ const ContactBanner = ({ bannerContent }) => {
     <>
       <section className="relative grid place-items-center gap-5 py-10 md:py-20 px-2 overflow-hidden bg-[#739e82]">
         <div className="relative z-30 grid place-items-center text-center md:w-[80%]">
-          <h1 className={`responsive-heading font-semibold ${backgroundImg ? "text-white" : "text-[#53657D]"}`}>{heading1}</h1>
-          <h2 className={`text-[3vmin] mt-2 ${backgroundImg ? "text-white" : "text-[#53657D]"}`} > {heading2} </h2>
+          <h1 className={`font-dm responsive-heading font-semibold ${backgroundImg ? "text-white" : "text-[#53657D]"}`}>{heading1}</h1>
+          <h2 className={`font-dm text-[3vmin] mt-2 ${backgroundImg ? "text-white" : "text-[#53657D]"}`} > {heading2} </h2>
         </div>
 
         {/* Buttons */}
@@ -33,7 +33,7 @@ const ContactBanner = ({ bannerContent }) => {
 
                 return (
                   <button key={index} onClick={handleClick}
-                    className="bg-[#cd6632] hover:bg-[#cd6632]/80 text-white px-8 py-3 rounded-none capitalize " >
+                    className="font-dm bg-[#cd6632] hover:bg-[#cd6632]/80 text-white px-8 py-3 rounded-none capitalize " >
                     {btn.btnName}
                   </button>
                 );
@@ -65,16 +65,16 @@ const ContactBanner = ({ bannerContent }) => {
                   {item.href ? (
                     <Link
                       href={item.href}
-                      className="hover:text-[#cd6632]"
+                      className="font-dm hover:text-[#cd6632]"
                     >
                       {item.label}
                     </Link>
                   ) : (
-                    <span className="text-gray-400">{item.label}</span>
+                    <span className="font-dm text-gray-400">{item.label}</span>
                   )}
 
                   {index < breadcrumbs.length - 1 && (
-                    <span className="text-gray-500">/</span>
+                    <span className="text-gray-500 font-dm">/</span>
                   )}
                 </span>
               ))}

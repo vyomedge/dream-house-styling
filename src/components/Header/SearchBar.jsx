@@ -154,11 +154,11 @@ const SearchBar = () => {
           /> */}
 
           <div className="relative hidden lg:block w-full">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/40 text-sm">
+            <span className="font-dm material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/40 text-sm">
               search
             </span>
             <input
-              className="bg-white/5 border-white/10 rounded-full pl-10 pr-4 py-2 text-sm focus:ring-primary focus:border-primary w-64 transition-all"
+              className="font-dm bg-white/5 border-white/10 rounded-full pl-10 pr-4 py-2 text-sm focus:ring-primary focus:border-primary w-64 transition-all"
               placeholder="Search aesthetics..."
               type="text"
             />

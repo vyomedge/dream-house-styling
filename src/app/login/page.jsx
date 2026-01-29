@@ -84,10 +84,10 @@ const Login = () => {
           <div className="w-full lg:w-1/2 bg-deep-charcoal flex items-center justify-center p-8 md:p-16 relative">
             <div className="w-full max-w-md">
               <div className="mb-12">
-                <h3 className="text-3xl font-bold uppercase tracking-tight mb-2">
+                <h3 className="font-dm responsiveheading3 font-bold uppercase tracking-tight mb-2 text-[#cd6632]">
                   Welcome Back
                 </h3>
-                <p className="text-white/40 text-sm">
+                <p className="font-dm text-black responsive-text">
                   Please enter your details to access your account.
                 </p>
               </div>
@@ -96,19 +96,19 @@ const Login = () => {
               <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                 {/* EMAIL */}
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.2em] font-bold text-(--primaryColor) mb-2 px-1">
+                  <label className="font-dm block text-[10px] uppercase tracking-[0.2em] font-bold text-(--primaryColor) mb-2 px-1">
                     Email Address
                   </label>
                   <input
                     {...register("email", {
                       required: "Email is required",
                     })}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-4 text-white placeholder:text-white/20 focus:ring-primary focus:border-primary input-glow transition-all outline-none"
+                      className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
                     placeholder="name@aesthetic.com"
                     type="email"
                   />
                   {errors.email && (
-                    <p className="text-red-400 text-xs mt-1">
+                    <p className="font-dm text-red-400 text-xs mt-1">
                       {errors.email.message}
                     </p>
                   )}
@@ -116,7 +116,7 @@ const Login = () => {
 
                 {/* PASSWORD */}
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.2em] font-bold text-(--primaryColor) mb-2 px-1">
+                  <label className="font-dm block text-[10px] uppercase tracking-[0.2em] font-bold text-(--primaryColor) mb-2 px-1">
                     Password
                   </label>
                   <div className="relative">
@@ -124,13 +124,13 @@ const Login = () => {
                       {...register("password", {
                         required: "Password is required",
                       })}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-4 text-white placeholder:text-white/20 focus:ring-primary focus:border-primary input-glow transition-all outline-none"
+                       className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
                       placeholder="••••••••"
                       type={showPass ? "text" : "password"}
                     />
                     <button
                       type="button"
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-white"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800"
                       onClick={() => setShowPass(!showPass)}
                     >
                       <span className="material-symbols-outlined text-xl">
@@ -139,7 +139,7 @@ const Login = () => {
                     </button>
                   </div>
                   {errors.password && (
-                    <p className="text-red-400 text-xs mt-1">
+                    <p className="font-dm text-red-400 text-xs mt-1">
                       {errors.password.message}
                     </p>
                   )}
@@ -148,17 +148,17 @@ const Login = () => {
                 {/* SUBMIT */}
                 <button
                   type="submit"
-                  className="w-full bg-[#cd6632] hover:bg-[#cd6632]/80cursor-pointer text-white font-black uppercase tracking-widest text-sm py-5 rounded-lg transition-all shadow-lg shadow-primary/20 active:scale-[0.98]"
+                  className="font-dm w-full bg-[#cd6632] hover:bg-[#cd6632]/80cursor-pointer text-white font-black uppercase tracking-widest text-sm py-5 rounded-lg transition-all shadow-lg shadow-primary/20 active:scale-[0.98]"
                 >
                   {Loading ? "Verifying..." : "Sign In"}
                 </button>
               </form>
 
               <div className="mt-16 text-center">
-                <p className="text-sm text-white/40 font-medium">
+                <p className="font-dm text-sm text-gray-600 font-medium">
                   Don't have an account?
                   <a
-                    className="text-white hover:text-(--primaryColor) transition-colors font-bold ml-1 border-b border-white/20 hover:border-primary pb-0.5"
+                    className="font-dm text-blue-700 hover:text-(--primaryColor) transition-colors font-bold ml-1 border-b border-white/20 hover:border-primary pb-0.5"
                     href="/signup"
                   >
                     Sign Up

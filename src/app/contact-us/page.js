@@ -10,13 +10,13 @@ export const metadata = {
     title: "Contact Us | Dream Home Styling – Home Decor Store Bhopal",
     description: "Contact Dream Home Styling in Bhopal for customized wallpapers, curtains, blinds, and interior design services. Visit our Neelbad store or call us today.",
     url: "https://www.dreamhomestyling.com/",
-    images: [{ url: "https://res.cloudinary.com/dtidgvjlt/image/upload/v1763040883/Shiksho_logo_png_plsk6o.png" }],
+    images: [{ url: "https://res.cloudinary.com/djxgpbncu/image/upload/v1769672836/logo_xhl9o6.png" }],
   },
   twitter: {
     card: 'summary_large_image',
     title: "Contact Us | Dream Home Styling – Home Decor Store Bhopal",
     description: "Contact Dream Home Styling in Bhopal for customized wallpapers, curtains, blinds, and interior design services. Visit our Neelbad store or call us today.",
-    images: [{ url: "https://res.cloudinary.com/dtidgvjlt/image/upload/v1763040883/Shiksho_logo_png_plsk6o.png" }],
+    images: [{ url: "https://res.cloudinary.com/djxgpbncu/image/upload/v1769672836/logo_xhl9o6.png" }],
   },
   robots: {
     index: true,

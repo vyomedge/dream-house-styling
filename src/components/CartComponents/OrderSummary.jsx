@@ -14,37 +14,37 @@ const OrderSummary = ({ cartItems = [] }) => {
 
   return (
     <div className="sticky top-32 glass p-8 rounded-2xl soft-shadow border border-white/10">
-      <h3 className="text-2xl font-bold uppercase tracking-tighter mb-8">
+      <h3 className="font-dm responsiveheading3 font-bold uppercase tracking-tighter mb-8">
         Order Summary
       </h3>
       <div className="space-y-4 mb-8">
         <div className="flex justify-between items-center text-white/60">
-          <span className="text-sm">Subtotal ({cartItems.length} items)</span>
-          <span className="font-medium">₹ {total.toFixed(2)}</span>
+          <span className="font-dm text-sm">Subtotal ({cartItems.length} items)</span>
+          <span className="font-dm font-medium">₹ {total.toFixed(2)}</span>
         </div>
         <div className="flex justify-between items-center text-white/60">
-          <span className="text-sm">Taxes</span>
-          <span className="font-medium">₹ {totalTax.toFixed(2)}</span>
+          <span className="font-dm text-sm">Taxes</span>
+          <span className="font-dm font-medium">₹ {totalTax.toFixed(2)}</span>
         </div>
       </div>
       <div className="h-[1px] bg-white/10 mb-8"></div>
       <div className="flex justify-between items-center mb-10">
-        <span className="text-lg font-bold">Total</span>
-        <span className="text-3xl font-black text-white">₹ {totalAfterTax} </span>
+        <span className="font-dm text-lg font-bold">Total</span>
+        <span className="font-dm text-3xl font-black text-white">₹ {totalAfterTax} </span>
       </div>
-      <button className="w-full bg-[#00D4C8] hover:bg-[#00D4C8]/90 cursor-pointer text-white font-black py-5 rounded-xl uppercase tracking-widest text-sm transition-all shadow-lg shadow-primary/20 mb-6">
+      <button className="font-dm w-full bg-[#cd6632] hover:bg-[#cd6632]/80 cursor-pointer text-white font-black py-5 rounded-xl uppercase tracking-widest text-sm transition-all shadow-lg shadow-primary/20 mb-6">
         Proceed to Checkout
       </button>
       <div className="space-y-4">
         <div className="flex items-center gap-3 text-white/40">
-          <span className="material-symbols-outlined text-sm">verified_user</span>
-          <span className="text-[10px] uppercase tracking-widest font-bold">
+          <span className=" material-symbols-outlined text-sm">verified_user</span>
+          <span className="font-dm text-[10px] uppercase tracking-widest font-bold">
             Secure SSL Checkout
           </span>
         </div>
         <div className="flex items-center gap-3 text-white/40">
-          <span className="material-symbols-outlined text-sm">local_shipping</span>
-          <span className="text-[10px] uppercase tracking-widest font-bold">
+          <span className=" material-symbols-outlined text-sm">local_shipping</span>
+          <span className="font-dm text-[10px] uppercase tracking-widest font-bold">
             Premium White Glove Delivery
           </span>
         </div>

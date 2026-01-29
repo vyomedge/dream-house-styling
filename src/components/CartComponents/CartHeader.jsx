@@ -1,10 +1,10 @@
 const CartHeader = () => {
   return (
     <div className="mb-12">
-      <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-2">
+      <h2 className="font-dm responsiveheading2 font-black uppercase tracking-tighter mb-2">
         Your Selection
       </h2>
-      <p className="text-white/40 uppercase tracking-[0.3em] text-xs">
+      <p className="font-dm text-gray-600 uppercase tracking-[0.3em] text-xs">
         Review your premium wallpaper curators' picks
       </p>
     </div>

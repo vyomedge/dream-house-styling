@@ -14,13 +14,13 @@ const HowItWorks = () => {
           </svg>
         </div>
         <div className="flex-1 space-y-6 z-10">
-          <h2 className="responsive-heading font-black! text-white leading-tight"> {`Need a closer look? Order your swatches.`}</h2>
-          <p className="text-slate-300 responsive-text">{` See the colors and feel the texture in your own home before committing to a full roll.`} </p>
+          <h2 className="font-dm responsive-heading font-black! text-black leading-tight"> {`Need a closer look? Order your swatches.`}</h2>
+          <p className="font-dm text-slate-600 responsive-text">{` See the colors and feel the texture in your own home before committing to a full roll.`} </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-[#cd6632] text-slate-900 px-8 py-4 rounded-lg font-bold hover:brightness-110 transition-all">
+            <button className="font-dm bg-[#cd6632] text-slate-900 px-8 py-4 rounded-lg font-bold hover:brightness-110 transition-all">
               Shop Sample Kits
             </button>
-            <button className="bg-slate-800 text-white px-8 py-4 rounded-lg font-bold hover:bg-slate-700 transition-all">
+            <button className="font-dm bg-slate-800 text-white px-8 py-4 rounded-lg font-bold hover:bg-slate-700 transition-all">
               How it Works
             </button>
           </div>

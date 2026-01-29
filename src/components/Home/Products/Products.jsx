@@ -98,12 +98,12 @@ const Products = () => {
   };
 
   return (
-    <div className="bg-[#FBC19A]">
+    <div className="bg-color">
     <section className="py-8 md:py-10 lg:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h2 className="responsiveheading2 font-semibold! tracking-tight mb-2 text-gray-700">{` Featured Products`}</h2>
-          <p className="text-muted-foreground text-gray-600"> {` Our best-selling designs curated for your home.`}</p>
+          <h2 className="font-dm responsiveheading2 font-semibold! tracking-tight mb-2 text-white">{` Featured Products`}</h2>
+          <p className="font-dm text-muted-foreground text-white"> {` Our best-selling designs curated for your home.`}</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -132,7 +132,7 @@ const Products = () => {
                   </button> */}
                   <button
                     onClick={() => handleAddToCart(product)}
-                    className="flex cursor-pointer bg-white  text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors"
+                    className="font-dm flex cursor-pointer bg-white  text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors"
                   >
                     <span className="material-symbols-outlined  ">
                      {` shopping_cart`}
@@ -142,25 +142,25 @@ const Products = () => {
               </div>
 
               {/* Content */}
-              <h5 className="text-lg font-bold group-hover:text-(--primaryColor) transition-colors">
+              <h5 className="font-dm text-lg font-bold group-hover:text-(--primaryColor) transition-colors">
                 {product.Product_Name}
               </h5>
               <p
-                className="text-white/40 text-sm mt-1 uppercase tracking-wider"
+                className="font-dm text-white/40 text-sm mt-1 uppercase tracking-wider"
                 dangerouslySetInnerHTML={{
                   __html: product.Product_Description,
                 }}
               />
 
-              <p className="text-(--primaryColor) font-bold mt-2">
+              <p className="font-dm text-(--primaryColor) font-bold mt-2">
                 ₹{product.Prices[0].Price[0].SalePrice}
               </p>
             </div>
           ))}
         </div>
 
-        <div className="flex justify-center mt-10 text-gray-700">
-          <button className="border border-foreground bg-transparent text-foreground px-6 py-3 rounded-md font-medium transition-all duration-300 hover:bg-foreground hover:text-background inline-flex items-center gap-2">
+        <div className="flex justify-center mt-10 text-white">
+          <button className="cursor-pointer font-dm border border-foreground bg-transparent text-foreground px-6 py-3 rounded-md font-medium transition-all duration-300 hover:bg-foreground hover:text-background inline-flex items-center gap-2">
            {` Load More Products`}
             <ArrowUpRight className="w-4 h-4" />
           </button>
