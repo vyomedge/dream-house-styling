@@ -28,7 +28,7 @@ const whyChoose = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="w-full bg-white py-20">
+    <section className="w-full bg-white py-10">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <h2 className="font-dm responsiveheading2 font-bold! text-[#cd6632] mb-2"> {`Why Choose Dream Home Styling?`}</h2>
@@ -41,7 +41,7 @@ const WhyChooseUs = () => {
               <div className=" w-16 h-16 mx-auto mb-3 flex items-center justify-center rounded-full bg-[#cd6632]/10 text-[#cd6632] transition group-hover:bg-[#cd6632] group-hover:text-white ">
                 {item.icon}
               </div>
-              <h4 className="font-dm responsiveheading6 font-semibold! text-gray-900 mb-3"> {item.title} </h4>
+              <h4 className="font-dm responsiveheading6 font-semibold! text-gray-800 mb-3"> {item.title} </h4>
               <p className="text-gray-600 font-dm responsive-text leading-relaxed ">{item.description}</p>
             </div>
           ))}
