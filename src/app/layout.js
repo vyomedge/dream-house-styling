@@ -5,6 +5,14 @@ import Footer from "@/components/Footer/Footer";
 import { CartProvider } from "@/Context/CartContext";
 import LayoutWrapper from "@/wrappers/LayoutWrapper";
 import { ToastContainer } from "react-toastify";
+import { DM_Sans } from "next/font/google";
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"], // commonly used weights
+  display: "swap",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +33,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable}  ${dmSans.variable} antialiased`}
       >
         <CartProvider>
           <LayoutWrapper>{children}</LayoutWrapper>

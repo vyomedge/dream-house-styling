@@ -8,6 +8,11 @@ import Products from "./Products/Products";
 import HowItWorks from "./HowItWorks/HowItWorks";
 import LuxerySection from "./LuxerySection/LuxerySection";
 import CommonFaq from "@/common-components/CommonFaq/CommonFaq";
+import Testimonial from "@/common-components/UesrSays/Testimonial";
+import Customization from "./Customization/Customization";
+import VisitStore from "./VisitStore/VisitStore";
+import InteriorSolutions from "./InteriorSolutions/InteriorSolutions";
+import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
 
 const faqs = [
   {
@@ -35,16 +40,40 @@ const faqs = [
     a: " Yes, you’re welcome to visit our Neelbad, Bhopal store during working hours.",
   },
 ];
+
+const testimonialData = [
+  {
+    id: 1,
+    icon: "/aboutus/about-3-1.svg",
+    title: " Radhika Sharma ",
+    rating: 5,
+    description: "“Excellent quality wallpapers and smooth customization process. One of the best home décor stores in Bhopal.”"
+  },
+  {
+    id: 2,
+    icon: "/aboutus/about-3-1.svg",
+    title: "Aman Verma ",
+    rating: 5,
+    description: "“Loved the curtain and blind collection. Professional team and timely service.”"
+  },
+]
+
+
 const HomePage = () => {
   return (
     <>
       <HomeBanner />
       <Features />
+      <WhyChooseUs />
       <HomeGallery />
       <LuxerySection />
       <VideoSection />
       <Products />
+      <Customization />
       {/* <HowItWorks /> */}
+      <InteriorSolutions />
+      <Testimonial testimonialData={testimonialData} />
+      <VisitStore />
       <CommonFaq
         title="Frequently Asked Questions"
         faqData={faqs}

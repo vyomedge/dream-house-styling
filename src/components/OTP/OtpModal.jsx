@@ -16,27 +16,27 @@ const OtpModal = ({ modalClose, pageType = "signin" }) => {
                   lock_person
                 </span>
               </div>
-              <h2 className="text-3xl font-black uppercase tracking-tighter mb-2">
+              <h2 className="font-dm text-3xl font-black uppercase tracking-tighter mb-2">
                 Verify Your Account
               </h2>
-              <p className="text-white/50 text-sm mb-10 max-w-[280px]">
+              <p className="font-dm text-white/50 text-sm mb-10 max-w-[280px]">
                 We've sent a 4-digit code to your email.
               </p>
               <div className="flex gap-4 mb-10">
                 <input
                   autofocus=""
-                  className=" w-16 h-16 rounded-full bg-charcoal-dark/50 border-2 border-white/10 text-center text-2xl font-bold transition-all duration-300  focus:outline-none focus:border-(--primaryColor) focus:bg-charcoal-dark focus:ring-0"
+                  className=" font-dm w-16 h-16 rounded-full bg-charcoal-dark/50 border-2 border-white/10 text-center text-2xl font-bold transition-all duration-300  focus:outline-none focus:border-(--primaryColor) focus:bg-charcoal-dark focus:ring-0"
                   maxlength="1"
                   type="text"
                 />
                 <input
-                  className=" w-16 h-16 rounded-full bg-charcoal-dark/50 border-2 border-white/10 text-center text-2xl font-bold transition-all duration-300  focus:outline-none focus:border-(--primaryColor) focus:bg-charcoal-dark focus:ring-0"
+                  className=" font-dm w-16 h-16 rounded-full bg-charcoal-dark/50 border-2 border-white/10 text-center text-2xl font-bold transition-all duration-300  focus:outline-none focus:border-(--primaryColor) focus:bg-charcoal-dark focus:ring-0"
                   maxlength="1"
                   placeholder=""
                   type="text"
                 />
                 <input
-                  className=" w-16 h-16 rounded-full bg-charcoal-dark/50 border-2 border-white/10 text-center text-2xl font-bold transition-all duration-300
+                  className="font-dm w-16 h-16 rounded-full bg-charcoal-dark/50 border-2 border-white/10 text-center text-2xl font-bold transition-all duration-300
                   focus:outline-none focus:border-(--primaryColor) focus:bg-charcoal-dark focus:ring-0
                   "
                   maxlength="1"
@@ -44,23 +44,23 @@ const OtpModal = ({ modalClose, pageType = "signin" }) => {
                   type="text"
                 />
                 <input
-                  className=" w-16 h-16 rounded-full bg-charcoal-dark/50 border-2 border-white/10 text-center text-2xl font-bold transition-all duration-300  focus:outline-none focus:border-(--primaryColor) focus:bg-charcoal-dark focus:ring-0"
+                  className=" font-dm w-16 h-16 rounded-full bg-charcoal-dark/50 border-2 border-white/10 text-center text-2xl font-bold transition-all duration-300  focus:outline-none focus:border-(--primaryColor) focus:bg-charcoal-dark focus:ring-0"
                   maxlength="1"
                   placeholder=""
                   type="text"
                 />
               </div>
-              <button className="w-full py-3  bg-[#00D4C8] hover:bg-[#00D4C8]/80 cursor-pointer text-white font-bold rounded-full hover:shadow-[0_10px_30px_-5px_rgba(17,164,212,0.4)] transition-all transform hover:-translate-y-1 active:scale-95 text-md tracking-wide uppercase">
+              <button className="font-dm w-full py-3  bg-[#00D4C8] hover:bg-[#00D4C8]/80 cursor-pointer text-white font-bold rounded-full hover:shadow-[0_10px_30px_-5px_rgba(17,164,212,0.4)] transition-all transform hover:-translate-y-1 active:scale-95 text-md tracking-wide uppercase">
                 Complete Verification
               </button>
               <div className="mt-8">
-                <p className="text-white/40 ">
+                <p className="font-dm text-white/40 ">
                   Resend in <span className="text-(--primaryColor)">0:59</span>
                 </p>
               </div>
               <button
                 onClick={modalClose}
-                className="mt-4 text-[10px] uppercase tracking-[0.2em] font-bold text-white/30 hover:text-white transition-colors cursor-pointer"
+                className=" font-dm mt-4 text-[10px] uppercase tracking-[0.2em] font-bold text-white/30 hover:text-white transition-colors cursor-pointer"
               >
                 Back to {pageType === "signin" ? "Sign In" : "Sign Up"}
               </button>

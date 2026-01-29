@@ -22,7 +22,7 @@ const HomeBanner = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 md:py-24">
           <div className="max-w-lg">
             <span
-              className="inline-block px-4 py-1 rounded-full text-sm font-medium mb-6"
+              className="font-dm inline-block px-4 py-1 rounded-full text-sm font-medium mb-6"
               style={{
                 backgroundColor: "#f2e3dc",
                 color: "#cd6632",
@@ -30,32 +30,28 @@ const HomeBanner = () => {
              {` NEW COLLECTION 2024`}
             </span>
 
-            <h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
-              style={{ color: "#ffffff" }}
-            >
+            <h1 className="font-dm text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+              style={{ color: "#ffffff" }} >
              Transform Your Space
             </h1>
-
-            <p
-              className="responsiveheading6 mb-8 max-w-md"
-              style={{ color: "rgba(255, 255, 255, 0.85)" }}
-            >
+            <p className="font-dm responsiveheading6 mb-8 max-w-md"
+              style={{ color: "rgba(255, 255, 255, 0.85)" }} >
             {`Discover premium wallpapers, curtains, blinds, upholstery, and carpets—crafted to match your style, space, and lifestyle. From single walls to complete interiors, we help you create spaces that feel truly yours.`}
             </p>
 
             <div className="flex flex-wrap gap-4">
               <Link href="/category">
               <button
-                className="px-8 py-4 rounded-md font-medium text-lg transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 shadow-lg"
+                className="font-dm px-8 py-4 rounded-md font-medium text-lg transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 shadow-lg"
                 style={{ backgroundColor: "#cd6632", color: "#ffffff" }}
               >
                Shop Collections
                 <ArrowRight className="w-5 h-5" />
               </button>
               </Link>
+              <Link href="/contact-us">
               <button
-                className="px-8 py-4 rounded-md font-medium text-lg transition-all duration-300 hover:bg-white/10"
+                className="font-dm px-8 py-4 rounded-md font-medium text-lg transition-all duration-300 hover:bg-white/10"
                 style={{
                   border: "1px solid rgba(255,255,255,0.4)",
                   color: "#ffffff",
@@ -63,6 +59,7 @@ const HomeBanner = () => {
               >
                  Get Free Consultation
               </button>
+              </Link>
             </div>
           </div>
         </div>

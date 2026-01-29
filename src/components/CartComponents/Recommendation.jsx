@@ -3,7 +3,7 @@ import RecommendationCard from "./RecommendationCard";
 const Recommendations = () => {
   return (
     <div className="pt-24 pb-12">
-      <h4 className="text-xl font-bold uppercase tracking-widest mb-10 flex items-center gap-4">
+      <h4 className="font-dm text-xl font-bold uppercase tracking-widest mb-10 flex items-center gap-4">
         You May Also Like
         <span className="h-[1px] flex-1 bg-white/10" />
       </h4>

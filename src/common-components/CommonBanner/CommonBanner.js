@@ -33,25 +33,25 @@ export default function CommonBanner({
                             {tag}
                         </span>
                     )}
-                    <h1 className="responsive-heading font-bold leading-tight">
+                    <h1 className="font-dm responsive-heading font-bold leading-tight">
                         {title}
                         {highlight && (
-                            <span className="dm-sans text-[#cd6632] ml-2">
+                            <span className="font-dm text-[#cd6632] ml-2">
                                 {highlight}
                             </span>
                         )}
                     </h1>
                     {subtitle && (
-                        <p className="font-poppins mt-6 text-gray-200 text-base responsive-text"> {subtitle} </p>
+                        <p className="font-dm mt-6 text-gray-200 text-base responsive-text"> {subtitle} </p>
                     )}
                     {subtitle1 && (
-                        <p className="font-poppins mt-1 text-gray-200 text-base responsive-text"> {subtitle1} </p>
+                        <p className="font-dm mt-1 text-gray-200 text-base responsive-text"> {subtitle1} </p>
                     )}
                     {subtitle2 && (
-                        <p className="font-poppins mt-1 text-gray-200 text-base responsive-text"> {subtitle2}</p>
+                        <p className="font-dm mt-1 text-gray-200 text-base responsive-text"> {subtitle2}</p>
                     )}
                     {subtitle3 && (
-                        <p className="mt-1 text-gray-200 text-base responsive-text"> {subtitle3} </p>
+                        <p className="font-dm mt-1 text-gray-200 text-base responsive-text"> {subtitle3} </p>
                     )}
                 </div>
             </section>
@@ -60,20 +60,20 @@ export default function CommonBanner({
                     <div className="custom-container py-4 text-sm text-gray-300">
                         <nav className="flex items-center gap-2">
                             {breadcrumbs.map((item, index) => (
-                                <span key={index} className="flex items-center gap-2">
+                                <span key={index} className="font-dm flex items-center gap-2">
                                     {item.href ? (
                                         <Link
                                             href={item.href}
-                                            className="hover:text-[#cd6632]"
+                                            className="hover:text-[#cd6632] font-dm"
                                         >
                                             {item.label}
                                         </Link>
                                     ) : (
-                                        <span className="text-gray-400">{item.label}</span>
+                                        <span className="text-gray-400 font-dm">{item.label}</span>
                                     )}
 
                                     {index < breadcrumbs.length - 1 && (
-                                        <span className="text-gray-500">/</span>
+                                        <span className="text-gray-500 font-dm">/</span>
                                     )}
                                 </span>
                             ))}
