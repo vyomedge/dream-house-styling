@@ -67,7 +67,7 @@ const CartItem = ({
       <div className="flex-1 flex flex-col justify-between py-2">
         <div className="flex justify-between items-start">
           <div>
-            <h3 className="font-dm text-(--primaryColor) responsiveheading3 font-bold mb-1">
+            <h3 className="font-dm text-(--primaryColor2) responsiveheading3 font-bold mb-1">
               {title}
             </h3>
             <p className="font-dm text-(--primaryColor2) text-sm mb-4">
@@ -75,7 +75,7 @@ const CartItem = ({
             </p>
           </div>
           <button
-            className="font-dm material-symbols-outlined text-white/30 hover:text-red-400 cursor-pointer"
+            className="font-dm material-symbols-outlined text-(--primaryColor) hover:text-red-400 cursor-pointer"
             onClick={handleRemove}
           >
             close

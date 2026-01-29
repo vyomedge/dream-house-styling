@@ -1,10 +1,9 @@
 "use client";
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
-const access_token = cookies.get("Access_Token");
 
 const CartContext = createContext();
 
@@ -39,6 +38,15 @@ export const CartProvider = ({ children }) => {
   // -----------------------
   // Helper
   // -----------------------
+  const refetchAccessToken = (items) => {
+    const access_token = cookies.get("Access_Token");
+
+    return access_token;
+  };
+
+  // -----------------------
+  // Helper
+  // -----------------------
   const setCartFromApi = (items) => {
     dispatch({ type: "SET_CART", payload: items });
   };
@@ -48,6 +56,7 @@ export const CartProvider = ({ children }) => {
   // -----------------------
   const addToCart = async (payload) => {
     try {
+      const access_token = refetchAccessToken();
       dispatch({ type: "SET_LOADING" });
 
       const res = await axios.post(
@@ -69,6 +78,7 @@ export const CartProvider = ({ children }) => {
   // BULK ITEMS ✅
   // -----------------------
   const fetchCartItems = async () => {
+    const access_token = refetchAccessToken();
     try {
       dispatch({ type: "SET_LOADING" });
 
@@ -91,6 +101,7 @@ export const CartProvider = ({ children }) => {
   // UPDATE
   // -----------------------
   const updateCartItem = async (payload, cartId) => {
+    const access_token = refetchAccessToken();
     try {
       dispatch({ type: "SET_LOADING" });
 
@@ -113,6 +124,7 @@ export const CartProvider = ({ children }) => {
   // REMOVE
   // -----------------------
   const removeFromCart = async (cartItemId) => {
+    const access_token = refetchAccessToken();
     try {
       dispatch({ type: "SET_LOADING" });
 
