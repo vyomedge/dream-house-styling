@@ -7,13 +7,25 @@ import Badge from "@mui/material/Badge";
 import { useCart } from "@/Context/CartContext";
 import HeaderMagaDropDown from "./HeaderMagaDropDown";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import Cookies from "universal-cookie";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
   const { items, fetchCartItems } = useCart();
   const pathname = usePathname();
+  const [validUser, setValidUser] = useState(false);
+  const router = useRouter();
+
+  const cookies = new Cookies();
+
+  useEffect(() => {
+    const access_token = cookies.get("Access_Token");
+    if (access_token) {
+      setValidUser(true);
+    }
+  }, []);
 
   // Function to check if link is active
   const isActive = (path) => {
@@ -49,6 +61,17 @@ const Header = () => {
       setShopOpen(false);
     }
   }, [openMenu]);
+
+  ("use client");
+
+  const logoutHandle = () => {
+    const cookies = new Cookies();
+    cookies.remove("Access_Token", {
+      path: "/",
+      sameSite: "strict",
+    });
+    router.replace("/login");
+  };
 
   return (
     <>
@@ -150,18 +173,30 @@ const Header = () => {
                 </Badge>
               </button>
             </Link>
-
-            <Link href={"/login"}>
+            {validUser ? (
               <button
+                onClick={logoutHandle}
                 className={`whitespace-nowrap font-dm px-5 py-2 rounded-lg text-sm font-bold transition-all cursor-pointer hidden md:block ${
                   isActive("/login")
                     ? "bg-white text-[#cd6632] border-2 border-[#cd6632]"
                     : "bg-[#cd6632] hover:bg-[#ad6d4c]/90 text-white"
                 }`}
               >
-                {`Sign In`}
+                {`Logout`}
               </button>
-            </Link>
+            ) : (
+              <Link href={"/login"}>
+                <button
+                  className={`whitespace-nowrap font-dm px-5 py-2 rounded-lg text-sm font-bold transition-all cursor-pointer hidden md:block ${
+                    isActive("/login")
+                      ? "bg-white text-[#cd6632] border-2 border-[#cd6632]"
+                      : "bg-[#cd6632] hover:bg-[#ad6d4c]/90 text-white"
+                  }`}
+                >
+                  {`Sign In`}
+                </button>
+              </Link>
+            )}
 
             <button
               onClick={() => setOpenMenu(true)}
@@ -287,17 +322,30 @@ const Header = () => {
                 )}
                 Contact
               </Link>
-              <Link
-                onClick={() => setOpenMenu(false)}
-                href="/login"
-                className={`mt-6 text-center py-3 rounded-lg font-bold transition-all duration-300 ${
-                  isActive("/login")
-                    ? "bg-white text-[#cd6632] border-2 border-[#cd6632]"
-                    : "bg-[#cd6632] hover:bg-[#b55528]"
-                }`}
-              >
-                {`Sign In`}
-              </Link>
+              {validUser ? (
+                <button
+                  onClick={() => logoutHandle}
+                  className={`mt-6 text-center py-3 rounded-lg font-bold transition-all duration-300 ${
+                    isActive("/login")
+                      ? "bg-white text-[#cd6632] border-2 border-[#cd6632]"
+                      : "bg-[#cd6632] hover:bg-[#b55528]"
+                  }`}
+                >
+                  {`Logout`}
+                </button>
+              ) : (
+                <Link
+                  onClick={() => setOpenMenu(false)}
+                  href="/login"
+                  className={`mt-6 text-center py-3 rounded-lg font-bold transition-all duration-300 ${
+                    isActive("/login")
+                      ? "bg-white text-[#cd6632] border-2 border-[#cd6632]"
+                      : "bg-[#cd6632] hover:bg-[#b55528]"
+                  }`}
+                >
+                  {`Sign In`}
+                </Link>
+              )}
             </nav>
           </div>
         </>

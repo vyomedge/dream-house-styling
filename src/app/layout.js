@@ -6,6 +6,7 @@ import { CartProvider } from "@/Context/CartContext";
 import LayoutWrapper from "@/wrappers/LayoutWrapper";
 import { ToastContainer } from "react-toastify";
 import { DM_Sans } from "next/font/google";
+import AuthGuard from "@/wrappers/AuthGuard";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -35,17 +36,19 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable}  ${dmSans.variable} antialiased`}
       >
-        <CartProvider>
-          <LayoutWrapper>{children}</LayoutWrapper>
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop
-            closeOnClick
-            pauseOnHover
-          />
-        </CartProvider>
+        <AuthGuard>
+          <CartProvider>
+            <LayoutWrapper>{children}</LayoutWrapper>
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop
+              closeOnClick
+              pauseOnHover
+            />
+          </CartProvider>
+        </AuthGuard>
       </body>
     </html>
   );
