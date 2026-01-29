@@ -51,9 +51,11 @@ const Products = () => {
   const cookies = new Cookies();
   const token_data = cookies.get("Access_Token");
   const { addToCart } = useCart();
+  const [loading, setLoading] = useState(false);
 
   const fetchProducts = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Product/`,
         {
@@ -63,7 +65,9 @@ const Products = () => {
         },
       );
       setProducts(response.data);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching products:", error);
     }
   };
@@ -109,67 +113,73 @@ const Products = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.map((product, idx) => (
-              <div key={idx} className="group">
-                <div className="relative aspect-[3/4] rounded-xl overflow-hidden soft-shadow bg-[#15242a] mb-6">
-                  {/* Image */}
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                    style={{
-                      backgroundImage: `url(${product?.images[0]?.image ? product?.images[0]?.image : getRandomImage()})`,
-                    }}
-                  />
+          {loading ? (
+            <p className="text-(--primaryColor) text-center">Loading...</p>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                {products.map((product, idx) => (
+                  <div key={idx} className="group">
+                    <div className="relative aspect-[3/4] rounded-xl overflow-hidden soft-shadow bg-[#15242a] mb-6">
+                      {/* Image */}
+                      <div
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                        style={{
+                          backgroundImage: `url(${product?.images[0]?.image ? product?.images[0]?.image : getRandomImage()})`,
+                        }}
+                      />
 
-                  {/* Badge */}
-                  {product?.badge && (
-                    <div className="absolute top-4 right-4 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase">
-                      {product.badge}
-                    </div>
-                  )}
+                      {/* Badge */}
+                      {product?.badge && (
+                        <div className="absolute top-4 right-4 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase">
+                          {product.badge}
+                        </div>
+                      )}
 
-                  {/* Hover Actions */}
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                    {/* <button className="flex cursor-pointer bg-white text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors">
+                      {/* Hover Actions */}
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        {/* <button className="flex cursor-pointer bg-white text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors">
                     <span className="material-symbols-outlined ">
                       visibility
                     </span>
                   </button> */}
-                    <button
-                      onClick={() => handleAddToCart(product)}
-                      className="font-dm flex cursor-pointer bg-white  text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors"
-                    >
-                      <span className="material-symbols-outlined  ">
-                        {` shopping_cart`}
-                      </span>
-                    </button>
+                        <button
+                          onClick={() => handleAddToCart(product)}
+                          className="font-dm flex cursor-pointer bg-white  text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors"
+                        >
+                          <span className="material-symbols-outlined  ">
+                            {` shopping_cart`}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <h5 className="font-dm text-lg font-bold text-(--primaryColor) transition-colors">
+                      {product.Product_Name}
+                    </h5>
+                    <p
+                      className="font-dm text-(--primaryColor2) text-sm mt-1 uppercase tracking-wider"
+                      dangerouslySetInnerHTML={{
+                        __html: product.Product_Description,
+                      }}
+                    />
+
+                    <p className="font-dm text-(--primaryColor2) font-bold mt-2">
+                      ₹{product.Prices[0].Price[0].SalePrice}
+                    </p>
                   </div>
-                </div>
-
-                {/* Content */}
-                <h5 className="font-dm text-lg font-bold text-(--primaryColor) transition-colors">
-                  {product.Product_Name}
-                </h5>
-                <p
-                  className="font-dm text-(--primaryColor2) text-sm mt-1 uppercase tracking-wider"
-                  dangerouslySetInnerHTML={{
-                    __html: product.Product_Description,
-                  }}
-                />
-
-                <p className="font-dm text-(--primaryColor2) font-bold mt-2">
-                  ₹{product.Prices[0].Price[0].SalePrice}
-                </p>
+                ))}
               </div>
-            ))}
-          </div>
 
-          <div className="flex justify-center mt-10 text-[#cd6632]">
-            <button className="cursor-pointer font-dm border border-foreground bg-transparent text-foreground px-6 py-3 rounded-md font-medium transition-all duration-300 hover:bg-foreground hover:text-background inline-flex items-center gap-2">
-              {` Load More Products`}
-              <ArrowUpRight className="w-4 h-4" />
-            </button>
-          </div>
+              <div className="flex justify-center mt-10 text-[#cd6632]">
+                <button className="cursor-pointer font-dm border border-foreground bg-transparent text-foreground px-6 py-3 rounded-md font-medium transition-all duration-300 hover:bg-foreground hover:text-background inline-flex items-center gap-2">
+                  {` Load More Products`}
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </section>
     </div>

@@ -28,16 +28,15 @@ const Categories = () => {
         },
       );
 
-      console.log("data", response.data.data);
-
       const newdata = response.data.data.map((item) => ({
         ...item,
         name: item.name,
         className: "aspect-[4/3]",
         image: patternFloral,
       }));
-      console.log("newData", newdata);
+
       SetCategory(newdata);
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       console.error("Error fetching categories:", error);
@@ -68,41 +67,47 @@ const Categories = () => {
         </div>
 
         {/* Grid */}
-        <div className="font-dm grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-          {categories.map((item, index) => (
-            <div
-              key={index}
-              className={`font-dm relative overflow-hidden rounded-lg cursor-pointer group ${item.className}`}
-            >
-              <Image
-                src={item.image}
-                alt={item.name}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                placeholder="blur"
-              />
+        {Loading ? (
+          <p className="text-(--primaryColor) text-center">Loading...</p>
+        ) : (
+          <>
+            <div className="font-dm grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+              {categories.map((item, index) => (
+                <div
+                  key={index}
+                  className={`font-dm relative overflow-hidden rounded-lg cursor-pointer group ${item.className}`}
+                >
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    placeholder="blur"
+                  />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-4">
-                <h3 className="font-dm text-(--primaryColor) responsiveheading3 font-semibold!">
-                  {item.name}
-                </h3>
-                <p className="font-dm text-white/70 responsive-text">
-                  {item.description}
-                </p>
-              </div>
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-4">
+                    <h3 className="font-dm text-(--primaryColor) responsiveheading3 font-semibold!">
+                      {item.name}
+                    </h3>
+                    <p className="font-dm text-white/70 responsive-text">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        {/* Mobile CTA */}
-        <a
-          href="#"
-          className="font-dm flex md:hidden items-center justify-center gap-1 responsive-text hover:underline font-medium mt-6 text-[#cd6632]"
-        >
-          {` View All Collections`}
-          <ArrowUpRight className="w-5 h-5" />
-        </a>
+            {/* Mobile CTA */}
+            <a
+              href="#"
+              className="font-dm flex md:hidden items-center justify-center gap-1 responsive-text hover:underline font-medium mt-6 text-[#cd6632]"
+            >
+              {` View All Collections`}
+              <ArrowUpRight className="w-5 h-5" />
+            </a>
+          </>
+        )}
       </div>
     </section>
   );
