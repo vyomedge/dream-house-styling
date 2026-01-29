@@ -95,9 +95,11 @@ const Header = () => {
               </Badge>
             </button>
           </Link>
-          <button className="bg-[#cd6632] hover:bg-[#ad6d4c]/90 text-white px-5 py-2 rounded-lg text-sm font-bold transition-all cursor-pointer">
-            <Link href={"/login"}>Sign In</Link>
-          </button>
+          <Link href={"/login"}>
+            <button className="bg-[#cd6632] hover:bg-[#ad6d4c]/90 text-white px-5 py-2 rounded-lg text-sm font-bold transition-all cursor-pointer">
+              Sign In
+            </button>
+          </Link>
         </div>
       </div>
     </header>

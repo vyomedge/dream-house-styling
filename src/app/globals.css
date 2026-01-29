@@ -4,6 +4,7 @@
   /* --background: #101d22; */
   --foreground: #ffffff;
   --primaryColor : #cd6632;
+  --primaryColor2 : #101d22;
 }
 
 /* @theme inline {
@@ -259,9 +260,9 @@ body {
 }
 
 .glass-bg {
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: #101d22;
+    /* backdrop-filter: blur(14px); */
+    /* -webkit-backdrop-filter: blur(14px); */
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
@@ -301,10 +302,10 @@ body {
 
         
 .glass {
-    background: rgba(16, 29, 34, 0.85);
-    backdrop-filter: blur(24px);
+    background: rgba(16, 29, 34);
+    /* backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1); */
 }
 .soft-shadow {
     box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);

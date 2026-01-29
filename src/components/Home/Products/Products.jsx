@@ -99,74 +99,77 @@ const Products = () => {
 
   return (
     <div className="bg-[#FBC19A]">
-    <section className="py-8 md:py-10 lg:py-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h2 className="responsiveheading2 font-semibold! tracking-tight mb-2 text-gray-700">{` Featured Products`}</h2>
-          <p className="text-muted-foreground text-gray-600"> {` Our best-selling designs curated for your home.`}</p>
-        </div>
+      <section className="py-8 md:py-10 lg:py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8">
+            <h2 className="responsiveheading2 font-semibold! tracking-tight mb-2 text-gray-700">{` Featured Products`}</h2>
+            <p className="text-muted-foreground text-gray-600">
+              {" "}
+              {` Our best-selling designs curated for your home.`}
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {products.map((product, idx) => (
-            <div key={idx} className="group">
-              <div className="relative aspect-[3/4] rounded-xl overflow-hidden soft-shadow bg-[#15242a] mb-6">
-                {/* Image */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                  style={{ backgroundImage: `url(${getRandomImage()})` }}
-                />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {products.map((product, idx) => (
+              <div key={idx} className="group">
+                <div className="relative aspect-[3/4] rounded-xl overflow-hidden soft-shadow bg-[#15242a] mb-6">
+                  {/* Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                    style={{ backgroundImage: `url(${getRandomImage()})` }}
+                  />
 
-                {/* Badge */}
-                {product?.badge && (
-                  <div className="absolute top-4 right-4 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase">
-                    {product.badge}
-                  </div>
-                )}
+                  {/* Badge */}
+                  {product?.badge && (
+                    <div className="absolute top-4 right-4 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase">
+                      {product.badge}
+                    </div>
+                  )}
 
-                {/* Hover Actions */}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                  {/* <button className="flex cursor-pointer bg-white text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors">
+                  {/* Hover Actions */}
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                    {/* <button className="flex cursor-pointer bg-white text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors">
                     <span className="material-symbols-outlined ">
                       visibility
                     </span>
                   </button> */}
-                  <button
-                    onClick={() => handleAddToCart(product)}
-                    className="flex cursor-pointer bg-white  text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors"
-                  >
-                    <span className="material-symbols-outlined  ">
-                     {` shopping_cart`}
-                    </span>
-                  </button>
+                    <button
+                      onClick={() => handleAddToCart(product)}
+                      className="flex cursor-pointer bg-white  text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors"
+                    >
+                      <span className="material-symbols-outlined  ">
+                        {` shopping_cart`}
+                      </span>
+                    </button>
+                  </div>
                 </div>
+
+                {/* Content */}
+                <h5 className="text-lg font-bold group-hover:text-(--primaryColor) transition-colors">
+                  {product.Product_Name}
+                </h5>
+                <p
+                  className="text-white/40 text-sm mt-1 uppercase tracking-wider"
+                  dangerouslySetInnerHTML={{
+                    __html: product.Product_Description,
+                  }}
+                />
+
+                <p className="text-(--primaryColor) font-bold mt-2">
+                  ₹{product.Prices[0].Price[0].SalePrice}
+                </p>
               </div>
+            ))}
+          </div>
 
-              {/* Content */}
-              <h5 className="text-lg font-bold group-hover:text-(--primaryColor) transition-colors">
-                {product.Product_Name}
-              </h5>
-              <p
-                className="text-white/40 text-sm mt-1 uppercase tracking-wider"
-                dangerouslySetInnerHTML={{
-                  __html: product.Product_Description,
-                }}
-              />
-
-              <p className="text-(--primaryColor) font-bold mt-2">
-                ₹{product.Prices[0].Price[0].SalePrice}
-              </p>
-            </div>
-          ))}
+          <div className="flex justify-center mt-10 text-gray-700">
+            <button className="border border-foreground bg-transparent text-foreground px-6 py-3 rounded-md font-medium transition-all duration-300 hover:bg-foreground hover:text-background inline-flex items-center gap-2">
+              {` Load More Products`}
+              <ArrowUpRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
-
-        <div className="flex justify-center mt-10 text-gray-700">
-          <button className="border border-foreground bg-transparent text-foreground px-6 py-3 rounded-md font-medium transition-all duration-300 hover:bg-foreground hover:text-background inline-flex items-center gap-2">
-           {` Load More Products`}
-            <ArrowUpRight className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
-    </section>
+      </section>
     </div>
   );
 };
