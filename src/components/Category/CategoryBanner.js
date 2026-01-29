@@ -21,7 +21,7 @@ export default function CategoryBanner({
     }, [bgImage]);
 
     return (
-        <section className="relative w-full min-h-50 md:min-h-80 overflow-hidden bg-cyan-50">
+        <section className="relative w-full min-h-50 md:min-h-80 overflow-hidden ">
             {imgSrc && (
                 <Image
                     src={imgSrc}
@@ -38,9 +38,9 @@ export default function CategoryBanner({
             )}
             {imgSrc && <div className="absolute inset-0 bg-black/50" />}
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-16">
-                <h1 className="responsive-heading  font-semibold! text-white">{title}</h1>
+                <h1 className="font-dm responsive-heading  font-semibold! text-white">{title}</h1>
                 {subtitle && (
-                    <p className="mt-2 responsive-text  text-white/90 max-w-2xl">{subtitle}</p>
+                    <p className="font-dm mt-2 responsive-text  text-white/90 max-w-2xl">{subtitle}</p>
                 )}
             </div>
         </section>

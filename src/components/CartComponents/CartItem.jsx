@@ -55,8 +55,8 @@ const CartItem = ({
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-start gap-8 py-8 border-b border-white/10 group">
-      <div className="w-full sm:w-48 aspect-[3/4] rounded-lg overflow-hidden bg-white/5">
+    <div className="flex flex-col sm:flex-row items-start gap-8 py-8 border-b text-(--primaryColor2) group">
+      <div className="w-full sm:w-48 aspect-[3/4] rounded-lg overflow-hidden ">
         <img
           src={image}
           alt={title}
@@ -67,11 +67,15 @@ const CartItem = ({
       <div className="flex-1 flex flex-col justify-between py-2">
         <div className="flex justify-between items-start">
           <div>
-            <h3 className="text-2xl font-bold mb-1">{title}</h3>
-            <p className="text-white/40 text-sm mb-4">{subtitle}</p>
+            <h3 className="font-dm text-(--primaryColor) responsiveheading3 font-bold mb-1">
+              {title}
+            </h3>
+            <p className="font-dm text-(--primaryColor2) text-sm mb-4">
+              {subtitle}
+            </p>
           </div>
           <button
-            className="material-symbols-outlined text-white/30 hover:text-red-400 cursor-pointer"
+            className="font-dm material-symbols-outlined text-white/30 hover:text-red-400 cursor-pointer"
             onClick={handleRemove}
           >
             close
@@ -79,20 +83,20 @@ const CartItem = ({
         </div>
 
         <div className="flex items-center justify-between mt-8">
-          <div className="flex items-center border border-white/20 rounded-lg">
+          <div className="flex items-center border border-x border-(--primaryColor2) rounded-lg">
             <button
-              className={`px-4 py-2  hover:text-(--primaryColor) ${cardData.Cart_Quantity === 1 ? "cursor-not-allowed" : "cursor-pointer"}`}
+              className={`font-dm px-4 py-2  text-(--primaryColor) ${cardData.Cart_Quantity === 1 ? "cursor-not-allowed" : "cursor-pointer"}`}
               onClick={() => {
                 cardData.Cart_Quantity !== 1 && handleUpdateQuantity("dec");
               }}
             >
               -
             </button>
-            <span className="px-6 py-2 border-x border-white/20 font-bold">
+            <span className="font-dm px-6 text-(--primaryColor) py-2 border-x border-(--primaryColor2) font-bold">
               {cardData.Cart_Quantity}
             </span>
             <button
-              className="px-4 py-2 cursor-pointer hover:text-(--primaryColor)"
+              className="font-dm px-4 py-2 cursor-pointer text-(--primaryColor)"
               onClick={() => {
                 handleUpdateQuantity("inc");
               }}
@@ -100,7 +104,7 @@ const CartItem = ({
               +
             </button>
           </div>
-          <p className="text-2xl font-black text-primary">
+          <p className="font-dm text-2xl font-black text-(--primaryColor)">
             ₹ {priceByQuanitity}
           </p>
         </div>

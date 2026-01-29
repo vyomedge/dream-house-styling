@@ -38,39 +38,39 @@ export default function ContactForm({ hide }) {
   };
 
   return (
-    <div className="mx-w-[600px] mx-auto border-1 border-white p-6 rounded-lg">
-      <h5 className="responsiveheading5 font-bold text-gray-500 mb-1">{`Send Us a Message`}</h5>
-      <p className="responsive-text text-gray-400 mb-6">{`Please fill in the form below and our team will get in touch within 24 hours.`}</p>
+    <div className="mx-w-[600px] mx-auto border border-white p-6 rounded-lg">
+      <h5 className="font-dm responsiveheading5 font-bold text-white mb-1">{`Send Us a Message`}</h5>
+      <p className="font-dm responsive-text text-gray-200 mb-6">{`Please fill in the form below and our team will get in touch within 24 hours.`}</p>
       {success && (
-        <p className="responsive-text text-green-600 mb-4">{`Your message has been sent successfully!`}</p>
+        <p className="font-dm responsive-text text-green-600 mb-4">{`Your message has been sent successfully!`}</p>
       )}
 
       {serverError && (
-        <p className="responsive-text text-red-600 mb-4">{serverError}</p>
+        <p className="font-dm responsive-text text-red-600 mb-4">{serverError}</p>
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="block responsive-text mb-1">{`Full Name`}</label>
+          <label className="font-dm block responsive-text mb-1">{`Full Name`}</label>
           <input
             type="text"
             placeholder="Full Name (required)"
-            className="w-full rounded-md border border-gray-500 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
+            className="font-dm w-full rounded-md border border-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
             {...register("fullName", {
               required: "Full name is required",
               minLength: { value: 2, message: "Name is too short" },
             })}
           />
           {errors.fullName && (
-            <p className="text-xs text-red-500 mt-1">{errors.fullName.message}</p>
+            <p className="font-dm text-xs text-red-500 mt-1">{errors.fullName.message}</p>
           )}
         </div>
         <div>
-          <label className="block responsive-text mb-1">{`Email`}</label>
+          <label className="font-dm block responsive-text mb-1">{`Email`}</label>
           <input
             type="email"
             placeholder="Email (required)"
-            className="w-full rounded-md border border-gray-500 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
+            className="font-dm w-full rounded-md border border-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
             {...register("email", {
               required: "Email is required",
               pattern: {
@@ -80,15 +80,15 @@ export default function ContactForm({ hide }) {
             })}
           />
           {errors.email && (
-            <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>
+            <p className="font-dm text-xs text-red-500 mt-1">{errors.email.message}</p>
           )}
         </div>
         <div>
-          <label className="block responsive-text mb-1">{`Phone`}</label>
+          <label className="font-dm block responsive-text mb-1">{`Phone`}</label>
           <input
             type="text"
             placeholder="Phone (required)"
-            className="w-full rounded-md border border-gray-500 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
+            className="font-dm w-full rounded-md border border-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
             {...register("phone", {
               required: "Phone number is required",
               pattern: {
@@ -98,15 +98,15 @@ export default function ContactForm({ hide }) {
             })}
           />
           {errors.phone && (
-            <p className="text-xs text-red-500 mt-1">{errors.phone.message}</p>
+            <p className="font-dm text-xs text-red-500 mt-1">{errors.phone.message}</p>
           )}
         </div>
         <div>
-          <label className="block responsive-text mb-1">{`Message`}</label>
+          <label className="font-dm block responsive-text mb-1">{`Message`}</label>
           <textarea
             rows="3"
             placeholder="Message"
-            className="w-full rounded-md border border-gray-500 px-3 py-2  focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
+            className="font-dm w-full rounded-md border border-white px-3 py-2  focus:outline-none focus:ring-2 focus:ring-[#1f3d2b]"
             {...register("message", {
               minLength: {
                 value: 10,
@@ -115,12 +115,12 @@ export default function ContactForm({ hide }) {
             })}
           />
           {errors.message && (
-            <p className="text-xs text-red-500 mt-1">{errors.message.message}</p>
+            <p className="font-dm text-xs text-red-500 mt-1">{errors.message.message}</p>
           )}
         </div>
         <button type="submit"
           disabled={isSubmitting}
-          className="w-full bg-[#cd6632] hover:bg-[#cd6632]/80 text-white py-3 rounded-md  transition disabled:opacity-70">
+          className="font-dm w-full bg-white hover:bg-white/80 text-[#cd6632] py-3 rounded-md  transition disabled:opacity-70">
           {isSubmitting ? "Submitting..." : "Submit Enquiry"}
         </button>
       </form>

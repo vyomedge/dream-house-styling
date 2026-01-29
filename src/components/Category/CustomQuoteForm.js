@@ -63,7 +63,7 @@ export default function CustomQuoteForm() {
                         className="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 md:p-8" >
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div>
-                                <label className="text-sm font-medium text-gray-700">
+                                <label className="font-dm text-sm font-medium text-gray-700">
                                     {` Full Name `}<span className="text-red-500">*</span>
                                 </label>
                                 <input
@@ -71,14 +71,14 @@ export default function CustomQuoteForm() {
                                     value={form.name}
                                     onChange={handleChange}
                                     placeholder="Enter your name"
-                                    className="mt-1 w-full rounded-md bg-cyan-50 px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-cyan-300"
+                                    className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
                                 />
                                 {errors.name && (
-                                    <p className="text-xs text-red-500 mt-1">{errors.name}</p>
+                                    <p className="font-dm text-xs text-red-500 mt-1">{errors.name}</p>
                                 )}
                             </div>
                             <div>
-                                <label className="text-sm font-medium text-gray-700">
+                                <label className="font-dm text-sm font-medium text-gray-700">
                                     {` Phone Number`} <span className="text-red-500">*</span>
                                 </label>
                                 <input
@@ -86,14 +86,14 @@ export default function CustomQuoteForm() {
                                     value={form.phone}
                                     onChange={handleChange}
                                     placeholder="+91 98765 43210"
-                                    className="mt-1 w-full rounded-md bg-cyan-50 px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-cyan-300"
+                                    className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
                                 />
                                 {errors.phone && (
                                     <p className="text-xs text-red-500 mt-1">{errors.phone}</p>
                                 )}
                             </div>
                             <div>
-                                <label className="text-sm font-medium text-gray-700">
+                                <label className="font-dm text-sm font-medium text-gray-700">
                                     {` Email`}
                                 </label>
                                 <input
@@ -101,14 +101,14 @@ export default function CustomQuoteForm() {
                                     value={form.email}
                                     onChange={handleChange}
                                     placeholder="your@email.com"
-                                    className="mt-1 w-full rounded-md bg-cyan-50 px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-cyan-300"
+                                    className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
                                 />
                                 {errors.email && (
-                                    <p className="text-xs text-red-500 mt-1">{errors.email}</p>
+                                    <p className="font-dm text-xs text-red-500 mt-1">{errors.email}</p>
                                 )}
                             </div>
                             <div>
-                                <label className="text-sm font-medium text-gray-700">
+                                <label className="font-dm text-sm font-medium text-gray-700">
                                     {`  City `}<span className="text-red-500">*</span>
                                 </label>
                                 <input
@@ -116,22 +116,22 @@ export default function CustomQuoteForm() {
                                     value={form.city}
                                     onChange={handleChange}
                                     placeholder="Bhopal"
-                                    className="mt-1 w-full rounded-md bg-cyan-50 px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-cyan-300"
+                                    className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
                                 />
                                 {errors.city && (
-                                    <p className="text-xs text-red-500 mt-1">{errors.city}</p>
+                                    <p className="font-dm text-xs text-red-500 mt-1">{errors.city}</p>
                                 )}
                             </div>
                         </div>
                         <div className="mt-5">
-                            <label className="text-sm font-medium text-gray-700">
+                            <label className="font-dm text-sm font-medium text-gray-700">
                                 {` Product Category `} <span className="text-red-500">*</span>
                             </label>
                             <select
                                 name="category"
                                 value={form.category}
                                 onChange={handleChange}
-                                className="mt-1 w-full rounded-md bg-cyan-50 px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-cyan-300"
+                                className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
                             >
                                 <option value="">{`Select a category`}</option>
                                 <option>{`Wallpapers`}</option>
@@ -139,11 +139,11 @@ export default function CustomQuoteForm() {
                                 <option>{`Custom Décor`}</option>
                             </select>
                             {errors.category && (
-                                <p className="text-xs text-red-500 mt-1">{errors.category}</p>
+                                <p className="font-dm text-xs text-red-500 mt-1">{errors.category}</p>
                             )}
                         </div>
                         <div className="mt-5">
-                            <label className="text-sm font-medium text-gray-700">
+                            <label className="font-dm text-sm font-medium text-gray-700">
                                 {`Your Requirements `} <span className="text-red-500">*</span>
                             </label>
                             <textarea
@@ -152,55 +152,55 @@ export default function CustomQuoteForm() {
                                 onChange={handleChange}
                                 rows="4"
                                 placeholder="Tell us about your requirements, preferred colors, room size, etc."
-                                className="mt-1 w-full rounded-md bg-cyan-50 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-cyan-300"
+                                className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
                             />
                             {errors.requirements && (
-                                <p className="text-xs text-red-500 mt-1">{errors.requirements}</p>
+                                <p className="font-dm text-xs text-red-500 mt-1">{errors.requirements}</p>
                             )}
                         </div>
 
-                        <div className="mt-4 rounded-md bg-cyan-50 px-4 py-3 text-sm text-gray-600">
+                        <div className="font-dm mt-4 rounded-md bg-[#cd6632]/20 px-4 py-3 text-sm text-gray-600">
                             <strong>{`Note : `}</strong>{` Our team will contact you within 24 hours to discuss your requirements and schedule a free consultation.`}
                         </div>
 
                         <button type="submit"
-                            className="mt-6 w-full rounded-md bg-[#00D4C8] py-3 text-sm font-medium text-white hover:bg-cyan-300 transition" >
+                            className="font-dm mt-6 w-full rounded-md bg-[#cd6632] py-3 text-sm font-medium text-white hover:bg-[#cd6632]/50 transition" >
                             {`Request Callback`}
                         </button>
                     </form>
                     <div className="space-y-6">
                         <div className="bg-white rounded-xl shadow-sm p-6">
-                            <h3 className="text-lg font-semibold text-gray-800 mb-4">{`Contact Information`}</h3>
+                            <h3 className="font-dm responsiveheading3 font-semibold! text-gray-800 mb-4">{`Contact Information`}</h3>
                             <div className="space-y-4 text-sm text-gray-600">
                                 <div className="flex gap-3 items-start">
                                     <FiPhone className="mt-1" />
                                     <div>
-                                        <p className="font-medium text-gray-800">{`Phone`}</p>
-                                        <p>{`+91 98765 43210`}</p>
+                                        <p className=" font-dm font-medium text-gray-800">{`Phone`}</p>
+                                        <p className=" font-dm font-medium text-gray-600">{`+91 98765 43210`}</p>
                                     </div>
                                 </div>
 
                                 <div className="flex gap-3 items-start">
                                     <FiMail className="mt-1" />
                                     <div>
-                                        <p className="font-medium text-gray-800">{`Email`}</p>
-                                        <p>{`info@dreamhomestyling.in`}</p>
+                                        <p className=" font-dm font-medium text-gray-800">{`Email`}</p>
+                                        <p className=" font-dm font-medium text-gray-600">{`info@dreamhomestyling.in`}</p>
                                     </div>
                                 </div>
 
                                 <div className="flex gap-3 items-start">
                                     <FiMapPin className="mt-1" />
                                     <div>
-                                        <p className="font-medium text-gray-800">{`Address`}</p>
-                                        <p> {` 123 MP Nagar, Bhopal `}<br />{` Madhya Pradesh 462011`}
+                                        <p className=" font-dm font-medium text-gray-800">{`Address`}</p>
+                                        <p className=" font-dm font-medium text-gray-600">{` 123 MP Nagar, Bhopal `}<br />{` Madhya Pradesh 462011`}
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="rounded-xl bg-[#101d22] p-6 text-white">
-                            <h3 className="text-lg font-semibold mb-2">{`Free Consultation`}</h3>
-                            <p className="text-sm opacity-90">{` Get expert advice on product selection, customization options,and pricing at no cost.`}</p>
+                        <div className="rounded-xl bg-[#cd6632] p-6 text-white">
+                            <h3 className="font-dm responsiveheading3 font-semibold! mb-2">{`Free Consultation`}</h3>
+                            <p className="font-dm responsive-text opacity-90">{` Get expert advice on product selection, customization options,and pricing at no cost.`}</p>
                         </div>
                     </div>
                 </div>

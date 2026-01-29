@@ -64,10 +64,10 @@ const SignUp = () => {
         <div className="w-full lg:w-1/2 bg-deep-charcoal flex items-center justify-center p-8 md:p-16 relative">
           <div className="w-full max-w-md">
             <div className="mb-10">
-              <h3 className="text-3xl font-bold uppercase tracking-tight mb-2">
+              <h3 className="font-dm responsiveheading3 text-[#cd6632] font-bold uppercase tracking-tight mb-2">
                 Create Account
               </h3>
-              <p className="text-white/40 text-sm">
+              <p className="font-dm text-black responsive-text">
                 Become part of the most exclusive wallpaper gallery.
               </p>
             </div>
@@ -76,19 +76,19 @@ const SignUp = () => {
             <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
               {/* USERNAME */}
               <div>
-                <label className="block text-[10px] uppercase tracking-[0.2em] font-bold text-(--primaryColor) mb-2 px-1">
+                <label className="font-dm block text-[10px] uppercase tracking-[0.2em] font-bold text-(--primaryColor) mb-2 px-1">
                   Username
                 </label>
                 <input
                   {...register("username", {
                     required: "Name is required",
                   })}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-4 text-white placeholder:text-white/20 focus:ring-cyan-blue focus:border-cyan-blue input-glow transition-all outline-none"
+                  className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
                   placeholder="Create a username"
                   type="text"
                 />
                 {errors.username && (
-                  <p className="text-red-400 text-xs mt-1">
+                  <p className="font-dm text-red-400 text-xs mt-1">
                     {errors.username.message}
                   </p>
                 )}
@@ -96,19 +96,19 @@ const SignUp = () => {
 
               {/* EMAIL */}
               <div>
-                <label className="block text-[10px] uppercase tracking-[0.2em] font-bold text-(--primaryColor) mb-2 px-1">
+                <label className="font-dm block text-[10px] uppercase tracking-[0.2em] font-bold text-(--primaryColor) mb-2 px-1">
                   Email Address
                 </label>
                 <input
                   {...register("email", {
                     required: "Email is required",
                   })}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-4 text-white placeholder:text-white/20 focus:ring-cyan-blue focus:border-cyan-blue input-glow transition-all outline-none"
+                  className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
                   placeholder="yourmail@gmail.com"
                   type="email"
                 />
                 {errors.email && (
-                  <p className="text-red-400 text-xs mt-1">
+                  <p className="font-dm text-red-400 text-xs mt-1">
                     {errors.email.message}
                   </p>
                 )}
@@ -116,7 +116,7 @@ const SignUp = () => {
 
               {/* PASSWORD */}
               <div>
-                <label className="block text-[10px] uppercase tracking-[0.2em] font-bold text-(--primaryColor) mb-2 px-1">
+                <label className="font-dm block text-[10px] uppercase tracking-[0.2em] font-bold text-(--primaryColor) mb-2 px-1">
                   Password
                 </label>
                 <div className="relative">
@@ -128,12 +128,12 @@ const SignUp = () => {
                         message: "Minimum 6 characters",
                       },
                     })}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-4 text-white placeholder:text-white/20 focus:ring-cyan-blue focus:border-cyan-blue input-glow transition-all outline-none"
+                    className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
                     placeholder="••••••••"
                     type={showPass ? "text" : "password"}
                   />
                   <button
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-white"
+                    className="font-dm absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-500"
                     type="button"
                     onClick={() => setShowPass(!showPass)}
                   >
@@ -143,7 +143,7 @@ const SignUp = () => {
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="text-red-400 text-xs mt-1">
+                  <p className="font-dm text-red-400 text-xs mt-1">
                     {errors.password.message}
                   </p>
                 )}
@@ -151,7 +151,7 @@ const SignUp = () => {
 
               {/* SUBMIT */}
               <button
-                className="w-full bg-[#cd6632] hover:bg-[#cd6632]/80 mt-4 cursor-pointer text-deep-charcoal font-black uppercase tracking-widest text-sm py-5 rounded-lg transition-all shadow-lg shadow-cyan-blue/10 active:scale-[0.98]"
+                className="font-dm w-full bg-[#cd6632] hover:bg-[#cd6632]/80 mt-4 cursor-pointer text-deep-charcoal font-black uppercase tracking-widest text-sm py-5 rounded-lg transition-all shadow-lg shadow-cyan-blue/10 active:scale-[0.98]"
                 type="submit"
               >
                 {Loading ? "Creating..." : "Create Account"}
@@ -159,10 +159,10 @@ const SignUp = () => {
             </form>
 
             <div className="mt-12 text-center">
-              <p className="text-sm text-white/40 font-medium">
+              <p className="font-dm text-sm text-gray-600 font-medium">
                 Already have an account?
                 <a
-                  className="text-white hover:text-(--primaryColor) transition-colors font-bold ml-1 border-b border-white/20 hover:border-cyan-blue pb-0.5"
+                  className="font-dm text-blue-700 hover:text-(--primaryColor) transition-colors font-bold ml-1 border-b border-white/20 hover:border-cyan-blue pb-0.5"
                   href="/login"
                 >
                   Sign In

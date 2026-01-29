@@ -47,18 +47,18 @@ const EmptyCartPage = () => {
           ></div>
         </div>
         <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
-          <span className="material-symbols-outlined text-primary text-6xl mb-8 block opacity-50">
+          <span className="font-dm material-symbols-outlined text-primary text-6xl mb-8 block opacity-50">
             shopping_cart_off
           </span>
-          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6 leading-none">
+          <h1 className="font-dm  responsive-heading font-black uppercase tracking-tighter mb-6 leading-none">
             Your Selection is Empty
-          </h2>
-          <p className="text-white/60 text-lg md:text-xl font-light mb-12 tracking-wide">
+          </h1>
+          <p className="font-dm text-white/60 text-lg md:text-xl font-light mb-12 tracking-wide">
             It looks like you haven't discovered your perfect wall yet. Let us
             help you find the texture for your next vision.
           </p>
           <Link
-            className="inline-block bg-[#00D4C8] hover:bg-[#00D4C8]/90 text-white font-black px-12 py-5 rounded-full uppercase tracking-[0.2em] text-sm transition-all shadow-xl shadow-primary/20"
+            className=" font-dm inline-block bg-[#cd6632] hover:bg-[#cd6632]/80 text-white font-black px-12 py-5 rounded-full uppercase tracking-[0.2em] text-sm transition-all shadow-xl shadow-primary/20"
             href="/"
           >
             Start Browsing
@@ -68,16 +68,16 @@ const EmptyCartPage = () => {
       <section className="max-w-7xl mx-auto px-6 py-24">
         <div className="flex items-center justify-between mb-12">
           <div>
-            <h3 className="text-3xl font-black uppercase tracking-tighter">
+            <h3 className="font-dm responsiveheading3 text-[#cd6632] uppercase tracking-tighter">
               Curated Picks
             </h3>
-            <p className="text-white/40 uppercase tracking-[0.3em] text-[10px] mt-2 font-bold">
+            <p className="font-dm responsive-text text-gray-500 uppercase tracking-[0.3em] text-[10px] mt-2 font-bold">
               Recommended for your refined taste
             </p>
           </div>
-          <div className="h-[1px] flex-1 bg-white/10 mx-12 hidden md:block"></div>
+          <div className="h-[1px] flex-1 bg-[#cd6632] mx-12 hidden md:block"></div>
           <a
-            className="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-white transition-colors"
+            className="font-dm text-[10px] font-bold uppercase tracking-widest text-[#cd6632] hover:text-[#cd6632]/80 transition-colors"
             href="#"
           >
             View All Collections
@@ -94,18 +94,18 @@ const EmptyCartPage = () => {
                 />
 
                 <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <button className="flex cursor-pointer bg-white p-3 rounded-full hover:bg-[var(--primaryColor)] text-black hover:text-white transition-colors">
-                    <span className="material-symbols-outlined">
+                  <button className="font-dm flex cursor-pointer bg-[#cd6632] hover:bg-[#cd6632]/80 p-3 rounded-full  transition-colors">
+                    <span className="font-dm material-symbols-outlined">
                       shopping_cart
                     </span>
                   </button>
                 </div>
               </div>
 
-              <h4 className="font-bold uppercase tracking-widest text-sm">
+              <h4 className="font-dm responsiveheading6 font-bold uppercase tracking-widest text-sm text-[#cd6632]">
                 {item.title}
               </h4>
-              <p className="text-white/40 text-xs mt-1">{item.subtitle}</p>
+              <p className="font-dm text-gray-600 responsive-text mt-1">{item.subtitle}</p>
             </div>
           ))}
         </div>

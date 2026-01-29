@@ -38,7 +38,7 @@ const HeaderMagaDropDown = () => {
   return (
     <div className="mega-menu invisible opacity-0 absolute top-20 left-0 w-full glass transition-all duration-300 translate-y-2 group-hover:translate-y-0  border-t-0 py-10">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-5 gap-6">
+        <div className="grid grid-cols-5 gap-6 font-dm">
           {rooms.map((room, index) => (
             <a key={index} href="#" className={"group/card block"}>
               <div className="aspect-[4/5] rounded-lg overflow-hidden mb-4 border border-white/10 group-hover:border-primary/50 transition-colors">
@@ -48,22 +48,22 @@ const HeaderMagaDropDown = () => {
                 />
               </div>
 
-              <h4 className="text-sm font-bold uppercase tracking-wider group-hover:text-primary transition-colors">
+              <p className="font-dm text-sm font-bold uppercase tracking-wider group-hover:text-primary transition-colors">
                 {room.title}
-              </h4>
+              </p>
 
-              <p className="text-[11px] text-white/50 mt-1 leading-relaxed">
+              <p className="font-dm text-[11px] text-gray-100 mt-1 leading-relaxed">
                 {room.description}
               </p>
             </a>
           ))}
         </div>
         <div className="mt-8 pt-6 border-t border-white/5 flex justify-between items-center">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-white/30">
+          <span className="font-dm text-[10px] tracking-[0.3em] uppercase text-gray-100">
             Curated by Interior Architects
           </span>
           <a
-            className="text-xs font-bold text-primary flex items-center gap-2 hover:gap-4 transition-all"
+            className="font-dm text-xs font-bold text-primary flex items-center gap-2 hover:gap-4 transition-all"
             href="/category"
           >
             View All Categories{" "}

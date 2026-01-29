@@ -66,7 +66,7 @@ export default function ProductDetailDiscription() {
                         <button
                             key={tab.key}
                             onClick={() => setActiveTab(tab.key)}
-                            className={`px-4 py-1.5 text-xs sm:text-sm rounded-full transition
+                            className={`font-dm px-4 py-1.5 text-xs sm:text-sm rounded-full transition
                             ${activeTab === tab.key
                                     ? "bg-white text-black shadow-sm"
                                     : "text-gray-600 hover:text-black"
@@ -75,12 +75,12 @@ export default function ProductDetailDiscription() {
                         </button>
                     ))}
                 </div>
-                <div className="text-sm text-gray-700 leading-relaxed space-y-4">
-               {activeTab === "Description" &&
-            activeData?.content.map((text, i) => (
-              <p key={i}>{text}</p>
-            ))}
-                    </div>
+                <div className="font-dm text-sm text-gray-700 leading-relaxed space-y-4">
+                    {activeTab === "Description" &&
+                        activeData?.content.map((text, i) => (
+                            <p key={i}>{text}</p>
+                        ))}
+                </div>
 
                 {/* Content */}
                 <div className="text-sm text-gray-700 leading-relaxed space-y-4 ">
@@ -88,8 +88,8 @@ export default function ProductDetailDiscription() {
                     {activeTab == "Customization Info" &&
                         activeData.content.map((faq, i) => (
                             <div key={i}>
-                                <p className="font-semibold text-black mb-1">{faq.question}</p>
-                                <p>{faq.answer}</p>
+                                <p className="font-dm font-semibold text-black mb-1">{faq.question}</p>
+                                <p className="font-dm text-gray-700 mb-1">{faq.answer}</p>
                             </div>
                         ))}
 
@@ -97,8 +97,8 @@ export default function ProductDetailDiscription() {
                     {activeTab === "FAQs" &&
                         activeData.content.map((faq, i) => (
                             <div key={i}>
-                                <p className="font-semibold text-black mb-1">{faq.question}</p>
-                                <p>{faq.answer}</p>
+                                <p className="font-dm font-semibold text-black mb-1">{faq.question}</p>
+                                <p className="font-dm text-gray-700 mb-1">{faq.answer}</p>
                             </div>
                         ))}
                 </div>

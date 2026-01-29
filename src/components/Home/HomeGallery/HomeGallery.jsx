@@ -49,28 +49,30 @@ const Categories = () => {
   }, []);
 
   return (
-    <section className="py-16 bg-[#FBC19A]">
+    <section className="py-10 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
         {/* Header */}
         <div className="flex items-end justify-between mb-8">
           <div>
-            <h2 className="responsiveheading2 font-semibold! tracking-tight mb-2 text-gray-600">{` Browse by Category`}</h2>
-            <p className="text-muted-foreground responsive-text">{`Find the perfect pattern for every room in your house.`}</p>
+            <h2 className="font-dm responsiveheading2 font-semibold! tracking-tight mb-2 text-[#cd6632]">{` Browse by Category`}</h2>
+            <p className="font-dm text-muted-foreground responsive-text text-black">{`Find the perfect pattern for every room in your house.`}</p>
           </div>
 
-          <a href="/category"
-            className="hidden md:flex items-center gap-1 responsive-text hover:underline font-medium" >
+          <a
+            href="/category"
+            className="font-dm hidden md:flex items-center gap-1 responsive-text hover:underline font-medium "
+          >
             {` View All Collections`}
             <ArrowUpRight className="w-5 h-5" />
           </a>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        <div className="font-dm grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {categories.map((item, index) => (
             <div
               key={index}
-              className={`relative overflow-hidden rounded-lg cursor-pointer group ${item.className}`}
+              className={`font-dm relative overflow-hidden rounded-lg cursor-pointer group ${item.className}`}
             >
               <Image
                 src={item.image}
@@ -82,10 +84,12 @@ const Categories = () => {
 
               {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-4">
-                <h3 className="text-black responsiveheading3 font-semibold!">
+                <h3 className="font-dm text-(--primaryColor) responsiveheading3 font-semibold!">
                   {item.name}
                 </h3>
-                <p className="text-white/70 responsive-text">{item.description}</p>
+                <p className="font-dm text-white/70 responsive-text">
+                  {item.description}
+                </p>
               </div>
             </div>
           ))}
@@ -94,7 +98,7 @@ const Categories = () => {
         {/* Mobile CTA */}
         <a
           href="#"
-          className="flex md:hidden items-center justify-center gap-1 responsive-text hover:underline font-medium mt-6"
+          className="font-dm flex md:hidden items-center justify-center gap-1 responsive-text hover:underline font-medium mt-6 text-[#cd6632]"
         >
           {` View All Collections`}
           <ArrowUpRight className="w-5 h-5" />

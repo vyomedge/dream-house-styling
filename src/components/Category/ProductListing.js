@@ -93,14 +93,14 @@ export default function ProductListing() {
             <section className="custom-container py-10 sm:py-14">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6">
                     <div className="mb-6">
-                        <h2 className="responsiveheading2 font-semibold! text-[#cd6632]"> {`Designer Wallpapers`} </h2>
-                        <p className="responsive-text text-gray-500 mt-2 "> {`Explore our premium collection of customizable wallpapers crafted to elevate modern interiors with timeless elegance.`}</p>
+                        <h2 className="font-dm responsiveheading2 font-semibold! text-[#cd6632]"> {`Designer Wallpapers`} </h2>
+                        <p className="font-dm responsive-text text-gray-500 mt-2 "> {`Explore our premium collection of customizable wallpapers crafted to elevate modern interiors with timeless elegance.`}</p>
                     </div>
                     {/* Filter Button (xs / sm / md ONLY) */}
                     <div className="relative mb-6 lg:hidden" ref={dropdownRef}>
                         <button
                             onClick={() => setOpen(!open)}
-                            className="flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm text-[#cd6632] shadow-sm " >
+                            className="font-dm flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm text-[#cd6632] shadow-sm " >
                             <FaFilter /> {` Filters`}
                         </button>
 
@@ -128,7 +128,7 @@ export default function ProductListing() {
                         </aside>
                         {/* Products */}
                         <div className="lg:col-span-3">
-                            <p className="text-sm text-gray-900 mb-4">{`Showing`} {" "}{filteredProducts.length}{""}{` products`} </p>
+                            <p className="font-dm text-sm text-gray-700 mb-4">{`Showing`} {" "}{filteredProducts.length}{""}{` products`} </p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
                                 {filteredProducts.map((product) => (
                                     <Link
@@ -152,7 +152,7 @@ export default function ProductListing() {
 /* FILTER PANEL */
 const FilterPanel = ({ filters, setFilters, handleCheckbox }) => (
     <div className=" border border-gray-300 rounded-xl p-5 shadow-xl">
-        <h3 className="flex items-center gap-2 font-semibold text-[#cd6632] mb-4"><FaFilter />{` Filters`} </h3>
+        <h3 className="font-dm flex items-center gap-2 font-semibold text-[#cd6632] mb-4"><FaFilter />{` Filters`} </h3>
         <FilterBlock title="Type">
             {["Premium", "Standard", "Economy"].map((t) => (
                 <Checkbox
@@ -172,7 +172,7 @@ const FilterPanel = ({ filters, setFilters, handleCheckbox }) => (
             ))}
         </FilterBlock>
         <FilterBlock title="Color">
-            <div className="flex gap-3 flex-wrap">
+            <div className="font-dm flex gap-3 flex-wrap">
                 {[
                     { name: "white", hex: "#ffffff" },
                     { name: "black", hex: "#000000" },
@@ -221,20 +221,20 @@ const FilterPanel = ({ filters, setFilters, handleCheckbox }) => (
 
 const FilterBlock = ({ title, children }) => (
     <div className="mb-5">
-        <h4 className="text-sm font-semibold mb-3 text-gray-700"> {title}</h4>
+        <h4 className="font-dm text-sm font-semibold mb-3 text-gray-700"> {title}</h4>
         {children}
     </div>
 );
 
 const Checkbox = ({ label, onChange }) => (
-    <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer text-gray-600">
+    <label className=" font-dm flex items-center gap-2 text-sm mb-2 cursor-pointer text-gray-600">
         <input type="checkbox" onChange={onChange} />
         {label}
     </label>
 );
 
 const Radio = ({ label, onChange }) => (
-    <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer text-gray-600">
+    <label className="font-dm flex items-center gap-2 text-sm mb-2 cursor-pointer text-gray-600">
         <input type="radio" name="price" onChange={onChange} />
         {label}
     </label>
