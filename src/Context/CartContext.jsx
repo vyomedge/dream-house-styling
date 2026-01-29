@@ -4,7 +4,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
-const access_token = cookies.get("Token_access");
+const access_token = cookies.get("Access_Token");
 
 const CartContext = createContext();
 
