@@ -35,10 +35,10 @@ const Features = () => {
                   <div className=" p-10 rounded-[1rem]  relative overflow-hidden group bg-[#101d22]">
                     <div className="absolute -top-24 -right-24 w-48 h-48 bg-(--primaryColor)/20 blur-[80px] rounded-full"></div>
                     <feature.icon className="w-8 h-8 text-primary mb-3 text-[#cd6632]" />
-                    <h3 className="font-dm font-semibold! mb-1 text-2xl text-[#cd6632]">
+                    <h3 className="font-dm responsiveheading3 font-semibold! mb-1 text-2xl text-[#cd6632]">
                       {feature.title}
                     </h3>
-                    <p className="font-dm text-sm text-muted-foreground text-[#cd6632]">
+                    <p className="font-dm responsive-textt  text-[#cd6632]">
                       {feature.description}
                     </p>
                     <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-(--primaryColor)/10 blur-[80px] rounded-full"></div>

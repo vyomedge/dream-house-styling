@@ -30,11 +30,11 @@ const HomeBanner = () => {
              {` NEW COLLECTION 2024`}
             </span>
 
-            <h1 className="font-dm text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+            <h1 className="font-dm responsive-heading font-bold mb-6 leading-tight"
               style={{ color: "#ffffff" }} >
              Transform Your Space
             </h1>
-            <p className="font-dm responsiveheading6 mb-8 max-w-md"
+            <p className="font-dm responsive-text mb-8 max-w-md"
               style={{ color: "rgba(255, 255, 255, 0.85)" }} >
             {`Discover premium wallpapers, curtains, blinds, upholstery, and carpets—crafted to match your style, space, and lifestyle. From single walls to complete interiors, we help you create spaces that feel truly yours.`}
             </p>
@@ -42,7 +42,7 @@ const HomeBanner = () => {
             <div className="flex flex-wrap gap-4">
               <Link href="/category">
               <button
-                className="font-dm px-8 py-4 rounded-md font-medium text-lg transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 shadow-lg"
+                className="font-dm responsive-text px-6 py-2 rounded-md font-medium  transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 shadow-lg"
                 style={{ backgroundColor: "#cd6632", color: "#ffffff" }}
               >
                Shop Collections
@@ -51,7 +51,7 @@ const HomeBanner = () => {
               </Link>
               <Link href="/contact-us">
               <button
-                className="font-dm px-8 py-4 rounded-md font-medium text-lg transition-all duration-300 hover:bg-white/10"
+                className="font-dm responsive-text px-6 py-2 rounded-md font-medium  transition-all duration-300 hover:bg-white/10"
                 style={{
                   border: "1px solid rgba(255,255,255,0.4)",
                   color: "#ffffff",

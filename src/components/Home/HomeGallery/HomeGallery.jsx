@@ -49,17 +49,17 @@ const Categories = () => {
   }, []);
 
   return (
-    <section className="py-16 bg-color">
+    <section className="py-10 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
         {/* Header */}
         <div className="flex items-end justify-between mb-8">
           <div>
-            <h2 className="font-dm responsiveheading2 font-semibold! tracking-tight mb-2 text-white">{` Browse by Category`}</h2>
-            <p className="font-dm text-muted-foreground responsive-text">{`Find the perfect pattern for every room in your house.`}</p>
+            <h2 className="font-dm responsiveheading2 font-semibold! tracking-tight mb-2 text-[#cd6632]">{` Browse by Category`}</h2>
+            <p className="font-dm text-muted-foreground responsive-text text-black">{`Find the perfect pattern for every room in your house.`}</p>
           </div>
 
           <a href="/category"
-            className="font-dm hidden md:flex items-center gap-1 responsive-text hover:underline font-medium" >
+            className="font-dm hidden md:flex items-center gap-1 responsive-text hover:underline font-medium " >
             {` View All Collections`}
             <ArrowUpRight className="w-5 h-5" />
           </a>
@@ -94,7 +94,7 @@ const Categories = () => {
         {/* Mobile CTA */}
         <a
           href="#"
-          className="font-dm flex md:hidden items-center justify-center gap-1 responsive-text hover:underline font-medium mt-6"
+          className="font-dm flex md:hidden items-center justify-center gap-1 responsive-text hover:underline font-medium mt-6 text-[#cd6632]"
         >
           {` View All Collections`}
           <ArrowUpRight className="w-5 h-5" />
