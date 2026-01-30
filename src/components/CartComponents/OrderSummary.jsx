@@ -63,7 +63,6 @@ const handleSubmit = async (e) => {
 };
 
 const OrderSummary = ({ cartItems = [] }) => {
-  console.log("cartItems", cartItems);
   const total = cartItems.reduce((acc, curr) => {
     return (acc += curr.TotalPrice);
   }, 0);

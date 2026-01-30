@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import logo from "@/assets/logo.png";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import Badge from "@mui/material/Badge";
 import { useCart } from "@/Context/CartContext";
@@ -9,7 +9,37 @@ import HeaderMagaDropDown from "./HeaderMagaDropDown";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Cookies from "universal-cookie";
+import SearchResultsCom from "./SearchResults";
+import { debounce } from "@/utills/utills";
+import axios from "axios";
 
+const getSearchFilter = async ({ store, search }) => {
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-SearchFilter/`,
+      {
+        store: store,
+        search: search,
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      // Backend error
+      console.error("API Error:", error.response.data);
+      throw error.response.data;
+    } else if (error.request) {
+      // No response from server
+      console.error("No response from server");
+      throw new Error("Server not responding");
+    } else {
+      // Axios config or JS error
+      console.error("Error:", error.message);
+      throw error;
+    }
+  }
+};
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -18,8 +48,13 @@ const Header = () => {
   const pathname = usePathname();
   const [validUser, setValidUser] = useState(false);
   const router = useRouter();
-
+  const [SearchResults, setSearchResults] = useState([]);
+  const [searchStr, setSearchStr] = useState("");
   const cookies = new Cookies();
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [suggestedProducts, setSuggestedProducts] = useState([]);
+  const [visibleProducts, setVisibleProducts] = useState([]);
+  const [resultsType, setResultType] = useState("suggested");
 
   useEffect(() => {
     const access_token = cookies.get("Access_Token");
@@ -44,27 +79,6 @@ const Header = () => {
     { href: "/shop/kitchen", label: "Kitchen" },
   ];
 
-  const fetchProducts = async () => {
-    try {
-      await fetchCartItems();
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (!items.length) {
-      fetchProducts();
-    }
-  }, []);
-  useEffect(() => {
-    if (!openMenu) {
-      setShopOpen(false);
-    }
-  }, [openMenu]);
-
-  ("use client");
-
   const logoutHandle = () => {
     const cookies = new Cookies();
     cookies.remove("Access_Token", {
@@ -74,17 +88,71 @@ const Header = () => {
     router.replace("/login");
   };
 
+  const handleLogoClick = (e) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  };
 
-const handleLogoClick = (e) => {
-  if (pathname === "/") {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }
-};
+  const fetchSearchData = async (value) => {
+    try {
+      setSearchLoading(true);
+      const data = await getSearchFilter({
+        store: 212,
+        search: value,
+      });
+      setVisibleProducts(data);
+      setResultType("searched");
+      setSearchLoading(false);
+      console.log("Filtered result:", data);
+    } catch (err) {
+      setSearchLoading(false);
+      console.log("Search failed", err);
+    }
+  };
 
+  const debouncedSearch = useCallback(
+    debounce((value) => {
+      fetchSearchData(value);
+    }, 500),
+    [],
+  );
+
+  // Trigger debounce on input change
+  useEffect(() => {
+    if (searchStr.trim()) {
+      debouncedSearch(searchStr.trim());
+    } else {
+      setVisibleProducts(suggestedProducts);
+      setResultType("suggested");
+    }
+  }, [searchStr, debouncedSearch]);
+
+  const fetchProducts = async () => {
+    try {
+      setSearchResults(true);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Product/`,
+      );
+      console.log("header fetched products", response.data);
+      setSuggestedProducts(response.data);
+      setVisibleProducts(response.data);
+      setSearchResults(false);
+    } catch (error) {
+      setSearchResults(false);
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  console.log("visible results", visibleProducts);
 
   return (
     <>
@@ -92,7 +160,7 @@ const handleLogoClick = (e) => {
         <div className="custom-container mx-auto px-6! h-20 py-2 flex items-center justify-between">
           <div className="flex items-center gap-12 h-full">
             <div className="flex items-center gap-3">
-             <Link href="/" onClick={handleLogoClick}>
+              <Link href="/" onClick={handleLogoClick}>
                 <div className="relative  w-[90px] sm:w-[120px] md:w-[150px] h-[50px] sm:h-[150px] md:h-[130px] mb-2 sm:mb-4">
                   <Image
                     src="/images/logo.png"
@@ -163,9 +231,17 @@ const handleLogoClick = (e) => {
           </div>
 
           <div className="flex items-center gap-3 sm:gap-4">
-            <div className="relative hidden lg:block">
-              <SearchBar />
+            <div className="relative hidden lg:block search-trigger">
+              <SearchBar
+                onSearch={(e) => setSearchStr(e.target.value)}
+                value={searchStr}
+              />
             </div>
+            <SearchResultsCom
+              results={visibleProducts}
+              resultsType={resultsType}
+              loading={searchLoading}
+            />
 
             {/* <button className="font-dm material-symbols-outlined text-white/70 hover:text-white">
               favorite

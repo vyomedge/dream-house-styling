@@ -1,7 +1,6 @@
 "use client";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import Cookies from "universal-cookie";
 import patternFloral from "@/assets/pattern-floral.jpg";
 import patternGeometric from "@/assets/pattern-geometric.jpg";
 import patternTextured from "@/assets/pattern-textured.jpg";
@@ -9,12 +8,11 @@ import patternAbstract from "@/assets/pattern-abstract.jpg";
 import patternMinimalist from "@/assets/pattern-minimalist.jpg";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 const Categories = () => {
   const [categories, SetCategory] = useState([]);
   const [Loading, setLoading] = useState(false);
-  const cookies = new Cookies();
-  const token_data = cookies.get("Access_Token");
 
   const fetchActiveCategory = async () => {
     setLoading(true);
@@ -54,7 +52,7 @@ const Categories = () => {
 
           <a
             href="/category"
-            className="font-dm hidden md:flex items-center gap-1 responsive-text hover:underline font-medium "
+            className="font-dm text-(--primaryColor2) hidden md:flex items-center gap-1 responsive-text hover:underline font-medium "
           >
             {` View All Collections`}
             <ArrowUpRight className="w-5 h-5" />
@@ -68,28 +66,32 @@ const Categories = () => {
           <>
             <div className="font-dm grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
               {categories.map((item, index) => (
-                <div
+                <Link
                   key={index}
-                  className={`font-dm relative overflow-hidden rounded-lg cursor-pointer group ${item.className}`}
+                  href={`/category/${item.name.toLowerCase()}/${item.id}`}
                 >
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    placeholder="blur"
-                  />
+                  <div
+                    className={`font-dm relative overflow-hidden rounded-lg cursor-pointer group ${item.className}`}
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      placeholder="blur"
+                    />
 
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-4">
-                    <h3 className="font-dm text-(--primaryColor) responsiveheading3 font-semibold!">
-                      {item.name}
-                    </h3>
-                    <p className="font-dm text-white/70 responsive-text">
-                      {item.description}
-                    </p>
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-4">
+                      <h3 className="font-dm text-(--primaryColor) responsiveheading3 font-semibold!">
+                        {item.name}
+                      </h3>
+                      {/* <p className="font-dm text-white/70 responsive-text">
+                        {item.description}
+                      </p> */}
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 

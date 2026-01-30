@@ -153,12 +153,12 @@ const Products = () => {
                     <h5 className="font-dm text-lg font-bold text-(--primaryColor) transition-colors">
                       {product.Product_Name}
                     </h5>
-                    <p
+                    {/* <p
                       className="font-dm text-(--primaryColor2) text-sm mt-1 uppercase tracking-wider"
                       dangerouslySetInnerHTML={{
                         __html: product.Product_Description,
                       }}
-                    />
+                    /> */}
 
                     <p className="font-dm text-(--primaryColor2) font-bold mt-2">
                       ₹{product.Prices[0].Price[0].SalePrice}

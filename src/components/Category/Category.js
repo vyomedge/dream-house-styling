@@ -1,18 +1,19 @@
-import React from 'react'
-import ProductListing from './ProductListing'
-import CategoryBanner from './CategoryBanner'
+"use client";
+import React from "react";
+import ProductListing from "./ProductListing";
+import CategoryBanner from "./CategoryBanner";
 
-const Categrory = () => {
+const Categrory = ({ products, category }) => {
   return (
     <div>
       <CategoryBanner
-        title="Designer Wallpapers"
-        subtitle="Transform your walls with timeless designs"
-        bgImage="/images/banners/wallpaper.jpg"
+        title={category?.name}
+        subtitle={"Transform your walls with timeless designs"}
+        bgImage="/aboutbanner.png"
       />
-      <ProductListing />
+      <ProductListing products={products} category={category} />
     </div>
-  )
-}
+  );
+};
 
-export default Categrory
+export default Categrory;
