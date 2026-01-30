@@ -10,6 +10,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Cookies from "universal-cookie";
 
+
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
@@ -73,13 +74,25 @@ const Header = () => {
     router.replace("/login");
   };
 
+
+const handleLogoClick = (e) => {
+  if (pathname === "/") {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+};
+
+
   return (
     <>
       <header className="bg-[#101d22] sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/80 backdrop-blur-md py-3">
         <div className="custom-container mx-auto px-6! h-20 py-2 flex items-center justify-between">
           <div className="flex items-center gap-12 h-full">
             <div className="flex items-center gap-3">
-              <Link href="/">
+             <Link href="/" onClick={handleLogoClick}>
                 <div className="relative  w-[90px] sm:w-[120px] md:w-[150px] h-[50px] sm:h-[150px] md:h-[130px] mb-2 sm:mb-4">
                   <Image
                     src="/images/logo.png"
@@ -154,9 +167,9 @@ const Header = () => {
               <SearchBar />
             </div>
 
-            <button className="font-dm material-symbols-outlined text-white/70 hover:text-white">
+            {/* <button className="font-dm material-symbols-outlined text-white/70 hover:text-white">
               favorite
-            </button>
+            </button> */}
 
             <Link href={"/add-to-cart"}>
               <button className="font-dm cursor-pointer material-symbols-outlined text-white/70 hover:text-white relative mb-2">

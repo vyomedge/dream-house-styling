@@ -50,6 +50,16 @@ export default function ProductListing() {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef(null);
 
+    /* Clear all filters */
+    const clearFilters = () => {
+        setFilters({
+            type: [],
+            room: [],
+            color: "",
+            price: "",
+        });
+    };
+
     // Close dropdown on outside click (xs / sm / md)
     useEffect(() => {
         const handler = (e) => {
@@ -110,6 +120,7 @@ export default function ProductListing() {
                                     filters={filters}
                                     setFilters={setFilters}
                                     handleCheckbox={handleCheckbox}
+                                    clearFilters={clearFilters}
                                 />
                             </div>
                         )}
@@ -123,6 +134,7 @@ export default function ProductListing() {
                                     filters={filters}
                                     setFilters={setFilters}
                                     handleCheckbox={handleCheckbox}
+                                    clearFilters={clearFilters}
                                 />
                             </div>
                         </aside>
@@ -150,15 +162,29 @@ export default function ProductListing() {
 }
 
 /* FILTER PANEL */
-const FilterPanel = ({ filters, setFilters, handleCheckbox }) => (
+const FilterPanel = ({ filters, setFilters, handleCheckbox, clearFilters, }) => (
     <div className=" border border-gray-300 rounded-xl p-5 shadow-xl">
         <h3 className="font-dm flex items-center gap-2 font-semibold text-[#cd6632] mb-4"><FaFilter />{` Filters`} </h3>
+
+        <button
+            onClick={clearFilters}
+            disabled={
+                !filters.type.length &&
+                !filters.room.length &&
+                !filters.color &&
+                !filters.price
+            }
+            className="w-full mb-5 text-sm border border-[#cd6632] text-[#cd6632] py-2 rounded-lg hover:bg-[#cd6632] hover:text-white transition disabled:opacity-40" >
+           {` Clear Filters`}
+        </button>
+
         <FilterBlock title="Type">
             {["Premium", "Standard", "Economy"].map((t) => (
                 <Checkbox
                     key={t}
                     label={t}
                     onChange={() => handleCheckbox("type", t)}
+                    checked={filters.type.includes(t)}
                 />
             ))}
         </FilterBlock>
@@ -167,6 +193,7 @@ const FilterPanel = ({ filters, setFilters, handleCheckbox }) => (
                 <Checkbox
                     key={r}
                     label={r}
+                    checked={filters.room.includes(r)}
                     onChange={() => handleCheckbox("room", r)}
                 />
             ))}
@@ -210,10 +237,10 @@ const FilterPanel = ({ filters, setFilters, handleCheckbox }) => (
         </FilterBlock>
 
         <FilterBlock title="Price Range">
-            <Radio label="Under ₹5,000" onChange={() => setFilters({ ...filters, price: "under5000" })} />
-            <Radio label="₹5,000 - ₹10,000" onChange={() => setFilters({ ...filters, price: "5000to10000" })} />
-            <Radio label="₹10,000 - ₹20,000" onChange={() => setFilters({ ...filters, price: "10000to20000" })} />
-            <Radio label="Above ₹20,000" onChange={() => setFilters({ ...filters, price: "above20000" })} />
+            <Radio label="Under ₹5,000" checked={filters.price === "under5000"} onChange={() => setFilters({ ...filters, price: "under5000" })} />
+            <Radio label="₹5,000 - ₹10,000" checked={filters.price === "5000to10000"} onChange={() => setFilters({ ...filters, price: "5000to10000" })} />
+            <Radio label="₹10,000 - ₹20,000" checked={filters.price === "10000to20000"} onChange={() => setFilters({ ...filters, price: "10000to20000" })} />
+            <Radio label="Above ₹20,000" checked={filters.price === "above20000"} onChange={() => setFilters({ ...filters, price: "above20000" })} />
 
         </FilterBlock>
     </div>
@@ -226,16 +253,16 @@ const FilterBlock = ({ title, children }) => (
     </div>
 );
 
-const Checkbox = ({ label, onChange }) => (
+const Checkbox = ({ label, checked, onChange }) => (
     <label className=" font-dm flex items-center gap-2 text-sm mb-2 cursor-pointer text-gray-600">
-        <input type="checkbox" onChange={onChange} />
+        <input type="checkbox" checked={checked} onChange={onChange} />
         {label}
     </label>
 );
 
-const Radio = ({ label, onChange }) => (
+const Radio = ({ label, checked, onChange }) => (
     <label className="font-dm flex items-center gap-2 text-sm mb-2 cursor-pointer text-gray-600">
-        <input type="radio" name="price" onChange={onChange} />
+        <input type="radio" name="price" checked={checked} onChange={onChange} />
         {label}
     </label>
 );
