@@ -33,8 +33,11 @@ body {
 }
 
 .bg-color {
-  background: #cd6632;
+  background-color: rgba(233, 107, 44, 0.83)
+
+;
 }
+
 
 .custom-container {
   max-width: 1280px;

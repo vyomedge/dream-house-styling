@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { FaInstagram, FaFacebookF, } from "react-icons/fa6";
+import axios from "axios";
 
 const bottomLinks = [
   {
@@ -26,14 +27,25 @@ const bottomLinks = [
 const Footer = () => {
   const pathname = usePathname();
 
-  const collectionLinks = [
-    { label: "Wallpapers", url: "" },
-    { label: "Curtains", url: "" },
-    { label: "Blinds", url: "" },
-    { label: "Upholstery & Sofa Fabrics", url: "" },
-    { label: "Carpets & Rugs", url: "" },
-    { label: "Interior Design Services", url: "" },
-  ];
+ const [categories, setCategories] = useState([]);
+  const [showMore, setShowMore] = useState(false);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`
+        );
+        setCategories(response.data || []);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+
   const supportLinks = [
     { label: "Contact Us", url: "/contact-us" },
     { label: "About Us", url: "/about-us" },
@@ -156,20 +168,43 @@ const Footer = () => {
 
               <div>
                 <p className="font-dm text-white font-bold uppercase tracking-widest text-sm mb-6"> {` Shopping`} </p>
-                <ul className="font-dm space-y-4 text-sm font-medium">
-                  {collectionLinks.map((link, index) => {
-                    const isActive = pathname === link.url;
-                    return (
-                      <li key={index}>
-                        <Link
-                          href={link.url}
-                          className={` transition-colors ${isActive ? "text-[#cd6632] " : "text-gold"} hover:text-[#cd6632]`}>
-                          {link.label}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
+                <ul className="font-dm space-y-4 text-sm font-medium first-letter:uppercase">
+                {categories.slice(0, 5).map((cat, index) => (
+                  <li key={index}>
+                    <Link href={`/category/${cat.slug}`}
+                      className="text-gold hover:text-[#cd6632] transition-colors first-letter:uppercase">
+                       {cat.name?.trimStart().replace(/^\w/, (c) => c.toUpperCase())}
+                    </Link>
+                  </li>
+                ))}
+
+                {categories.length > 5 && (
+                  <li>
+                    <button onClick={() => setShowMore(!showMore)}
+                      className="flex items-center gap-1 text-gold hover:text-[#cd6632]">
+                      More
+                      <IoChevronDown
+                        className={`transition-transform ${
+                          showMore ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    {showMore && (
+                      <ul className="mt-3 ml-3 space-y-3">
+                        {categories.slice(5).map((cat, index) => (
+                          <li key={index}>
+                            <Link href={`/category/${cat.slug}`}
+                              className="text-gold hover:text-[#cd6632] first-letter:uppercase" >
+                               {cat.name?.trimStart().replace(/^\w/, (c) => c.toUpperCase())}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                )}
+              </ul>
               </div>
 
               <div>

@@ -1,5 +1,6 @@
 "use client";
 
+import CommonFaq from "@/common-components/CommonFaq/CommonFaq";
 import { useState } from "react";
 
 const tabs = [
@@ -34,19 +35,16 @@ const tabs = [
         key: "FAQs",
         content: [
             {
-                question: "How long does customization take?",
-                answer:
-                    "Typically 7–14 days depending on the product and customization requirements.",
+                q: "1. How long does customization take?",
+                a: "Typically 7–14 days depending on the product and customization requirements.",
             },
             {
-                question: "Do you provide installation?",
-                answer:
-                    "Yes, professional installation is included with all custom orders in Bhopal and MP.",
+                q: "2. Do you provide installation?",
+                a: "Yes, professional installation is included with all custom orders in Bhopal and MP.",
             },
             {
-                question: "What is your return policy?",
-                answer:
-                    "Custom products are final sale. However, we ensure complete satisfaction through our consultation and approval process.",
+                q: "3. What is your return policy?",
+                a: "Custom products are final sale. However, we ensure complete satisfaction through our consultation and approval process.",
             },
         ],
     },
@@ -75,7 +73,7 @@ export default function ProductDetailDiscription() {
                         </button>
                     ))}
                 </div>
-                <div className="font-dm text-sm text-gray-700 leading-relaxed space-y-4">
+                <div className="font-dm responsive-text text-gray-700 leading-relaxed space-y-4">
                     {activeTab === "Description" &&
                         activeData?.content.map((text, i) => (
                             <p key={i}>{text}</p>
@@ -88,19 +86,19 @@ export default function ProductDetailDiscription() {
                     {activeTab == "Customization Info" &&
                         activeData.content.map((faq, i) => (
                             <div key={i}>
-                                <p className="font-dm font-semibold text-black mb-1">{faq.question}</p>
-                                <p className="font-dm text-gray-700 mb-1">{faq.answer}</p>
+                                <p className="font-dm responsive-text font-semibold! text-black mb-1">{faq.question}</p>
+                                <p className="font-dm responsive-text text-gray-700 mb-1">{faq.answer}</p>
                             </div>
                         ))}
 
                     {/* FAQs */}
-                    {activeTab === "FAQs" &&
-                        activeData.content.map((faq, i) => (
-                            <div key={i}>
-                                <p className="font-dm font-semibold text-black mb-1">{faq.question}</p>
-                                <p className="font-dm text-gray-700 mb-1">{faq.answer}</p>
-                            </div>
-                        ))}
+                    {activeTab === "FAQs" && (
+                        <CommonFaq
+                            title={false}
+                            faqData={activeData?.content || []}
+                            columns={1}
+                        />
+                    )}
                 </div>
             </div>
         </section>

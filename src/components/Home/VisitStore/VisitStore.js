@@ -5,7 +5,7 @@ import { MdLocationOn, MdCall, MdDirections } from "react-icons/md";
 
 const VisitStore = () => {
   return (
-    <section className="w-full bg-[#cd6632] py-16">
+    <section className="w-full bg-color py-16">
       <div className="max-w-5xl mx-auto px-6">
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-10 md:p-14 text-white shadow-xl">
           <h2 className="font-dm responsiveheading2 font-bold mb-2 text-center">{`Visit Our Store – Bhopal`}</h2>
