@@ -58,11 +58,6 @@ const Products = () => {
       setLoading(true);
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Product/`,
-        {
-          headers: {
-            Authorization: `Bearer ${token_data}`,
-          },
-        },
       );
       setProducts(response.data);
       setLoading(false);

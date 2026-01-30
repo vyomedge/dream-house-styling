@@ -1,20 +1,28 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Cookies from "universal-cookie";
+
+const protectedRoutes = ["/add-to-cart"];
 
 const AuthGuard = ({ children }) => {
   const router = useRouter();
+  const pathname = usePathname();
   const cookies = new Cookies();
 
   useEffect(() => {
     const access_token = cookies.get("Access_Token");
+    console.log("accessToken", access_token);
 
-    if (!access_token) {
-      router.replace("/login"); // prevent back navigation
+    const isProtected = protectedRoutes.some((route) =>
+      pathname.startsWith(route),
+    );
+
+    if (isProtected && !access_token) {
+      router.replace("/login");
     }
-  }, [router]);
+  }, [pathname, router]);
 
   return <>{children}</>;
 };

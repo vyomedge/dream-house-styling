@@ -20,15 +20,10 @@ const Categories = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/VendorPanel/ActiveCategory/`,
-        {
-          headers: {
-            Authorization: `Bearer ${token_data}`,
-          },
-        },
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`,
       );
 
-      const newdata = response.data.data.map((item) => ({
+      const newdata = response.data.map((item) => ({
         ...item,
         name: item.name,
         className: "aspect-[4/3]",
