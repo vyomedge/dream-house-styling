@@ -31,10 +31,10 @@ const VideoSection = () => {
               <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                 <button
                   onClick={playVideo}
-                  className="font-dm h-16  md:h-15  mt-8 inline-flex items-center bg-white/10 hover:bg-white/15   gap-2 px-4 py-2  text-white rounded-full cursor-pointer transition-colors"
+                  className="font-dm h-10 sm:h-12 md:h-15  mt-8 inline-flex items-center bg-white/10 hover:bg-white/15   gap-2 px-4 py-2  text-white rounded-full cursor-pointer transition-colors"
                 >
-                  <div className="bg-[#cd6632] p-4 rounded-full">
-                    <Play className="w-6 h-6 md:w-5 md:h-5  ml-1" fill="#fff" />
+                  <div className="bg-[#cd6632] p-2 md:p-4 rounded-full">
+                    <Play className="w-4 h-4 md:w-5 md:h-5  ml-1" fill="#fff" />
                   </div>
                  {` Watch Our Process`}
                 </button>

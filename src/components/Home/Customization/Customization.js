@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 
 const Customization = () => {
@@ -48,9 +49,11 @@ const Customization = () => {
           ))}
         </div>
         <div className="text-center mt-8">
+          <Link href="/contact-us">
           <button className="cursor-pointer font-dm bg-[#cd6632] hover:bg-[#ad6d4c] text-white font-bold px-10 py-4 rounded-xl transition-all shadow-md hover:shadow-lg">
             {` Start Customizing`}
           </button>
+          </Link>
         </div>
       </div>
     </section>

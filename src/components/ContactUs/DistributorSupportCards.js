@@ -1,8 +1,22 @@
 "use client";
 
+import ContactModal from "@/common-components/Modal/ContactModal";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function DistributorSupportCards() {
+
+    const [openModal, setOpenModal] = useState(false);
+
+  const scrollToTop = () => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // smooth scrolling
+      });
+    }
+  };
+
   return (
     <div className="custom-container  mx-auto mt-10 px-4 py-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -18,7 +32,8 @@ export default function DistributorSupportCards() {
                 <li>{`Upholstery & Carpets`}</li>
                 <li>{`Complete interior solutions`}</li>
               </ul>
-              <button className="font-dm bg-[#cd6632] hover:bg-[#cd6632]/80 text-white responsive-text px-4 py-1.5 w-full mt-3">
+              <button onClick={scrollToTop}
+                className="font-dm bg-[#cd6632] hover:bg-[#cd6632]/80 text-white responsive-text px-4 py-1.5 w-full mt-3" >
                 {`Schedule a free consultation today`}
               </button>
             </div>
@@ -47,7 +62,8 @@ export default function DistributorSupportCards() {
                 <li>{`Custom order support`}</li>
               </ul>
               <p className="font-dm text-[#1f3d2b] text-[16px] mb-3">{`Call us or send a message — we’re happy to help.`}</p>
-              <button className="font-dm bg-[#cd6632] hover:bg-[#cd6632]/80 text-white responsive-text px-4 py-1.5 w-[140]">{`Apply Now`}</button>
+               <button onClick={() => setOpenModal(true)}
+                className="font-dm bg-[#cd6632] hover:bg-[#cd6632]/80 text-white responsive-text px-4 py-1.5 w-[140]">{`Apply Now`}</button>
             </div>
 
             <div className="relative w-[15vmin] h-[15vmin] md:w-[10vmin] md:h-[10vmin]">
@@ -60,8 +76,8 @@ export default function DistributorSupportCards() {
             </div>
           </div>
         </div>
-
       </div>
+          {openModal && <ContactModal hide={() => setOpenModal(false)} />}
     </div>
   );
 }

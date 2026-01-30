@@ -9,9 +9,9 @@ import HeaderMagaDropDown from "./HeaderMagaDropDown";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Cookies from "universal-cookie";
+import axios from "axios";
 import SearchResultsCom from "./SearchResults";
 import { debounce } from "@/utills/utills";
-import axios from "axios";
 
 const getSearchFilter = async ({ store, search }) => {
   try {
@@ -50,11 +50,29 @@ const Header = () => {
   const router = useRouter();
   const [SearchResults, setSearchResults] = useState([]);
   const [searchStr, setSearchStr] = useState("");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`,
+        );
+        setCategories(res.data || []);
+      } catch (err) {
+        console.error("Category API error:", err);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   const cookies = new Cookies();
   const [searchLoading, setSearchLoading] = useState(false);
   const [suggestedProducts, setSuggestedProducts] = useState([]);
   const [visibleProducts, setVisibleProducts] = useState([]);
   const [resultsType, setResultType] = useState("suggested");
+  console.log("resultsType", resultsType);
 
   useEffect(() => {
     const access_token = cookies.get("Access_Token");
@@ -105,8 +123,11 @@ const Header = () => {
         store: 212,
         search: value,
       });
-      setVisibleProducts(data);
-      setResultType("searched");
+      if (searchStr.trim().length) {
+        setVisibleProducts(data);
+        setResultType("searched");
+      }
+
       setSearchLoading(false);
       console.log("Filtered result:", data);
     } catch (err) {
@@ -138,7 +159,7 @@ const Header = () => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Product/`,
       );
-      console.log("header fetched products", response.data);
+
       setSuggestedProducts(response.data);
       setVisibleProducts(response.data);
       setSearchResults(false);
@@ -355,6 +376,7 @@ const Header = () => {
                     )}
                     Shop
                   </span>
+
                   <span
                     className={`material-symbols-outlined text-sm transition-transform duration-300 ${
                       shopOpen ? "rotate-180" : ""
@@ -366,23 +388,26 @@ const Header = () => {
 
                 {shopOpen && (
                   <div className="ml-4 mt-2 flex flex-col gap-1 border-l-2 border-[#cd6632]/50 pl-4">
-                    {shopCategories.map((category) => (
+                    {categories.map((cat) => (
                       <Link
-                        key={category.href}
+                        key={cat.slug}
                         onClick={() => setOpenMenu(false)}
-                        href={category.href}
+                        href={`/category/${cat.slug}`}
                         className={`py-2 px-3 rounded-lg transition-all duration-300 text-sm ${
-                          isActive(category.href)
+                          isActive(`/category/${cat.slug}`)
                             ? "bg-[#cd6632]/80 text-white font-semibold"
                             : "text-white/80 hover:bg-white/10 hover:text-white"
                         }`}
                       >
-                        {category.label}
+                        {cat.name
+                          ?.trimStart()
+                          .replace(/^\w/, (c) => c.toUpperCase())}
                       </Link>
                     ))}
                   </div>
                 )}
               </div>
+
               <Link
                 onClick={() => setOpenMenu(false)}
                 href="/about-us"
