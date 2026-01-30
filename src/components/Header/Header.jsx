@@ -9,6 +9,7 @@ import HeaderMagaDropDown from "./HeaderMagaDropDown";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Cookies from "universal-cookie";
+import axios from "axios";
 
 
 const Header = () => {
@@ -18,6 +19,23 @@ const Header = () => {
   const pathname = usePathname();
   const [validUser, setValidUser] = useState(false);
   const router = useRouter();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+  const fetchCategories = async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`
+      );
+      setCategories(res.data || []);
+    } catch (err) {
+      console.error("Category API error:", err);
+    }
+  };
+
+  fetchCategories();
+}, []);
+
 
   const cookies = new Cookies();
 
@@ -264,49 +282,53 @@ const handleLogoClick = (e) => {
                 Collections
               </Link>
 
-              <div className="flex flex-col">
-                <button
-                  onClick={() => setShopOpen(!shopOpen)}
-                  className={`py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-between ${
-                    isActive("/shop")
-                      ? "bg-[#cd6632] text-white font-bold"
-                      : "hover:bg-white/10"
-                  }`}
-                >
-                  <span className="flex items-center gap-3">
-                    {isActive("/shop") && (
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                    )}
-                    Shop
-                  </span>
-                  <span
-                    className={`material-symbols-outlined text-sm transition-transform duration-300 ${
-                      shopOpen ? "rotate-180" : ""
-                    }`}
-                  >
-                    expand_more
-                  </span>
-                </button>
+            <div className="flex flex-col">
+  <button
+    onClick={() => setShopOpen(!shopOpen)}
+    className={`py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-between ${
+      isActive("/shop")
+        ? "bg-[#cd6632] text-white font-bold"
+        : "hover:bg-white/10"
+    }`}
+  >
+    <span className="flex items-center gap-3">
+      {isActive("/shop") && (
+        <span className="w-2 h-2 bg-white rounded-full"></span>
+      )}
+      Shop
+    </span>
 
-                {shopOpen && (
-                  <div className="ml-4 mt-2 flex flex-col gap-1 border-l-2 border-[#cd6632]/50 pl-4">
-                    {shopCategories.map((category) => (
-                      <Link
-                        key={category.href}
-                        onClick={() => setOpenMenu(false)}
-                        href={category.href}
-                        className={`py-2 px-3 rounded-lg transition-all duration-300 text-sm ${
-                          isActive(category.href)
-                            ? "bg-[#cd6632]/80 text-white font-semibold"
-                            : "text-white/80 hover:bg-white/10 hover:text-white"
-                        }`}
-                      >
-                        {category.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+    <span
+      className={`material-symbols-outlined text-sm transition-transform duration-300 ${
+        shopOpen ? "rotate-180" : ""
+      }`}
+    >
+      expand_more
+    </span>
+  </button>
+
+  {shopOpen && (
+    <div className="ml-4 mt-2 flex flex-col gap-1 border-l-2 border-[#cd6632]/50 pl-4">
+      {categories.map((cat) => (
+        <Link
+          key={cat.slug}
+          onClick={() => setOpenMenu(false)}
+          href={`/category/${cat.slug}`}
+          className={`py-2 px-3 rounded-lg transition-all duration-300 text-sm ${
+            isActive(`/category/${cat.slug}`)
+              ? "bg-[#cd6632]/80 text-white font-semibold"
+              : "text-white/80 hover:bg-white/10 hover:text-white"
+          }`}
+        >
+          {cat.name
+            ?.trimStart()
+            .replace(/^\w/, (c) => c.toUpperCase())}
+        </Link>
+      ))}
+    </div>
+  )}
+</div>
+
               <Link
                 onClick={() => setOpenMenu(false)}
                 href="/about-us"

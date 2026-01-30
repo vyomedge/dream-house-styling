@@ -5,6 +5,8 @@ import DesignServicesOutlinedIcon from "@mui/icons-material/DesignServicesOutlin
 import ViewInArOutlinedIcon from "@mui/icons-material/ViewInArOutlined";
 import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
 import Link from "next/link";
+import { useState } from "react";
+import ContactModal from "@/common-components/Modal/ContactModal";
 
 const services = [
   {
@@ -28,8 +30,9 @@ const services = [
 ];
 
 const InteriorSolutions = () => {
+   const [openModal, setOpenModal] = useState(false);
   return (
-    <section className="w-full bg-[#cd6632] py-20">
+    <section className="w-full bg-color py-20">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <h2 className="font-dm responsiveheading2 font-bold! text-white mb-4"> {`Complete Interior Design Solutions`}</h2>
@@ -46,14 +49,15 @@ const InteriorSolutions = () => {
           ))}
         </div>
         <div className="text-center">
-          <Link href="/contact-us" className="inline-block">
-            <button type="button"
+          <button
+                onClick={() => setOpenModal(true)}
               className=" inline-flex items-center gap-2 bg-white text-[#cd6632] font-bold px-8 py-4 rounded-full  transition-all duration-300 hover:bg-white/90 hover:text-[#cd6632]  hover:-translate-y-1 hover:shadow-2xl cursor-pointer ">
              {` Book Free Design Consultation`}
             </button>
-          </Link>
+          
         </div>
       </div>
+      {openModal && <ContactModal hide={() => setOpenModal(false)} />}
     </section>
   );
 };
