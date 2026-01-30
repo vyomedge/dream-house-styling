@@ -27,7 +27,7 @@ const HomeBanner = () => {
                 backgroundColor: "#f2e3dc",
                 color: "#cd6632",
               }}>
-             {` NEW COLLECTION 2024`}
+             {` NEW COLLECTION 2026`}
             </span>
 
             <h1 className="font-dm responsive-heading font-bold mb-6 leading-tight"

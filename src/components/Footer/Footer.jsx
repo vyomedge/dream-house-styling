@@ -73,6 +73,16 @@ const Footer = () => {
     copyright: "Dream Home Styling. ",
   };
 
+  const handleLogoClick = (e) => {
+  if (pathname === "/") {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+};
+
   return (
     <>
       <div className="bg-[#101d22]">
@@ -83,8 +93,8 @@ const Footer = () => {
             style={{ backgroundImage: `url('https://lh3.googleusercontent.com/aida-public/AB6AXuBq6of0mqRU2evYFSn3lmP5Hk4UsxnX32IAC_nnWcOcKcT8FO3Ac7HDlsd8mZe0DGvc_9N6nDXp-sd2iGFFjm0ppeSNeIQzjo95Rsi0oYvI_CtmuBVbIAyHrsOqQbLuJ9nZ8JiczAPqwviEu_B6g_kRm3F4lwtYRQhG4shjqLNCHleoCux3TGfA61EiU2-xxKLl423LWT3npJwMKMjJ5HlrGEH8qKRzRUwJ1Xx77IrNsRjANMCm2eqw31GI_HqSf-TgCHH7YxfHapk')`, }} ></div>
           <div
             style={{ position: "absolute", inset: 0, background: `linear-gradient( to top, rgba(16, 29, 34, 1), rgba(16, 29, 34, 0.95), rgba(16, 29, 34, 0.9) )`, }} ></div>
-          <div className="relative max-w-7xl mx-auto px-6 pt-32 pb-16">
-            <div className="glass2 p-12 rounded-2xl max-w-4xl mx-auto mb-32 text-center border border-white/20">
+          <div className="relative max-w-7xl mx-auto px-6 pt-12 pb-16">
+            {/* <div className="glass2 p-12 rounded-2xl max-w-4xl mx-auto mb-32 text-center border border-white/20">
               <h4 className="font-dm responsiveheading2 font-bold! text-white mb-4 uppercase tracking-tighter">{`Join the Aesthetic Circle`}</h4>
               <p className="font-dm text-white/60 mb-8 max-w-md mx-auto resposive-text"> {" "} {`Get early access to limited edition drops and interior design tips from our curators.`}{" "} </p>
               <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
@@ -96,12 +106,12 @@ const Footer = () => {
                   {` Subscribe`}
                 </button>
               </form>
-            </div>
+            </div> */}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
               <div className="col-span-1 lg:col-span-1">
                 <div className="flex items-center gap-3 text-white mb-6">
-                  <Link href="/">
+                   <Link href="/" onClick={handleLogoClick}>
                     <div className="relative w-[100px] md:w-[100px] h-[150px]  md:h-[127px] mb-2 sm:mb-4 ">
                       <Image
                         src="/images/logo.png"
