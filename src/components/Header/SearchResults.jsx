@@ -71,7 +71,7 @@ const SearchResults = ({ results = [], resultsType, loading }) => {
                       <div
                         className="w-full h-full bg-cover bg-center group-hover/card:scale-110 transition-transform duration-700"
                         style={{
-                          backgroundImage: `url('https://lh3.googleusercontent.com/aida-public/AB6AXuDddcDj73KuwXyb7KKAnTSyl34IzI47kZA_b4LQzdGYTa5SnPL78XZbwMJY-g1nMloSV9yV3wSWOZxnOT-6uXssvnLq1ix81sWXMqAG3kNwdojVo_p0sc6H3Izg5f-hMSJ3bQYk6dZsvUOEbgBGLsB8sh_IDACh7UjcNMS_yWhZ1MtsBskUyr0dkgCWGUiX1jY3wY0rlV4Y7ln02ScJ_Akf_3s2InCAVmoFDMK94UntSnLTN-okxr7LZ0Y5McQZo-uKqpedJutevys')`,
+                          backgroundImage: `url('${item.images[0].image}')`,
                         }}
                       />
                     </div>

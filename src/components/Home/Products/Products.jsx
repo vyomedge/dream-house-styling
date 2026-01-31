@@ -1,8 +1,10 @@
 "use client";
+import { useAuth } from "@/Context/AuthContext";
 import { useCart } from "@/Context/CartContext";
 import axios from "axios";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Cookies from "universal-cookie";
@@ -51,7 +53,9 @@ const getRandomImage = () => {
 const Products = () => {
   const [products, setProducts] = useState([]);
   const { addToCart } = useCart();
+  const { checkUserLoggedIn } = useAuth();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const fetchProducts = async () => {
     try {
@@ -89,8 +93,12 @@ const Products = () => {
       Product_id: cartdata?.id,
     };
     try {
-      await addToCart(data);
-      toast.success("Added into Cart");
+      if (checkUserLoggedIn()) {
+        await addToCart(data);
+        toast.success("Added into Cart");
+      } else {
+        router.push("/login");
+      }
     } catch (error) {
       toast.error("Something Went Wrong");
       console.error("Error in adding products into cart:", error);

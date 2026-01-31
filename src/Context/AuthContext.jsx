@@ -1,10 +1,5 @@
 "use client";
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-} from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
@@ -45,8 +40,16 @@ export const AuthProvider = ({ children }) => {
   // -----------------------
   const refetchAccessToken = () => {
     const access_token = cookies.get("Access_Token");
-
     return access_token;
+  };
+
+  const checkUserLoggedIn = () => {
+    const token = refetchAccessToken();
+    if (token) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const fetchUserData = async () => {
@@ -74,7 +77,7 @@ export const AuthProvider = ({ children }) => {
     if (refetchAccessToken()) {
       fetchUserData();
     }
-  } ,[]);
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -82,6 +85,7 @@ export const AuthProvider = ({ children }) => {
         userData: state.userData,
         loading: state.loading,
         fetchUserData,
+        checkUserLoggedIn,
       }}
     >
       {children}
