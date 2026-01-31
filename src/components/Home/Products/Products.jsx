@@ -1,6 +1,7 @@
 "use client";
 import { useAuth } from "@/Context/AuthContext";
 import { useCart } from "@/Context/CartContext";
+import { textToSlug } from "@/utills/utills";
 import axios from "axios";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
@@ -126,6 +127,7 @@ const Products = () => {
                   <div key={idx} className="group">
                     <div className="relative aspect-[3/4] rounded-xl overflow-hidden soft-shadow bg-[#15242a] mb-6">
                       {/* Image */}
+
                       <div
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
                         style={{
@@ -142,11 +144,15 @@ const Products = () => {
 
                       {/* Hover Actions */}
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        {/* <button className="flex cursor-pointer bg-white text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors">
-                    <span className="material-symbols-outlined ">
-                      visibility
-                    </span>
-                  </button> */}
+                        <Link
+                          href={`/category/${textToSlug(product.category_name)}/${product.Category_id}/${textToSlug(product.Product_Name)}/${product.id}`}
+                        >
+                          <button className="flex cursor-pointer bg-white text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors">
+                            <span className="material-symbols-outlined ">
+                              visibility
+                            </span>
+                          </button>
+                        </Link>
                         <button
                           onClick={() => handleAddToCart(product)}
                           className="font-dm flex cursor-pointer bg-white  text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors"

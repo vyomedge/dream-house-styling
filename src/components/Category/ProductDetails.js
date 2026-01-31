@@ -19,7 +19,6 @@ export default function ProductDetail({ product, category }) {
   const [showQuoteForm, setShowQuoteForm] = useState(false);
   const { addToCart } = useCart();
 
-
   useEffect(() => {
     setActiveImg(product.images[0].image);
   }, [product]);
@@ -76,7 +75,9 @@ export default function ProductDetail({ product, category }) {
                       {category.name.toLowerCase()}
                     </Link>{" "}
                     /
-                    <span className="font-dm text-gray-400">{` Elegant Floral Wallpaper`}</span>
+                    <span className="font-dm text-gray-400">
+                      {product.Product_Name}
+                    </span>
                   </div>
                   <Link
                     href="/category"
