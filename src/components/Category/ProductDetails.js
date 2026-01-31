@@ -8,14 +8,47 @@ import {
   FaCommentDots,
   FaRuler,
 } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomQuoteForm from "./CustomQuoteForm";
 import ProductDetailDiscription from "./ProductDetailDiscription";
 import { textToSlug } from "@/utills/utills";
+import { useCart } from "@/Context/CartContext";
 
 export default function ProductDetail({ product, category }) {
   const [activeImg, setActiveImg] = useState("/wallpaper-1.png");
   const [showQuoteForm, setShowQuoteForm] = useState(false);
+  const { addToCart } = useCart();
+
+
+  useEffect(() => {
+    setActiveImg(product.images[0].image);
+  }, [product]);
+
+  const handleAddToCart = async (cartdata) => {
+    const data = {
+      Cart_Quantity: 1,
+      category: cartdata?.category_name,
+      Sub_Category_id: cartdata?.Sub_Category_id,
+      Store_id: cartdata?.Store_id,
+      TotalPrice: cartdata?.Prices[0].Price[0].SalePrice,
+      Price: cartdata?.Prices,
+      Image_id: cartdata.images[0].id,
+      Country: "India",
+      State: cartdata?.Store_Country,
+      City: cartdata?.Store_City,
+      Copuon: cartdata?.copuon,
+      free: "no",
+      Brand_Id: cartdata?.Brand_id,
+      Product_id: cartdata?.id,
+    };
+    try {
+      await addToCart(data);
+      toast.success("Added into Cart");
+    } catch (error) {
+      toast.error("Something Went Wrong");
+      console.error("Error in adding products into cart:", error);
+    }
+  };
 
   return (
     <>
@@ -65,23 +98,19 @@ export default function ProductDetail({ product, category }) {
                       </div>
 
                       <div className="flex gap-4 mt-4">
-                        {[
-                          "/wallpaper1.jpg",
-                          "/wallpaper1.jpg",
-                          "/wallpaper1.jpg",
-                        ].map((img, i) => (
+                        {product.images.map((img, i) => (
                           <button
                             type="button"
                             key={i}
-                            onClick={() => setActiveImg("/wallpaper-1.png")}
-                            className={`relative w-20 h-20 rounded-lg overflow-hidden border ${
-                              activeImg === img
+                            onClick={() => setActiveImg(img.image)}
+                            className={`relative w-20 h-20 rounded-lg overflow-hidden border cursor-pointer ${
+                              activeImg === img.image
                                 ? "border-[#cd6632]"
                                 : "border-gray-200"
                             }`}
                           >
                             <Image
-                              src={"/wallpaper-1.png"}
+                              src={img?.image ?? "/wallpaper-1.png"}
                               alt=""
                               fill
                               className="object-cover"
@@ -128,6 +157,7 @@ export default function ProductDetail({ product, category }) {
                       {/* Actions */}
                       <div className="space-y-3 max-w-sm">
                         <button
+                          onClick={() => handleAddToCart(product)}
                           type="button"
                           className="font-dm w-full flex items-center justify-center gap-3 bg-[#cd6632] text-white cursor-pointer py-3 rounded-lg text-sm font-medium hover:opacity-95"
                         >

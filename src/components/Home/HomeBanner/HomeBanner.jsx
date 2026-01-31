@@ -51,7 +51,7 @@ const HomeBanner = () => {
             <div className="flex flex-wrap gap-4">
               <Link href="/category/wallpaper/3">
                 <button
-                  className="font-dm responsive-text px-6 py-2 rounded-md font-medium  transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 shadow-lg"
+                  className="font-dm responsive-text px-6 py-2 rounded-md cursor-pointer font-medium  transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 shadow-lg"
                   style={{ backgroundColor: "#cd6632", color: "#ffffff" }}
                 >
                   Shop Collections
@@ -60,7 +60,7 @@ const HomeBanner = () => {
               </Link>
               <button
                 onClick={() => setOpenModal(true)}
-                className="font-dm responsive-text px-6 py-2 rounded-md font-medium transition-all duration-300 hover:bg-white/10"
+                className="font-dm responsive-text px-6 py-2 cursor-pointer rounded-md font-medium transition-all duration-300 hover:bg-white/10"
                 style={{
                   border: "1px solid rgba(255,255,255,0.4)",
                   color: "#ffffff",

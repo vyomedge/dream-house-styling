@@ -4,7 +4,7 @@ import Link from "next/link";
 const SearchResults = ({ results = [], resultsType, loading }) => {
   console.log("results", results);
   return (
-    <div className="mega-search-dropdown bg-(--primaryColor2) opacity-0 invisible fixed top-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1400px] mega-glass rounded-2xl p-6 lg:p-10 transition-all duration-500 translate-y-10 border border-white/10 soft-shadow z-[60] max-h-[85vh] flex flex-col">
+    <div className="mega-search-dropdown bg-(--primaryColor2) opacity-0 invisible fixed top-11 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1400px] mega-glass rounded-2xl p-6 lg:p-10 transition-all duration-500 translate-y-10 border border-white/10 soft-shadow z-[60] max-h-[85vh] flex flex-col">
       <div className="flex flex-col gap-6 h-full">
         {/* Top Bar */}
         {/* <div className="flex items-center justify-between pb-6 border-b border-white/10">

@@ -51,7 +51,7 @@ const Categories = () => {
           </div>
 
           <a
-            href="/category"
+            href="/category/wallpaper/3"
             className="font-dm text-(--primaryColor2) hidden md:flex items-center gap-1 responsive-text hover:underline font-medium "
           >
             {` View All Collections`}
@@ -74,11 +74,10 @@ const Categories = () => {
                     className={`font-dm relative overflow-hidden rounded-lg cursor-pointer group ${item.className}`}
                   >
                     <Image
-                      src={item.image}
+                      src={item.categoryImages}
                       alt={item.name}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      placeholder="blur"
                     />
 
                     {/* Overlay */}

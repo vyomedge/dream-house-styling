@@ -6,12 +6,14 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Cookies from "universal-cookie";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/Context/AuthContext";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
   const [showOtpModal, setShowOtpModal] = useState(false);
   const cookies = new Cookies();
   const [Loading, setLoading] = useState(false);
+  const { fetchUserData } = useAuth();
   const router = useRouter();
 
   const {
@@ -37,6 +39,7 @@ const Login = () => {
         cookies.set("Access_Token", response.data.tokens.access, {
           expires: date,
         });
+        fetchUserData();
         router.push("/");
       }
     } catch (error) {

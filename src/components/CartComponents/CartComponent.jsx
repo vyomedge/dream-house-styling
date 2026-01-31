@@ -15,6 +15,8 @@ export const CartComponent = () => {
     }
   };
 
+  console.log("cart items",items)
+
   useEffect(() => {
     if (!items.length) {
       fetchProducts();

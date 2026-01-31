@@ -52,6 +52,27 @@ const Header = () => {
   const [searchStr, setSearchStr] = useState("");
   const [categories, setCategories] = useState([]);
 
+  const fetchCartProducts = async () => {
+    try {
+      await fetchCartItems();
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (!items.length) {
+      fetchCartProducts();
+    }
+  }, []);
+  useEffect(() => {
+    if (!openMenu) {
+      setShopOpen(false);
+    }
+  }, [openMenu]);
+
+  ("use client");
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -123,10 +144,9 @@ const Header = () => {
         store: 212,
         search: value,
       });
-      if (searchStr.trim().length) {
-        setVisibleProducts(data);
-        setResultType("searched");
-      }
+
+      setVisibleProducts(data);
+      setResultType("searched");
 
       setSearchLoading(false);
       console.log("Filtered result:", data);
@@ -145,7 +165,7 @@ const Header = () => {
 
   // Trigger debounce on input change
   useEffect(() => {
-    if (searchStr.trim()) {
+    if (searchStr.trim().length) {
       debouncedSearch(searchStr.trim());
     } else {
       setVisibleProducts(suggestedProducts);
@@ -177,12 +197,12 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-[#101d22] sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/80 backdrop-blur-md py-3">
+      <header className="bg-[#101d22] sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/80 backdrop-blur-md ">
         <div className="custom-container mx-auto px-6! h-20 py-2 flex items-center justify-between">
           <div className="flex items-center gap-12 h-full">
             <div className="flex items-center gap-3">
               <Link href="/" onClick={handleLogoClick}>
-                <div className="relative  w-[90px] sm:w-[120px] md:w-[150px] h-[50px] sm:h-[150px] md:h-[130px] mb-2 sm:mb-4">
+                <div className="relative  w-[90px] sm:w-[120px] md:w-[100px] h-[50px] sm:h-[150px] md:h-[130px] mb-2 sm:mb-4">
                   <Image
                     src="/images/logo.png"
                     alt="DHS Logo"

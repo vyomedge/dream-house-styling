@@ -8,7 +8,7 @@ export default function ProductCard({ product }) {
     <div className="group">
       <div className="relative aspect-[4/4] rounded-xl overflow-hidden bg-[#15242a] mb-4">
         <Image
-          src={product?.image ?? patternGeometric}
+          src={product?.images?.[0]?.image ?? patternGeometric}
           // alt={product.title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-110"

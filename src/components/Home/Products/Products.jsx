@@ -2,7 +2,9 @@
 import { useCart } from "@/Context/CartContext";
 import axios from "axios";
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Cookies from "universal-cookie";
 
 const products2 = [
@@ -48,8 +50,6 @@ const getRandomImage = () => {
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const cookies = new Cookies();
-  const token_data = cookies.get("Access_Token");
   const { addToCart } = useCart();
   const [loading, setLoading] = useState(false);
 
@@ -72,7 +72,6 @@ const Products = () => {
   }, []);
 
   const handleAddToCart = async (cartdata) => {
-    console.log("cardData", cartdata?.Prices[0].Price[0].SalePrice);
     const data = {
       Cart_Quantity: 1,
       category: cartdata?.category_name,
@@ -91,7 +90,9 @@ const Products = () => {
     };
     try {
       await addToCart(data);
+      toast.success("Added into Cart");
     } catch (error) {
+      toast.error("Something Went Wrong");
       console.error("Error in adding products into cart:", error);
     }
   };
@@ -168,10 +169,12 @@ const Products = () => {
               </div>
 
               <div className="flex justify-center mt-10 text-[#cd6632]">
-                <button className="cursor-pointer font-dm border border-foreground bg-transparent text-foreground px-6 py-3 rounded-md font-medium transition-all duration-300 hover:bg-foreground hover:text-background inline-flex items-center gap-2">
-                  {` Load More Products`}
-                  <ArrowUpRight className="w-4 h-4" />
-                </button>
+                <Link href={"/category/wallpaper/3"}>
+                  <button className="cursor-pointer font-dm border border-foreground bg-transparent text-foreground px-6 py-3 rounded-md font-medium transition-all duration-300 hover:bg-foreground hover:text-background inline-flex items-center gap-2">
+                    {` Load More Products`}
+                    <ArrowUpRight className="w-4 h-4" />
+                  </button>
+                </Link>
               </div>
             </>
           )}
