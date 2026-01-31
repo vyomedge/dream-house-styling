@@ -175,6 +175,7 @@ const Header = () => {
 
   const fetchProducts = async () => {
     try {
+      setSearchLoading(true);
       setSearchResults(true);
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Product/`,
@@ -183,8 +184,10 @@ const Header = () => {
       setSuggestedProducts(response.data);
       setVisibleProducts(response.data);
       setSearchResults(false);
+      setSearchLoading(false);
     } catch (error) {
       setSearchResults(false);
+      setSearchLoading(false);
       console.error("Error fetching products:", error);
     }
   };
