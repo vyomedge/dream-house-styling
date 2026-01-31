@@ -13,11 +13,14 @@ import CustomQuoteForm from "./CustomQuoteForm";
 import ProductDetailDiscription from "./ProductDetailDiscription";
 import { textToSlug } from "@/utills/utills";
 import { useCart } from "@/Context/CartContext";
+import Button from "@mui/material/Button";
+import { toast } from "react-toastify";
 
 export default function ProductDetail({ product, category }) {
   const [activeImg, setActiveImg] = useState("/wallpaper-1.png");
   const [showQuoteForm, setShowQuoteForm] = useState(false);
   const { addToCart } = useCart();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setActiveImg(product.images[0].image);
@@ -41,11 +44,14 @@ export default function ProductDetail({ product, category }) {
       Product_id: cartdata?.id,
     };
     try {
+      setLoading(true);
       await addToCart(data);
       toast.success("Added into Cart");
     } catch (error) {
       toast.error("Something Went Wrong");
       console.error("Error in adding products into cart:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -157,13 +163,23 @@ export default function ProductDetail({ product, category }) {
                       </div>
                       {/* Actions */}
                       <div className="space-y-3 max-w-sm">
-                        <button
+                        <Button
                           onClick={() => handleAddToCart(product)}
-                          type="button"
+                          loading={loading}
+                          startIcon={<FaShoppingCart />}
+                          variant="contained"
                           className="font-dm w-full flex items-center justify-center gap-3 bg-[#cd6632] text-white cursor-pointer py-3 rounded-lg text-sm font-medium hover:opacity-95"
+                          style={{
+                            background: `var(--primaryColor)`,
+                            textTransform: "none",
+                          }}
+                          sx={{
+                            paddingBlock: 1,
+                            marginBottom: 1,
+                          }}
                         >
-                          <FaShoppingCart /> {` Add to Cart`}
-                        </button>
+                          Add To Cart
+                        </Button>
 
                         <button
                           type="button"
