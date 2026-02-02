@@ -13,7 +13,7 @@ const VideoSection = () => {
   return (
     <section className="py-8 md:py-10 lg:py-15 bg-secondary custom-container">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="font-dm responsiveheading2 font-bold! text-gray-700 mb-4">
+        <h2 className="font-dm responsiveheading2 font-bold! text-(--primaryColor) mb-4">
           {`See Our Wallpapers in Action`}
         </h2>
 
@@ -36,7 +36,7 @@ const VideoSection = () => {
                   <div className="bg-[#cd6632] p-2 md:p-4 rounded-full">
                     <Play className="w-4 h-4 md:w-5 md:h-5  ml-1" fill="#fff" />
                   </div>
-                 {` Watch Our Process`}
+                  {` Watch Our Process`}
                 </button>
               </div>
             )}

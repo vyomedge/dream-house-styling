@@ -34,25 +34,41 @@ const Customization = () => {
     <section className="relative w-full bg-white py-15">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-10">
-          <h2 className="font-dm responsiveheading2 font-bold! text-gray-900"> {`How Customization Works`}</h2>
-          <p className="font-dm text-gray-600 mt-4 max-w-xl mx-auto"> {`A seamless process designed to deliver interiors tailored perfectly to your space.`}</p>
+          <h2 className="font-dm responsiveheading2 font-bold! text-(--primaryColor)">
+            {" "}
+            {`How Customization Works`}
+          </h2>
+          <p className="font-dm text-gray-600 mt-4 max-w-xl mx-auto">
+            {" "}
+            {`A seamless process designed to deliver interiors tailored perfectly to your space.`}
+          </p>
         </div>
         <div className="font-dm grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-8">
           {steps.map((item, index) => (
-            <div key={index}
-              className="relative group bg-white border border-gray-200 rounded-2xl p-8 text-center transition-all hover:-translate-y-1 hover:border-[#cd6632] shadow-md hover:shadow-xl">
-              <p className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#cd6632] text-white text-xs font-bold px-4 py-1 rounded-full">{item.step}</p>
-              <p className="material-symbols-outlined text-[#cd6632] text-4xl mb-5 block group-hover:scale-110 transition">{item.icon}</p>
-              <h3 className="font-dm text-gray-900 font-semibold! responsiveheading6 mb-3">{item.title}</h3>
-              <p className="font-dm text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+            <div
+              key={index}
+              className="relative group bg-white border border-gray-200 rounded-2xl p-8 text-center transition-all hover:-translate-y-1 hover:border-[#cd6632] shadow-md hover:shadow-xl"
+            >
+              <p className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#cd6632] text-white text-xs font-bold px-4 py-1 rounded-full">
+                {item.step}
+              </p>
+              <p className="material-symbols-outlined text-[#cd6632] text-4xl mb-5 block group-hover:scale-110 transition">
+                {item.icon}
+              </p>
+              <h3 className="font-dm text-gray-900 font-semibold! responsiveheading6 mb-3">
+                {item.title}
+              </h3>
+              <p className="font-dm text-gray-600 text-sm leading-relaxed">
+                {item.desc}
+              </p>
             </div>
           ))}
         </div>
         <div className="text-center mt-8">
           <Link href="/contact-us">
-          <button className="cursor-pointer font-dm bg-[#cd6632] hover:bg-[#ad6d4c] text-white font-bold px-10 py-4 rounded-xl transition-all shadow-md hover:shadow-lg">
-            {` Start Customizing`}
-          </button>
+            <button className="cursor-pointer font-dm bg-[#cd6632] hover:bg-[#ad6d4c] text-white font-bold px-10 py-4 rounded-xl transition-all shadow-md hover:shadow-lg">
+              {` Start Customizing`}
+            </button>
           </Link>
         </div>
       </div>

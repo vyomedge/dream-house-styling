@@ -40,7 +40,7 @@ const SearchBar = ({ onSearch, value }) => {
                   search
                 </span>
                 <input
-                  className="    bg-[#101d22]  border border-transparent rounded-full  pl-10 pr-4 py-2  text-sm w-64 focus:w-96 transition-all  text-white focus:outline-none  focus:border-[var(--primaryColor)] focus:ring-1  focus:ring-[var(--primaryColor)]"
+                  className="    bg-[#101d22]  border border-white/20 rounded-full  pl-10 pr-4 py-2  text-sm w-64 focus:w-96 transition-all  text-white focus:outline-none  focus:border-[var(--primaryColor)] focus:ring-1  focus:ring-[var(--primaryColor)]"
                   placeholder="Search products..."
                   type="text"
                   value={value}
@@ -55,9 +55,18 @@ const SearchBar = ({ onSearch, value }) => {
       {/* MOBILE FULLSCREEN SEARCH */}
       {isBelowLg && isExpanded && (
         <div className="fixed inset-0 z-[100]">
-          <div className="absolute inset-0 bg-[#101d22]/90" onClick={() => setIsExpanded(false)} />
-          <div className="relative z-[110] flex items-center gap-3 p-4 border-b border-white/10" onClick={(e) => e.stopPropagation()} >
-            <button onClick={() => setIsExpanded(false)} className="material-symbols-outlined text-white text-2xl" >
+          <div
+            className="absolute inset-0 bg-[#101d22]/90"
+            onClick={() => setIsExpanded(false)}
+          />
+          <div
+            className="relative z-[110] flex items-center gap-3 p-4 border-b border-white/10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setIsExpanded(false)}
+              className="material-symbols-outlined text-white text-2xl"
+            >
               arrow_back
             </button>
             <div className="flex-1 relative">
@@ -73,7 +82,10 @@ const SearchBar = ({ onSearch, value }) => {
                 type="text"
               />
             </div>
-            <button onClick={() => setIsExpanded(false)} className="material-symbols-outlined text-white/70 hover:text-white text-2xl" >
+            <button
+              onClick={() => setIsExpanded(false)}
+              className="material-symbols-outlined text-white/70 hover:text-white text-2xl"
+            >
               close
             </button>
           </div>

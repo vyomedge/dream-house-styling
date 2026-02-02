@@ -47,10 +47,7 @@ const Categories = () => {
         title="Explore Our Collections"
         subtitle={"Find the perfect pattern for every room in your house."}
         bgImage="/2.jpg"
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Collections" },
-        ]}
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Collections" }]}
       />
       <section className="py-10 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
@@ -88,9 +85,12 @@ const Categories = () => {
                         <h3 className="font-dm text-(--primaryColor) responsiveheading3 font-semibold!">
                           {item.name}
                         </h3>
-                        <p className="font-dm text-white/70 responsive-text">
-                          {item.description}
-                        </p>
+                        <p
+                          className="font-dm text-white/70 text-sm "
+                          dangerouslySetInnerHTML={{
+                            __html: item.description,
+                          }}
+                        ></p>
                       </div>
                     </div>
                   </Link>
