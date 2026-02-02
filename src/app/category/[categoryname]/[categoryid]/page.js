@@ -56,11 +56,14 @@ const Page = async ({ params }) => {
 
   try {
     const [productRes, categoryRes] = await Promise.all([
-      axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Product`),
+      axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-ProductByCategorybyStore/${categoryid}?store_id=212`,
+      ),
       axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`,
       ),
     ]);
+    console.log("categoryRes after call", categoryRes.data);
     products = productRes.data;
     categories = categoryRes.data;
   } catch (error) {
