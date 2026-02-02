@@ -110,8 +110,6 @@ export default function ProductListing({ products, category }) {
     return true;
   });
 
-  console.log("filteredProducts", filteredProducts);
-
   return (
     <div>
       <section className="custom-container py-10 sm:py-14">

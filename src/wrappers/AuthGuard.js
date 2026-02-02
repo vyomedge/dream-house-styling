@@ -13,7 +13,6 @@ const AuthGuard = ({ children }) => {
 
   useEffect(() => {
     const access_token = cookies.get("Access_Token");
-    console.log("accessToken", access_token);
 
     const isProtected = protectedRoutes.some((route) =>
       pathname.startsWith(route),

@@ -29,8 +29,6 @@ const CartItem = ({
 
     const totalPrice = quantity * price;
 
-    console.log("totalPrice", totalPrice);
-
     const data = {
       Cart_Quantity: quantity,
       category: cardData?.category_name,

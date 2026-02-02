@@ -67,7 +67,6 @@ export const AuthProvider = ({ children }) => {
       );
 
       dispatch({ type: "SET_USER", payload: res.data });
-      console.log("user data", res.data);
     } catch (err) {
       console.error("Error fetching products:", err);
     }

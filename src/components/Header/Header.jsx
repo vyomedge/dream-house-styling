@@ -11,7 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import SearchResultsCom from "./SearchResults";
-import { debounce } from "@/utills/utills";
+import { debounce, groupProductsByCategoryArray } from "@/utills/utills";
 
 const getSearchFilter = async ({ store, search }) => {
   try {
@@ -93,7 +93,6 @@ const Header = () => {
   const [suggestedProducts, setSuggestedProducts] = useState([]);
   const [visibleProducts, setVisibleProducts] = useState([]);
   const [resultsType, setResultType] = useState("suggested");
-  console.log("resultsType", resultsType);
 
   useEffect(() => {
     const access_token = cookies.get("Access_Token");
@@ -149,7 +148,6 @@ const Header = () => {
       setResultType("searched");
 
       setSearchLoading(false);
-      console.log("Filtered result:", data);
     } catch (err) {
       setSearchLoading(false);
       console.log("Search failed", err);
@@ -196,7 +194,7 @@ const Header = () => {
     fetchProducts();
   }, []);
 
-  console.log("visible results", visibleProducts);
+  const structuredProducts = groupProductsByCategoryArray(visibleProducts);
 
   return (
     <>
@@ -282,7 +280,7 @@ const Header = () => {
               />
             </div>
             <SearchResultsCom
-              results={visibleProducts}
+              results={structuredProducts}
               resultsType={resultsType}
               loading={searchLoading}
             />

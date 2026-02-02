@@ -17,3 +17,24 @@ export const debounce = (fn, delay = 500) => {
     }, delay);
   };
 };
+
+export const groupProductsByCategoryArray = (products) => {
+  const grouped = products.reduce((acc, product) => {
+    const category = product.category_name || "Uncategorized";
+
+    let existingCategory = acc.find((item) => item.category_name === category);
+
+    if (!existingCategory) {
+      existingCategory = {
+        category_name: category,
+        products: [],
+      };
+      acc.push(existingCategory);
+    }
+
+    existingCategory.products.push(product);
+    return acc;
+  }, []);
+
+  return grouped;
+};

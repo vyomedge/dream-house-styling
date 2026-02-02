@@ -2,9 +2,8 @@ import { textToSlug } from "@/utills/utills";
 import Link from "next/link";
 
 const SearchResults = ({ results = [], resultsType, loading }) => {
-  console.log("results", results);
   return (
-    <div className="mega-search-dropdown bg-(--primaryColor2) opacity-0 invisible fixed top-11 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1400px] mega-glass rounded-2xl p-6 lg:p-10 transition-all duration-500 translate-y-10 border border-white/10 soft-shadow z-[60] max-h-[85vh] flex flex-col">
+    <div className="mega-search-dropdown bg-(--primaryColor2) opacity-0 invisible fixed top-11 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1400px] mega-glass rounded-2xl p-6 lg:p-10 transition-all duration-500 translate-y-10 border border-white/10 soft-shadow z-[60] max-h-[65vh] flex flex-col">
       <div className="flex flex-col gap-6 h-full">
         {/* Top Bar */}
         {/* <div className="flex items-center justify-between pb-6 border-b border-white/10">
@@ -49,72 +48,91 @@ const SearchResults = ({ results = [], resultsType, loading }) => {
 
         {/* Section Title */}
         <div className="flex flex-col border-b pb-6 border-white/10">
-          <h2 className="text-xl font-black  font-normal">
+          <h2 className="text-lg font-black  font-normal">
             {resultsType === "suggested"
               ? "Recommended Products"
               : "Top Search Results"}
           </h2>
         </div>
-
-        {/* Grid */}
-        {!loading ? (
-          results.length ? (
-            <div className="flex-1   pr-4 -mr-4">
-              <div className="grid pr-3 overflow-y-auto h-[50vh] custom-scrollbar grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 py-4">
-                {results.map((item, index) => (
-                  <Link
-                    key={index}
-                    className="group/card block"
-                    href={`/category/${textToSlug(item.category_name)}/${item.Category_id}/${textToSlug(item.Product_Name)}/${item.id}`}
-                  >
-                    <div className="aspect-[4/5] rounded-xl overflow-hidden mb-3 border border-white/5 group-hover/card:border-primary/50 transition-all soft-shadow bg-white/5">
-                      <div
-                        className="w-full h-full bg-cover bg-center group-hover/card:scale-110 transition-transform duration-700"
-                        style={{
-                          backgroundImage: `url('${item.images[0].image}')`,
-                        }}
-                      />
-                    </div>
-                    <div className="flex flex-col px-1">
-                      <h4 className="text-sm font-bold tracking-tight group-hover/card:text-primary transition-colors truncate">
-                        {item.Product_Name}
-                      </h4>
-                      <div className="flex justify-between items-center mt-1">
-                        {/* <p className="text-[9px] text-white/40 uppercase tracking-widest truncate mr-2">
+        <div className="h-[42vh] overflow-x-auto custom-scrollbar overflow-x-hidden">
+          {/* Grid */}
+          {!loading ? (
+            results.length ? (
+              <div className="flex-1   pr-4 -mr-4">
+                {results.map((category, idx) => {
+                  return (
+                    <div key={idx} className="mb-4">
+                      <div className="text-base">{category.category_name}</div>
+                      <div className="grid pr-3  grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 py-4">
+                        {category.products.map((item, index) => (
+                          <Link
+                            key={index}
+                            className="group/card block"
+                            href={`/category/${textToSlug(item.category_name)}/${item.Category_id}/${textToSlug(item.Product_Name)}/${item.id}`}
+                          >
+                            <div className="aspect-[4/5] rounded-xl overflow-hidden mb-3 border border-white/5 group-hover/card:border-primary/50 transition-all soft-shadow bg-white/5">
+                              <div
+                                className="w-full h-full bg-cover bg-center group-hover/card:scale-110 transition-transform duration-700"
+                                style={{
+                                  backgroundImage: `url('${item.images[0].image}')`,
+                                }}
+                              />
+                            </div>
+                            <div className="flex flex-col px-1">
+                              <h4 className="text-base font-bold   text-(--primaryColor) transition-colors truncate">
+                                {item.Product_Name}
+                              </h4>
+                              <div className="flex flex-col  mt-1">
+                                {/* <p className="text-[9px] text-white/40 uppercase tracking-widest truncate mr-2">
                       {item.type}
                     </p> */}
-                        <span className="text-sm font-black text-primary">
-                          ₹ {item.Prices[0].Price[0].SalePrice}
-                        </span>
+                                <div className="d-flex space-x-1">
+                                  <span className="text-sm font-black text-white/50 font-normal line-through ">
+                                    ₹ {item.Prices[0].Price[0].Price}
+                                  </span>
+                                  {item.Prices[0].Price[0].Discount && (
+                                    <span className="text-sm font-black text-(--primaryGreen) font-normal ">
+                                      ({item.Prices[0].Price[0].Discount}% off)
+                                    </span>
+                                  )}
+                                </div>
+
+                                <span className="text-base font-black text-primary font-semibold">
+                                  ₹ {item.Prices[0].Price[0].SalePrice}
+                                </span>
+                              </div>
+                            </div>
+                          </Link>
+                        ))}
                       </div>
                     </div>
-                  </Link>
-                ))}
+                  );
+                })}
               </div>
-            </div>
+            ) : (
+              <div className="h-[40vh] flex justify-center items-center">
+                <div className="text-center">
+                  <p className="text-2xl text-(--primaryColor) mb-2">
+                    No Product Found
+                  </p>
+                  <p className="text-center">
+                    It looks like there are no products here right now. <br />{" "}
+                    Don’t worry—try a different search or browse other
+                    collections to find something you love.
+                  </p>
+                </div>
+              </div>
+            )
           ) : (
-            <div className="h-[50vh] flex justify-center items-center">
+            <div className="h-[40vh] flex justify-center items-center">
               <div className="text-center">
-                <p className="text-2xl text-(--primaryColor) mb-2">
-                  No Product Found
-                </p>
-                <p className="text-center">
-                  It looks like there are no products here right now. <br />{" "}
-                  Don’t worry—try a different search or browse other collections
-                  to find something you love.
+                <p className="text-xl text-(--primaryColor) mb-2">
+                  Searching Products...
                 </p>
               </div>
             </div>
-          )
-        ) : (
-          <div className="h-[50vh] flex justify-center items-center">
-            <div className="text-center">
-              <p className="text-2xl text-(--primaryColor) mb-2">
-                Searching Products...
-              </p>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

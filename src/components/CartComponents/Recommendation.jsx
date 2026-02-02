@@ -24,7 +24,6 @@ const Recommendations = () => {
     fetchProducts();
   }, []);
 
-  console.log("products in Recommendation", products);
   return (
     <div className="pt-24 pb-12">
       <h4 className="font-dm text-xl text-(--primaryColor) font-bold uppercase tracking-widest mb-10 flex items-center gap-4">

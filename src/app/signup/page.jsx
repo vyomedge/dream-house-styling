@@ -26,7 +26,6 @@ const SignUp = () => {
   });
 
   const onSubmit = (data) => {
-    console.log("data on submit", data);
     setLoading(true);
     const Details = {
       email: data.email,

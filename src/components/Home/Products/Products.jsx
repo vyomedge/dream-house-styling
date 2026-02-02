@@ -175,7 +175,18 @@ const Products = () => {
                       }}
                     /> */}
 
-                    <p className="font-dm text-(--primaryColor2) font-bold mt-2">
+                    <div className="d-flex space-x-1">
+                      <span className="text-sm font-black text-gray-600 font-normal line-through ">
+                        ₹ {product.Prices[0].Price[0].Price}
+                      </span>
+                      {product.Prices[0].Price[0].Discount && (
+                        <span className="text-sm font-black text-(--primaryGreen) font-normal ">
+                          ({product.Prices[0].Price[0].Discount}% off)
+                        </span>
+                      )}
+                    </div>
+
+                    <p className="font-dm text-(--primaryColor2) text-gray-900 font-bold mt-2">
                       ₹{product.Prices[0].Price[0].SalePrice}
                     </p>
                   </div>
