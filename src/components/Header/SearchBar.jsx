@@ -40,7 +40,7 @@ const SearchBar = ({ onSearch, value }) => {
                   search
                 </span>
                 <input
-                  className=" bg-white/5  border border-transparent rounded-full  pl-10 pr-4 py-2  text-sm w-64 focus:w-96 transition-all  text-white focus:outline-none  focus:border-[var(--primaryColor)] focus:ring-1  focus:ring-[var(--primaryColor)]"
+                  className="    bg-[#101d22]  border border-transparent rounded-full  pl-10 pr-4 py-2  text-sm w-64 focus:w-96 transition-all  text-white focus:outline-none  focus:border-[var(--primaryColor)] focus:ring-1  focus:ring-[var(--primaryColor)]"
                   placeholder="Search products..."
                   type="text"
                   value={value}
@@ -65,7 +65,7 @@ const SearchBar = ({ onSearch, value }) => {
                 search
               </span>
               <input
-                className=" bg-white/5  border border-transparent rounded-full  pl-10 pr-4 py-2  text-sm w-full text-white focus:outline-none  focus:border-[var(--primaryColor)] focus:ring-1 focus:ring-[var(--primaryColor)]"
+                className="    bg-[#101d22]  border border-transparent rounded-full  pl-10 pr-4 py-2  text-sm w-full text-white focus:outline-none  focus:border-[var(--primaryColor)] focus:ring-1 focus:ring-[var(--primaryColor)]"
                 placeholder="Search products..."
                 value={value}
                 onChange={onSearch}
