@@ -24,12 +24,13 @@ function generateWhatsAppMessage(cartItems, customerInfo = {}) {
   // message += `Mumbai, Maharashtra, India\n\n`;
 
   // Customer info (if provided)
-  if (customerInfo.username) {
+  if (customerInfo.Name) {
     message += `👤 *Customer Details:*\n`;
     message += `━━━━━━━━━━━━━━━━━━━━\n\n`;
-    message += `Name: ${customerInfo.username}\n`;
+    message += `Name: ${customerInfo.Name}\n`;
     if (customerInfo.email) message += `Email: ${customerInfo.email}\n`;
-    // if (customerInfo.address) message += `Address: ${customerInfo.address}\n`;
+    if (customerInfo.MobilePhone)
+      message += `Phone: ${customerInfo.MobilePhone}\n`;
     message += `\n`;
   }
 
@@ -152,7 +153,7 @@ const OrderSummary = ({ cartItems = [] }) => {
           <span className="font-dm font-medium">₹ {total.toFixed(2)}</span>
         </div>
         <div className="flex justify-between items-center text-white/60">
-          <span className="font-dm text-sm">Taxes</span>
+          <span className="font-dm text-sm">Taxes (18%)</span>
           <span className="font-dm font-medium">₹ {totalTax.toFixed(2)}</span>
         </div>
       </div>

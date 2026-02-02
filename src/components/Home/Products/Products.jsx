@@ -182,14 +182,14 @@ const Products = () => {
                 ))}
               </div>
 
-              <div className="flex justify-center mt-10 text-[#cd6632]">
+              {/* <div className="flex justify-center mt-10 text-[#cd6632]">
                 <Link href={"/category/wallpaper/3"}>
                   <button className="cursor-pointer font-dm border border-foreground bg-transparent text-foreground px-6 py-3 rounded-md font-medium transition-all duration-300 hover:bg-foreground hover:text-background inline-flex items-center gap-2">
                     {` Load More Products`}
                     <ArrowUpRight className="w-4 h-4" />
                   </button>
                 </Link>
-              </div>
+              </div> */}
             </>
           )}
         </div>

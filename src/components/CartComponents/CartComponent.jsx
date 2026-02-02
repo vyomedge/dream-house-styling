@@ -15,7 +15,7 @@ export const CartComponent = () => {
     }
   };
 
-  console.log("cart items",items)
+  console.log("cart items", items);
 
   useEffect(() => {
     if (!items.length) {

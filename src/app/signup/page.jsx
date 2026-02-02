@@ -1,10 +1,11 @@
 "use client";
 import OtpModal from "@/components/OTP/OtpModal";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { matchIsValidTel, MuiTelInput } from "mui-tel-input";
 
 const SignUp = () => {
   const [showPass, setShowPass] = useState(false);
@@ -17,14 +18,22 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+    control,
+  } = useForm({
+    defaultValues: {
+      phone: "+91",
+    },
+  });
 
   const onSubmit = (data) => {
+    console.log("data on submit", data);
     setLoading(true);
     const Details = {
       email: data.email,
       password: data.password,
       username: data.username,
+      MobilePhone: data.phone.replace(/\s/g, ""),
+      Name: data.fullname,
       user_type: "Customer",
     };
 
@@ -81,7 +90,7 @@ const SignUp = () => {
                 </label>
                 <input
                   {...register("username", {
-                    required: "Name is required",
+                    required: "Username is required",
                   })}
                   className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
                   placeholder="Create a username"
@@ -90,6 +99,25 @@ const SignUp = () => {
                 {errors.username && (
                   <p className="font-dm text-red-400 text-xs mt-1">
                     {errors.username.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label className="font-dm block text-[10px] uppercase tracking-[0.2em] font-bold text-(--primaryColor) mb-2 px-1">
+                  Full Name
+                </label>
+                <input
+                  {...register("fullname", {
+                    required: "Name is required",
+                  })}
+                  className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
+                  placeholder="Enter your full name"
+                  type="text"
+                />
+                {errors.fullname && (
+                  <p className="font-dm text-red-400 text-xs mt-1">
+                    {errors.fullname.message}
                   </p>
                 )}
               </div>
@@ -103,13 +131,65 @@ const SignUp = () => {
                   {...register("email", {
                     required: "Email is required",
                   })}
-                  className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none "
+                  className="font-dm w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600  focus:border-[#cd6632] transition-all outline-none "
                   placeholder="yourmail@gmail.com"
                   type="email"
                 />
                 {errors.email && (
                   <p className="font-dm text-red-400 text-xs mt-1">
                     {errors.email.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label className="font-dm block text-[10px] uppercase tracking-[0.2em] font-bold text-(--primaryColor) mb-2 px-1">
+                  Phone Number
+                </label>
+
+                <Controller
+                  name="phone"
+                  control={control}
+                  rules={{
+                    required: "Phone number is required",
+                    validate: (value) =>
+                      matchIsValidTel(value) || "Enter a valid mobile number",
+                  }}
+                  render={({ field }) => (
+                    <MuiTelInput
+                      {...field}
+                      defaultCountry="in"
+                      variant="outlined"
+                      fullWidth
+                      disableDropdown={false}
+                      placeholder="Enter phone number"
+                      className="font-dm"
+                      inputProps={{
+                        className:
+                          "w-full bg-white/10 border border-[#cd6632] rounded-lg px-4 py-4 text-gray-800 placeholder:text-gray-600 focus:ring-2 focus:ring-[#cd6632]/40 focus:border-[#cd6632] transition-all outline-none",
+                      }}
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": {
+                            borderColor: "#cd6632", // default
+                            borderRadius: "8px",
+                          },
+                          "&:hover fieldset": {
+                            borderColor: "#cd6632", // hover
+                          },
+                          "&.Mui-focused fieldset": {
+                            borderColor: "#cd6632", // focus
+                            borderWidth: "1px",
+                          },
+                        },
+                      }}
+                    />
+                  )}
+                />
+
+                {errors.phone && (
+                  <p className="font-dm text-red-400 text-xs mt-1">
+                    {errors.phone.message}
                   </p>
                 )}
               </div>
