@@ -24,6 +24,8 @@ const Recommendations = () => {
     fetchProducts();
   }, []);
 
+  const LimetedProducts = products.slice(0, 6);
+
   return (
     <div className="pt-24 pb-12">
       <h4 className="font-dm text-xl text-(--primaryColor) font-bold uppercase tracking-widest mb-10 flex items-center gap-4">
@@ -35,7 +37,7 @@ const Recommendations = () => {
         <div className="text-(--primaryColor) text-center">Loading...</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {products.map((data) => {
+          {LimetedProducts.map((data) => {
             return <RecommendationCard cardData={data} />;
           })}
         </div>

@@ -27,25 +27,9 @@ export default function ProductDetail({ product, category }) {
   }, [product]);
 
   const handleAddToCart = async (cartdata) => {
-    const data = {
-      Cart_Quantity: 1,
-      category: cartdata?.category_name,
-      Sub_Category_id: cartdata?.Sub_Category_id,
-      Store_id: cartdata?.Store_id,
-      TotalPrice: cartdata?.Prices[0].Price[0].SalePrice,
-      Price: cartdata?.Prices,
-      Image_id: cartdata.images[0].id,
-      Country: "India",
-      State: cartdata?.Store_Country,
-      City: cartdata?.Store_City,
-      Copuon: cartdata?.copuon,
-      free: "no",
-      Brand_Id: cartdata?.Brand_id,
-      Product_id: cartdata?.id,
-    };
     try {
       setLoading(true);
-      await addToCart(data);
+      await addToCart(cartdata);
       toast.success("Added into Cart");
     } catch (error) {
       toast.error("Something Went Wrong");

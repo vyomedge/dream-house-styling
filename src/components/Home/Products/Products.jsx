@@ -77,25 +77,9 @@ const Products = () => {
   }, []);
 
   const handleAddToCart = async (cartdata) => {
-    const data = {
-      Cart_Quantity: 1,
-      category: cartdata?.category_name,
-      Sub_Category_id: cartdata?.Sub_Category_id,
-      Store_id: cartdata?.Store_id,
-      TotalPrice: cartdata?.Prices[0].Price[0].SalePrice,
-      Price: cartdata?.Prices,
-      Image_id: 4,
-      Country: "India",
-      State: cartdata?.Store_Country,
-      City: cartdata?.Store_City,
-      Copuon: cartdata?.copuon,
-      free: "no",
-      Brand_Id: cartdata?.Brand_id,
-      Product_id: cartdata?.id,
-    };
     try {
       if (checkUserLoggedIn()) {
-        await addToCart(data);
+        await addToCart(cartdata);
         toast.success("Added into Cart");
       } else {
         router.push("/login");

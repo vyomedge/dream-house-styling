@@ -55,13 +55,30 @@ export const CartProvider = ({ children }) => {
   // SINGLE ITEM
   // -----------------------
   const addToCart = async (payload) => {
+    const data = {
+      Cart_Quantity: 1,
+      category: payload?.category_name,
+      Sub_Category_id: payload?.Sub_Category_id,
+      Store_id: payload?.Store_id,
+      TotalPrice: payload?.Prices[0].Price[0].SalePrice,
+      Price: payload?.Prices,
+      Image_id: 4,
+      Country: "India",
+      State: payload?.Store_Country,
+      City: payload?.Store_City,
+      Copuon: payload?.copuon,
+      free: "no",
+      Brand_Id: payload?.Brand_id,
+      Product_id: payload?.id,
+    };
+
     try {
       const access_token = refetchAccessToken();
       dispatch({ type: "SET_LOADING" });
 
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Add-AddtoCart/`,
-        payload,
+        data,
         {
           headers: {
             Authorization: `Bearer ${access_token}`,
@@ -71,6 +88,7 @@ export const CartProvider = ({ children }) => {
       fetchCartItems();
     } catch (err) {
       console.error("Add to cart failed", err);
+      throw new Error(err);
     }
   };
 
@@ -138,6 +156,7 @@ export const CartProvider = ({ children }) => {
       );
       fetchCartItems();
     } catch (err) {
+      throw new Error(err);
       console.error("Remove failed", err);
     }
   };

@@ -3,6 +3,7 @@ import OrderSummary from "./OrderSummary";
 import Recommendations from "./Recommendation";
 
 const CartLayout = ({ cartItems }) => {
+  console.log("cartItems", cartItems);
   return (
     <div className="flex flex-col lg:flex-row gap-12">
       <div className="lg:w-2/3 space-y-8">
