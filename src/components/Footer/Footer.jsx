@@ -49,7 +49,7 @@ const Footer = () => {
   const supportLinks = [
     { label: "Contact Us", url: "/contact-us" },
     { label: "About Us", url: "/about-us" },
-    { label: "Category", url: "/category" },
+    { label: "Category", url: "/categories" },
     { label: "Terms & Conditions", url: "/terms-and-conditions" },
     { label: "Privacy Policy", url: "/privacy-policy" },
     { label: "Disclaimer", url: "/disclaimer-policy" },

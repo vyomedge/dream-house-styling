@@ -51,6 +51,7 @@ const Header = () => {
   const [SearchResults, setSearchResults] = useState([]);
   const [searchStr, setSearchStr] = useState("");
   const [categories, setCategories] = useState([]);
+  
 
   const fetchCartProducts = async () => {
     try {
@@ -215,7 +216,7 @@ const Header = () => {
             </div>
             <nav className="hidden md:flex items-center gap-8 h-full">
               <Link
-                href="/category/wallpaper/3"
+                href="/categories"
                 className={`font-dm text-sm font-medium transition-colors relative ${
                   isActive("/category/wallpaper/3")
                     ? "text-[#cd6632]"
@@ -223,7 +224,7 @@ const Header = () => {
                 }`}
               >
                 {` Collections`}
-                {isActive("/category/wallpaper/3") && (
+                {isActive("/categories") && (
                   <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#cd6632]"></span>
                 )}
               </Link>
@@ -273,7 +274,7 @@ const Header = () => {
           </div>
 
           <div className="flex items-center gap-3 sm:gap-4">
-            <div className="relative hidden lg:block search-trigger">
+            <div className="relative  search-trigger">
               <SearchBar
                 onSearch={(e) => setSearchStr(e.target.value)}
                 value={searchStr}
@@ -369,14 +370,14 @@ const Header = () => {
             <nav className="flex flex-col gap-2 text-white">
               <Link
                 onClick={() => setOpenMenu(false)}
-                href="/category"
+                href="/categories"
                 className={`py-3 px-4 rounded-lg transition-all duration-300 flex items-center gap-3 ${
-                  isActive("/category")
+                  isActive("/categories")
                     ? "bg-[#cd6632] text-white font-bold border-white"
                     : "hover:bg-white/10 hover:pl-6"
                 }`}
               >
-                {isActive("/category") && (
+                {isActive("/categories") && (
                   <span className="w-2 h-2 bg-white rounded-full"></span>
                 )}
                 Collections
