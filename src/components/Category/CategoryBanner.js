@@ -40,9 +40,10 @@ export default function CategoryBanner({ title, subtitle, bgImage = null,  bread
           {title}
         </h1>
         {subtitle && (
-          <p className="font-dm mt-2 responsive-text  text-white/90 max-w-2xl">
-            {subtitle}
-          </p>
+          <p
+            className="font-dm mt-2 responsive-text text-xl text-white/90 max-w-2xl"
+            dangerouslySetInnerHTML={{ __html: subtitle }}
+          ></p>
         )}
       </div>
     </section>

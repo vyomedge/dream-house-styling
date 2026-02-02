@@ -26,16 +26,28 @@ export default function ProductCard({ product }) {
         {" "}
         {product.Product_Name}
       </h3>
-      <p
+      {/* <p
         className="font-dm text-gray-600 text-sm mt-1 line-clamp-2"
         dangerouslySetInnerHTML={{
           __html: product?.Product_Description || "",
         }}
-      ></p>
-      <p className="font-dm text-[#cd6632] font-bold mt-2">
-        {" "}
-        ₹{product.Prices[0].Price[0].SalePrice}
-      </p>
+      ></p> */}
+      <div className="flex justify-between items-center mt-1">
+        <div className="d-flex space-x-1">
+          <span className="text-sm font-black text-gray-600 font-normal line-through ">
+            ₹ {product.Prices[0].Price[0].Price}
+          </span>
+          {product.Prices[0].Price[0].Discount && (
+            <span className="text-sm font-black text-(--primaryGreen) font-normal ">
+              ({product.Prices[0].Price[0].Discount}% off)
+            </span>
+          )}
+        </div>
+        <p className="font-dm text-[#cd6632] font-bold ">
+          {" "}
+          ₹{product.Prices[0].Price[0].SalePrice}
+        </p>
+      </div>
     </div>
   );
 }

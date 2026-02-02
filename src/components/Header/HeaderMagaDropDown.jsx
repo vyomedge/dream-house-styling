@@ -58,13 +58,14 @@ const HeaderMagaDropDown = () => {
                   />
                 </div>
 
-                <p className="font-dm text-sm font-bold uppercase tracking-wider group-hover:text-primary transition-colors">
+                <p className="font-dm text-sm font-bold uppercase tracking-wider group-hover:text-primary transition-colors ">
                   {cat.name}
                 </p>
 
-                <p className="font-dm text-[11px] text-gray-100 mt-1 leading-relaxed">
-                  {cat.description || "Explore curated designs & textures."}
-                </p>
+                <p
+                  className="font-dm text-[11px] text-gray-100 mt-1 leading-relaxed line-clamp-2"
+                  dangerouslySetInnerHTML={{ __html: cat.description }}
+                ></p>
               </Link>
             ))}
           </div>
