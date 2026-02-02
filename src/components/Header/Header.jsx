@@ -217,15 +217,15 @@ const Header = () => {
             </div>
             <nav className="hidden md:flex items-center gap-8 h-full">
               <Link
-                href="/category"
+                href="/category/wallpaper/3"
                 className={`font-dm text-sm font-medium transition-colors relative ${
-                  isActive("/category")
+                  isActive("/category/wallpaper/3")
                     ? "text-[#cd6632]"
                     : "text-white hover:text-[#cd6632]"
                 }`}
               >
                 {` Collections`}
-                {isActive("/category") && (
+                {isActive("/category/wallpaper/3") && (
                   <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#cd6632]"></span>
                 )}
               </Link>
