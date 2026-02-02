@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const FALLBACK_IMAGE = "/Rectangle.png";
 
-export default function CategoryBanner({ title, subtitle, bgImage = null }) {
+export default function CategoryBanner({ title, subtitle, bgImage = null,  breadcrumbs = [], }) {
   const [imgSrc, setImgSrc] = useState(null);
 
   useEffect(() => {
@@ -17,6 +18,7 @@ export default function CategoryBanner({ title, subtitle, bgImage = null }) {
   }, [bgImage]);
 
   return (
+    <>
     <section className="relative w-full min-h-50 md:min-h-80 overflow-hidden ">
       {imgSrc && (
         <Image
@@ -45,5 +47,32 @@ export default function CategoryBanner({ title, subtitle, bgImage = null }) {
         )}
       </div>
     </section>
+      {breadcrumbs.length > 0 && (
+                <div className="bg-[#101d22]">
+                    <div className="custom-container py-4 text-sm text-gray-300">
+                        <nav className="flex items-center gap-2">
+                            {breadcrumbs.map((item, index) => (
+                                <span key={index} className="font-dm flex items-center gap-2">
+                                    {item.href ? (
+                                        <Link
+                                            href={item.href}
+                                            className="hover:text-[#cd6632] font-dm"
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    ) : (
+                                        <span className="text-gray-400 font-dm">{item.label}</span>
+                                    )}
+
+                                    {index < breadcrumbs.length - 1 && (
+                                        <span className="text-gray-500 font-dm">/</span>
+                                    )}
+                                </span>
+                            ))}
+                        </nav>
+                    </div>
+                </div>
+            )}
+            </>
   );
 }
