@@ -11,7 +11,11 @@ import { usePathname, useRouter } from "next/navigation";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import SearchResultsCom from "./SearchResults";
-import { debounce, groupProductsByCategoryArray } from "@/utills/utills";
+import {
+  debounce,
+  groupProductsByCategoryArray,
+  textToSlug,
+} from "@/utills/utills";
 
 const getSearchFilter = async ({ store, search }) => {
   try {
@@ -51,7 +55,6 @@ const Header = () => {
   const [SearchResults, setSearchResults] = useState([]);
   const [searchStr, setSearchStr] = useState("");
   const [categories, setCategories] = useState([]);
-  
 
   const fetchCartProducts = async () => {
     try {
@@ -218,7 +221,7 @@ const Header = () => {
               <Link
                 href="/categories"
                 className={`font-dm text-sm font-medium transition-colors relative ${
-                  isActive("/category/wallpaper/3")
+                  isActive("/categories")
                     ? "text-[#cd6632]"
                     : "text-white hover:text-[#cd6632]"
                 }`}
@@ -414,9 +417,11 @@ const Header = () => {
                       <Link
                         key={cat.slug}
                         onClick={() => setOpenMenu(false)}
-                        href={`/category/${cat.slug}`}
+                        href={`/category/${textToSlug(cat.name)}/${cat.id}`}
                         className={`py-2 px-3 rounded-lg transition-all duration-300 text-sm ${
-                          isActive(`/category/${cat.slug}`)
+                          isActive(
+                            `/category/${textToSlug(cat.name)}/${cat.id}`,
+                          )
                             ? "bg-[#cd6632]/80 text-white font-semibold"
                             : "text-white/80 hover:bg-white/10 hover:text-white"
                         }`}
