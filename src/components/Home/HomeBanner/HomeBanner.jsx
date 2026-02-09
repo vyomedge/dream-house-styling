@@ -49,7 +49,7 @@ const HomeBanner = () => {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Link href="/category/wallpaper/3">
+              <Link href="/categories">
                 <button
                   className="font-dm responsive-text px-6 py-2 rounded-md cursor-pointer font-medium  transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 shadow-lg"
                   style={{ backgroundColor: "#cd6632", color: "#ffffff" }}
