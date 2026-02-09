@@ -70,7 +70,7 @@ export default function ProductDetail({ product, category }) {
                     </span>
                   </div>
                   <Link
-                    href="/category"
+                    href="/categories"
                     className="font-dm inline-flex items-center gap-2 text-sm text-[#cd6632] mb-6"
                   >
                     {" "}
