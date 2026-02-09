@@ -9,6 +9,7 @@ import patternMinimalist from "@/assets/pattern-minimalist.jpg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import { textToSlug } from "@/utills/utills";
 
 const Categories = () => {
   const [categories, SetCategory] = useState([]);
@@ -51,7 +52,7 @@ const Categories = () => {
           </div>
 
           <a
-            href="/category/wallpaper/3"
+            href="/category/categories"
             className="font-dm text-(--primaryColor2) hidden md:flex items-center gap-1 responsive-text hover:underline font-medium "
           >
             {` View All Collections`}
@@ -68,7 +69,7 @@ const Categories = () => {
               {categories.map((item, index) => (
                 <Link
                   key={index}
-                  href={`/category/${item.name.toLowerCase()}/${item.id}`}
+                  href={`/category/${textToSlug(item.name.toLowerCase())}/${item.id}`}
                 >
                   <div
                     className={`font-dm relative overflow-hidden rounded-lg cursor-pointer group ${item.className}`}
