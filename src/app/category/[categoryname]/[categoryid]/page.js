@@ -24,7 +24,7 @@ export const metadata = {
     url: "https://www.dreamhomestyling.com/",
     images: [
       {
-        url: "https://res.cloudinary.com/djxgpbncu/image/upload/v1769672836/logo_xhl9o6.png",
+        url: "https://res.cloudinary.com/dyc17zibo/image/upload/v1770710138/logo_yorkun.png",
       },
     ],
   },
@@ -35,7 +35,7 @@ export const metadata = {
       "Contact Dream Home Styling in Bhopal for customized wallpapers, curtains, blinds, and interior design services. Visit our Neelbad store or call us today.",
     images: [
       {
-        url: "https://res.cloudinary.com/djxgpbncu/image/upload/v1769672836/logo_xhl9o6.png",
+        url: "https://res.cloudinary.com/dyc17zibo/image/upload/v1770710138/logo_yorkun.png",
       },
     ],
   },

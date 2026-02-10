@@ -7,7 +7,7 @@ import { FaStar } from "react-icons/fa";
 
 const Testimonial = ({ testimonialData, icon }) => {
   const FALLBACK_IMAGE =
-    "https://res.cloudinary.com/djxgpbncu/image/upload/v1769672836/logo_xhl9o6.png";
+    "https://res.cloudinary.com/dyc17zibo/image/upload/v1770710138/logo_yorkun.png";
 
   return (
     <div className="custom-container  text-center py-5 md:py-10 ">
