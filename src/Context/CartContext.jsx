@@ -55,6 +55,7 @@ export const CartProvider = ({ children }) => {
   // SINGLE ITEM
   // -----------------------
   const addToCart = async (payload) => {
+    console.log("Adding to cart with payload:", payload);
     const data = {
       Cart_Quantity: 1,
       category: payload?.category_name,
@@ -62,7 +63,7 @@ export const CartProvider = ({ children }) => {
       Store_id: payload?.Store_id,
       TotalPrice: payload?.Prices[0].Price[0].SalePrice,
       Price: payload?.Prices,
-      Image_id: 4,
+      Image_id: payload?.images[0]?.id,
       Country: "India",
       State: payload?.Store_Country,
       City: payload?.Store_City,
