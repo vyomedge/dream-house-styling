@@ -11,35 +11,8 @@ import axios from "axios";
 import Link from "next/link";
 import { textToSlug } from "@/utills/utills";
 
-const Categories = () => {
-  const [categories, SetCategory] = useState([]);
+const Categories = ({ categories }) => {
   const [Loading, setLoading] = useState(false);
-
-  const fetchActiveCategory = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`,
-      );
-
-      const newdata = response.data.map((item) => ({
-        ...item,
-        name: item.name,
-        className: "aspect-[4/3]",
-        image: patternFloral,
-      }));
-
-      SetCategory(newdata);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.error("Error fetching categories:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchActiveCategory();
-  }, []);
 
   return (
     <section className="py-10 ">

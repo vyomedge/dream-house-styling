@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import HomeBanner from "./HomeBanner/HomeBanner";
 import Features from "./Features/Features";
@@ -47,28 +46,61 @@ const testimonialData = [
     icon: "/aboutus/about-3-1.svg",
     title: " Radhika Sharma ",
     rating: 5,
-    description: "“Excellent quality wallpapers and smooth customization process. One of the best home décor stores in Bhopal.”"
+    description:
+      "“Excellent quality wallpapers and smooth customization process. One of the best home décor stores in Bhopal.”",
   },
   {
     id: 2,
     icon: "/aboutus/about-3-1.svg",
     title: "Aman Verma ",
     rating: 5,
-    description: "“Loved the curtain and blind collection. Professional team and timely service.”"
+    description:
+      "“Loved the curtain and blind collection. Professional team and timely service.”",
   },
-]
+];
 
+async function getCategories() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`,
+    {
+      next: { revalidate: 3600 }, // ISR: revalidate every 1 hr
+    },
+  );
 
-const HomePage = () => {
+  const data = await res.json();
+
+  const newdata = data.map((item) => ({
+    ...item,
+    name: item.name,
+    className: "aspect-[4/3]",
+  }));
+
+  return newdata;
+}
+
+async function getProducts() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Product/`,
+    {
+      next: { revalidate: 3600 }, // ISR: revalidate every 1 hr
+    },
+  );
+
+  return res.json();
+}
+
+const HomePage = async () => {
+  const categories = await getCategories();
+  const products = await getProducts();
   return (
     <>
       <HomeBanner />
       <Features />
       <WhyChooseUs />
-      <HomeGallery />
+      <HomeGallery categories={categories} />
       <LuxerySection />
       <VideoSection />
-      <Products />
+      <Products products={products} />
       <Customization />
       {/* <HowItWorks /> */}
       <InteriorSolutions />

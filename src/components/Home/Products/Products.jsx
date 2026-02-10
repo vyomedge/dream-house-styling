@@ -2,37 +2,16 @@
 import { useAuth } from "@/Context/AuthContext";
 import { useCart } from "@/Context/CartContext";
 import { textToSlug } from "@/utills/utills";
-import axios from "axios";
-import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
-const Products = () => {
-  const [products, setProducts] = useState([]);
+const Products = ({ products }) => {
   const { addToCart } = useCart();
   const { checkUserLoggedIn } = useAuth();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-  const fetchProducts = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Product/`,
-      );
-      setProducts(response.data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.error("Error fetching products:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   const handleAddToCart = async (cartdata) => {
     try {
