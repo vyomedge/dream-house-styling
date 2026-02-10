@@ -80,7 +80,7 @@ export default function ProductDetail({ product, category }) {
                     <div>
                       <div className="relative w-full  h-[320] sm:h-[420] rounded-xl overflow-hidden border border-gray-200">
                         <Image
-                          src={activeImg}
+                          src={activeImg ?? "/images/no-image.jpg"}
                           alt="Elegant Floral Wallpaper"
                           fill
                           className="object-cover"
@@ -101,7 +101,7 @@ export default function ProductDetail({ product, category }) {
                             }`}
                           >
                             <Image
-                              src={img?.image ?? "/wallpaper-1.png"}
+                              src={img?.image ?? "/images/no-image.jpg"}
                               alt=""
                               fill
                               className="object-cover"

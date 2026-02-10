@@ -74,7 +74,7 @@ const Categories = () => {
                       className={`font-dm relative overflow-hidden rounded-lg cursor-pointer group ${item.className}`}
                     >
                       <Image
-                        src={item.categoryImages}
+                        src={item.categoryImages ?? "/images/no-image.jpg"}
                         alt={item.name}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-110"
