@@ -55,7 +55,6 @@ export const CartProvider = ({ children }) => {
   // SINGLE ITEM
   // -----------------------
   const addToCart = async (payload) => {
-    console.log("Adding to cart with payload:", payload);
     const data = {
       Cart_Quantity: 1,
       category: payload?.category_name,
