@@ -4,7 +4,7 @@ import logo from "@/assets/logo.png";
 import React, { useCallback, useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import Badge from "@mui/material/Badge";
-import { useCart } from "@/Context/CartContext";
+import { refetchAccessToken, useCart } from "@/Context/CartContext";
 import HeaderMagaDropDown from "./HeaderMagaDropDown";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -45,7 +45,7 @@ const getSearchFilter = async ({ store, search }) => {
   }
 };
 
-const Header = () => {
+const Header = ({ categories }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
   const { items, fetchCartItems } = useCart();
@@ -54,7 +54,9 @@ const Header = () => {
   const router = useRouter();
   const [SearchResults, setSearchResults] = useState([]);
   const [searchStr, setSearchStr] = useState("");
-  const [categories, setCategories] = useState([]);
+  const hideLayout = ["/login", "/register", "/signup"].includes(pathname);
+
+  const token = refetchAccessToken();
 
   const fetchCartProducts = async () => {
     try {
@@ -65,10 +67,11 @@ const Header = () => {
   };
 
   useEffect(() => {
+    if (hideLayout) return;
     if (!items.length) {
       fetchCartProducts();
     }
-  }, []);
+  }, [token]);
   useEffect(() => {
     if (!openMenu) {
       setShopOpen(false);
@@ -76,21 +79,6 @@ const Header = () => {
   }, [openMenu]);
 
   ("use client");
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`,
-        );
-        setCategories(res.data || []);
-      } catch (err) {
-        console.error("Category API error:", err);
-      }
-    };
-
-    fetchCategories();
-  }, []);
 
   const cookies = new Cookies();
   const [searchLoading, setSearchLoading] = useState(false);
@@ -103,7 +91,7 @@ const Header = () => {
     if (access_token) {
       setValidUser(true);
     }
-  }, []);
+  }, [token]);
 
   // Function to check if link is active
   const isActive = (path) => {
@@ -112,14 +100,6 @@ const Header = () => {
     }
     return pathname === path || pathname.startsWith(path + "/");
   };
-
-  const shopCategories = [
-    { href: "/shop/living Room", label: "Living Room" },
-    { href: "/shop/bedroom", label: "Bedroom" },
-    { href: "/shop/nursery", label: "Nursery" },
-    { href: "/shop/study", label: "Study" },
-    { href: "/shop/kitchen", label: "Kitchen" },
-  ];
 
   const logoutHandle = () => {
     const cookies = new Cookies();
@@ -167,13 +147,14 @@ const Header = () => {
 
   // Trigger debounce on input change
   useEffect(() => {
+    if (hideLayout) return;
     if (searchStr.trim().length) {
       debouncedSearch(searchStr.trim());
     } else {
       setVisibleProducts(suggestedProducts);
       setResultType("suggested");
     }
-  }, [searchStr, debouncedSearch]);
+  }, [searchStr, debouncedSearch, token]);
 
   const fetchProducts = async () => {
     try {
@@ -195,10 +176,13 @@ const Header = () => {
   };
 
   useEffect(() => {
+    if (hideLayout) return;
     fetchProducts();
-  }, []);
+  }, [token]);
 
   const structuredProducts = groupProductsByCategoryArray(visibleProducts);
+
+  if (hideLayout) return <></>;
 
   return (
     <>

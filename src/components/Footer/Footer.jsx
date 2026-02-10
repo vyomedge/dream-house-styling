@@ -6,8 +6,10 @@ import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
-import { FaInstagram, FaFacebookF, } from "react-icons/fa6";
+import { FaInstagram, FaFacebookF } from "react-icons/fa6";
 import axios from "axios";
+import { refetchAccessToken } from "@/Context/CartContext";
+import { textToSlug } from "@/utills/utills";
 
 const bottomLinks = [
   {
@@ -24,27 +26,11 @@ const bottomLinks = [
   },
 ];
 
-const Footer = () => {
+const Footer = ({ categories }) => {
   const pathname = usePathname();
-
- const [categories, setCategories] = useState([]);
   const [showMore, setShowMore] = useState(false);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`
-        );
-        setCategories(response.data || []);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
+  const hideLayout = ["/login", "/register", "/signup"].includes(pathname);
 
   const supportLinks = [
     { label: "Contact Us", url: "/contact-us" },
@@ -86,14 +72,16 @@ const Footer = () => {
   };
 
   const handleLogoClick = (e) => {
-  if (pathname === "/") {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }
-};
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  if (hideLayout) return null;
 
   return (
     <>
@@ -102,9 +90,17 @@ const Footer = () => {
           <div
             className="absolute inset-0 bg-cover bg-center opacity-30"
             data-alt="Dark dramatic floral wallpaper pattern with deep reds and purples"
-            style={{ backgroundImage: `url('https://lh3.googleusercontent.com/aida-public/AB6AXuBq6of0mqRU2evYFSn3lmP5Hk4UsxnX32IAC_nnWcOcKcT8FO3Ac7HDlsd8mZe0DGvc_9N6nDXp-sd2iGFFjm0ppeSNeIQzjo95Rsi0oYvI_CtmuBVbIAyHrsOqQbLuJ9nZ8JiczAPqwviEu_B6g_kRm3F4lwtYRQhG4shjqLNCHleoCux3TGfA61EiU2-xxKLl423LWT3npJwMKMjJ5HlrGEH8qKRzRUwJ1Xx77IrNsRjANMCm2eqw31GI_HqSf-TgCHH7YxfHapk')`, }} ></div>
+            style={{
+              backgroundImage: `url('https://lh3.googleusercontent.com/aida-public/AB6AXuBq6of0mqRU2evYFSn3lmP5Hk4UsxnX32IAC_nnWcOcKcT8FO3Ac7HDlsd8mZe0DGvc_9N6nDXp-sd2iGFFjm0ppeSNeIQzjo95Rsi0oYvI_CtmuBVbIAyHrsOqQbLuJ9nZ8JiczAPqwviEu_B6g_kRm3F4lwtYRQhG4shjqLNCHleoCux3TGfA61EiU2-xxKLl423LWT3npJwMKMjJ5HlrGEH8qKRzRUwJ1Xx77IrNsRjANMCm2eqw31GI_HqSf-TgCHH7YxfHapk')`,
+            }}
+          ></div>
           <div
-            style={{ position: "absolute", inset: 0, background: `linear-gradient( to top, rgba(16, 29, 34, 1), rgba(16, 29, 34, 0.95), rgba(16, 29, 34, 0.9) )`, }} ></div>
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: `linear-gradient( to top, rgba(16, 29, 34, 1), rgba(16, 29, 34, 0.95), rgba(16, 29, 34, 0.9) )`,
+            }}
+          ></div>
           <div className="relative max-w-7xl mx-auto px-6 pt-12 pb-16">
             {/* <div className="glass2 p-12 rounded-2xl max-w-4xl mx-auto mb-32 text-center border border-white/20">
               <h4 className="font-dm responsiveheading2 font-bold! text-white mb-4 uppercase tracking-tighter">{`Join the Aesthetic Circle`}</h4>
@@ -123,7 +119,7 @@ const Footer = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
               <div className="col-span-1 lg:col-span-1">
                 <div className="flex items-center gap-3 text-white mb-6">
-                   <Link href="/" onClick={handleLogoClick}>
+                  <Link href="/" onClick={handleLogoClick}>
                     <div className="relative w-[100px] md:w-[100px] h-[150px]  md:h-[127px] mb-2 sm:mb-4 ">
                       <Image
                         src="/images/logo.png"
@@ -134,15 +130,25 @@ const Footer = () => {
                     </div>
                   </Link>
                 </div>
-                <p className="font-dm text-sm leading-relaxed mb-2"> {` Dream Home Styling (DHS) — Customized wallpapers, curtains, blinds, upholstery, carpets, and interior solutions in Bhopal & Indore.`} </p>
-                <a href="tel:+917509666466" className="font-dm hover:cursor-pointer">
+                <p className="font-dm text-sm leading-relaxed mb-2">
+                  {" "}
+                  {` Dream Home Styling (DHS) — Customized wallpapers, curtains, blinds, upholstery, carpets, and interior solutions in Bhopal & Indore.`}{" "}
+                </p>
+                <a
+                  href="tel:+917509666466"
+                  className="font-dm hover:cursor-pointer"
+                >
                   <p className="font-dm text-xs leading-relaxed mb-6  flex items-center gap-2">
-                    <span className="material-symbols-outlined text-gold text-xs">location_on </span>
+                    <span className="material-symbols-outlined text-gold text-xs">
+                      location_on{" "}
+                    </span>
                     <span>Neelbad, Bhopal</span>
                     <span className="text-white/40">|</span>
-                    <span className="material-symbols-outlined text-gold text-xs"> call</span>
+                    <span className="material-symbols-outlined text-gold text-xs">
+                      {" "}
+                      call
+                    </span>
                     <span>075096 66466</span>
-
                   </p>
                 </a>
                 <div className="flex items-center gap-3.5 text-sm md:text-base font-responsive "></div>
@@ -167,48 +173,63 @@ const Footer = () => {
               </div>
 
               <div>
-                <p className="font-dm text-white font-bold uppercase tracking-widest text-sm mb-6"> {` Shopping`} </p>
+                <p className="font-dm text-white font-bold uppercase tracking-widest text-sm mb-6">
+                  {" "}
+                  {` Shopping`}{" "}
+                </p>
                 <ul className="font-dm space-y-4 text-sm font-medium first-letter:uppercase">
-                {categories.slice(0, 5).map((cat, index) => (
-                  <li key={index}>
-                    <Link href={`/category/${cat.slug}`}
-                      className="text-gold hover:text-[#cd6632] transition-colors first-letter:uppercase">
-                       {cat.name?.trimStart().replace(/^\w/, (c) => c.toUpperCase())}
-                    </Link>
-                  </li>
-                ))}
+                  {categories.slice(0, 5).map((cat, index) => (
+                    <li key={index}>
+                      <Link
+                        href={`/category/${textToSlug(cat.name.toLowerCase())}/${cat.id}`}
+                        className="text-gold hover:text-[#cd6632] transition-colors first-letter:uppercase"
+                      >
+                        {cat.name
+                          ?.trimStart()
+                          .replace(/^\w/, (c) => c.toUpperCase())}
+                      </Link>
+                    </li>
+                  ))}
 
-                {categories.length > 5 && (
-                  <li>
-                    <button onClick={() => setShowMore(!showMore)}
-                      className="flex items-center gap-1 text-gold hover:text-[#cd6632]">
-                      More
-                      <IoChevronDown
-                        className={`transition-transform ${
-                          showMore ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
+                  {categories.length > 5 && (
+                    <li>
+                      <button
+                        onClick={() => setShowMore(!showMore)}
+                        className="flex items-center gap-1 text-gold hover:text-[#cd6632]"
+                      >
+                        More
+                        <IoChevronDown
+                          className={`transition-transform ${
+                            showMore ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
 
-                    {showMore && (
-                      <ul className="mt-3 ml-3 space-y-3">
-                        {categories.slice(5).map((cat, index) => (
-                          <li key={index}>
-                            <Link href={`/category/${cat.slug}`}
-                              className="text-gold hover:text-[#cd6632] first-letter:uppercase" >
-                               {cat.name?.trimStart().replace(/^\w/, (c) => c.toUpperCase())}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                )}
-              </ul>
+                      {showMore && (
+                        <ul className="mt-3 ml-3 space-y-3">
+                          {categories.slice(5).map((cat, index) => (
+                            <li key={index}>
+                              <Link
+                                href={`/category/${textToSlug(cat.name.toLowerCase())}/${cat.id}`}
+                                className="text-gold hover:text-[#cd6632] first-letter:uppercase"
+                              >
+                                {cat.name
+                                  ?.trimStart()
+                                  .replace(/^\w/, (c) => c.toUpperCase())}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  )}
+                </ul>
               </div>
 
               <div>
-                <p className="font-dm text-white font-bold uppercase tracking-widest text-sm mb-6">{`Quick links`} </p>
+                <p className="font-dm text-white font-bold uppercase tracking-widest text-sm mb-6">
+                  {`Quick links`}{" "}
+                </p>
                 <ul className="font-dm space-y-4 text-sm font-medium">
                   {supportLinks.map((link, index) => {
                     const isActive = pathname === link.url;
@@ -216,7 +237,8 @@ const Footer = () => {
                       <li key={index}>
                         <Link
                           href={link.url}
-                          className={` transition-colors ${isActive ? "text-[#cd6632] " : "text-gold"} hover:text-[#cd6632] `}>
+                          className={` transition-colors ${isActive ? "text-[#cd6632] " : "text-gold"} hover:text-[#cd6632] `}
+                        >
                           {link.label}
                         </Link>
                       </li>
@@ -226,26 +248,46 @@ const Footer = () => {
               </div>
 
               <div>
-                <p className="font-dm text-white font-bold uppercase tracking-widest text-sm mb-6"> {`Visit Our Store – Bhopal`}</p>
+                <p className="font-dm text-white font-bold uppercase tracking-widest text-sm mb-6">
+                  {" "}
+                  {`Visit Our Store – Bhopal`}
+                </p>
                 <ul className="font-dm space-y-4 text-sm">
                   <li className="font-dm flex items-start gap-3">
-                    <span className="material-symbols-outlined text-gold text-sm">location_on  </span>
+                    <span className="material-symbols-outlined text-gold text-sm">
+                      location_on{" "}
+                    </span>
                     <span className="font-dm">{`Ground Floor, Maran Complex, Shop No. 9 ,Opposite HP Petrol Pump, Neelbad Squar, Bhopal, Madhya Pradesh – 462044`}</span>
                   </li>
                   <li className="font-dm flex items-center gap-3">
-                    <span className="material-symbols-outlined text-gold text-sm"> mail </span>
-                    <a href="mailto:info@dreamhomestyling.com" className="font-dm text-gold hover:underline break-all" >
+                    <span className="material-symbols-outlined text-gold text-sm">
+                      {" "}
+                      mail{" "}
+                    </span>
+                    <a
+                      href="mailto:info@dreamhomestyling.com"
+                      className="font-dm text-gold hover:underline break-all"
+                    >
                       info@dreamhomestyling.com
                     </a>
                   </li>
                   <li className="font-dm flex items-start gap-3">
-                    <span className="material-symbols-outlined text-gold text-sm"> phone </span>
-                    <a href="tel:+917509666466" className="font-dm hover:underline" >
+                    <span className="material-symbols-outlined text-gold text-sm">
+                      {" "}
+                      phone{" "}
+                    </span>
+                    <a
+                      href="tel:+917509666466"
+                      className="font-dm hover:underline"
+                    >
                       075096 66466
                     </a>
                   </li>
                   <li className="font-dm flex items-start gap-3">
-                    <span className="material-symbols-outlined text-gold text-sm"> pin_drop </span>
+                    <span className="material-symbols-outlined text-gold text-sm">
+                      {" "}
+                      pin_drop{" "}
+                    </span>
                     <p className="font-dm"> {`Serving : Bhopal • Indore`}</p>
                   </li>
                 </ul>
@@ -257,16 +299,26 @@ const Footer = () => {
                 <Link href="/" className="font-dm hover:underline">
                   {footerData.copyright}
                 </Link>
-                {""}{`All Rights Reserved.`}
+                {""}
+                {`All Rights Reserved.`}
                 <span className="hidden md:inline text-[#cd6632]">|</span>
                 <div className="flex items-center gap-2">
                   <span>
                     {`Developed by`}{" "}
-                    <Link href="https://vyomedge.com/" target="_blank" rel="noopener noreferrer" className="decoration-none hover:underline" >
+                    <Link
+                      href="https://vyomedge.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="decoration-none hover:underline"
+                    >
                       Vyomedge
                     </Link>
                   </span>
-                  <Link href="https://vyomedge.com/" target="_blank" rel="noopener noreferrer" >
+                  <Link
+                    href="https://vyomedge.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Image
                       src={"/vyomedgelogo.webp"}
                       alt="Vyomedge Website"
@@ -279,12 +331,14 @@ const Footer = () => {
               </div>
               <div className="font-dm flex items-center justify-center gap-4 text-xs">
                 {bottomLinks.map((link, index) => {
-                  const isActive = pathname === `/${link.url}` || pathname === link.url;
+                  const isActive =
+                    pathname === `/${link.url}` || pathname === link.url;
                   return (
                     <React.Fragment key={link.url}>
                       <Link
                         href={link.url}
-                        className={` capitalize transition-colors ${isActive ? "text-[#cd6632] " : "text-white/70"} hover:text-[#cd6632] `} >
+                        className={` capitalize transition-colors ${isActive ? "text-[#cd6632] " : "text-white/70"} hover:text-[#cd6632] `}
+                      >
                         {link.label}
                       </Link>
                       {index !== bottomLinks.length - 1 && (

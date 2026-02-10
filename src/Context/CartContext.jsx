@@ -32,17 +32,18 @@ const cartReducer = (state, action) => {
   }
 };
 
+export const refetchAccessToken = (items) => {
+  const access_token = cookies.get("Access_Token");
+
+  return access_token;
+};
+
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
   // -----------------------
   // Helper
   // -----------------------
-  const refetchAccessToken = (items) => {
-    const access_token = cookies.get("Access_Token");
-
-    return access_token;
-  };
 
   // -----------------------
   // Helper
