@@ -25,7 +25,7 @@ const Categories = ({ categories }) => {
           </div>
 
           <a
-            href="/category/categories"
+            href="/categories"
             className="font-dm text-(--primaryColor2) hidden md:flex items-center gap-1 responsive-text hover:underline font-medium "
           >
             {` View All Collections`}

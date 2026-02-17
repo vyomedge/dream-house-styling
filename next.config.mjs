@@ -2,6 +2,7 @@
 const nextConfig = {
   /* config options here */
   reactCompiler: true,
+  output: "standalone",
   images: {
     domains: ["res.cloudinary.com"],
   },
