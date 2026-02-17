@@ -59,55 +59,45 @@ stages:
   # -----------------------------------
   - stage: Prod
     displayName: "Deploy to Production"
+
     jobs:
       - job: DeployProd
         displayName: "Deploy to Hostinger - Prod"
+
         variables:
           imageName: "dreamhousestyling/dhs-frontend"
           dockerRegistry: "docker.io"
           dockerRegistryServiceConnection: "DockerHubConnection"
           buildVersion: $[counter('build-version', 1)]
 
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                # Install CLI
-                - task: Docker@2
-                  displayName: "Login to Docker Hub"
-                  inputs:
-                    command: login
-                    containerRegistry: $(dockerRegistryServiceConnection)
+        steps:
+          - task: Docker@2
+            displayName: "Login to Docker Hub"
+            inputs:
+              command: login
+              containerRegistry: $(dockerRegistryServiceConnection)
 
-                - powershell: |
-                    $image = "$(dockerRegistry)/$(imageName):latest"
-                    $backupTag = "$(dockerRegistry)/$(imageName):build-$(buildVersion)"
+          - powershell: |
+              $image = "$(dockerRegistry)/$(imageName):latest"
+              $backupTag = "$(dockerRegistry)/$(imageName):build-$(buildVersion)"
 
-                    Write-Host "Checking if latest image exists: $image"
+              docker pull $image
+              if ($LASTEXITCODE -eq 0) {
+                  docker tag $image $backupTag
+                  docker push $backupTag
+              }
+            displayName: "Backup previous latest Docker image"
 
-                    $ErrorActionPreference = "Continue"
-                    docker pull $image
+          - task: Docker@2
+            displayName: "Build and Push Docker Image"
+            inputs:
+              command: buildAndPush
+              repository: $(imageName)
+              dockerfile: Dockerfile
+              containerRegistry: $(dockerRegistryServiceConnection)
+              tags: |
+                latest
 
-                    if ($LASTEXITCODE -eq 0) {
-                        Write-Host "Backing up existing image as $backupTag"
-                        docker tag $image $backupTag
-                        docker push $backupTag
-                    }
-                    else {
-                        Write-Host "No existing latest image found. Skipping backup."
-                    }
-                  displayName: "Backup previous latest Docker image"
-
-                - task: Docker@2
-                  displayName: "Build and Push Django Docker Image"
-                  inputs:
-                    command: buildAndPush
-                    repository: $(imageName)
-                    dockerfile: Dockerfile
-                    containerRegistry: $(dockerRegistryServiceConnection)
-                    tags: |
-                      latest
-
-                - script: |
-                    curl -X POST http://72.61.174.48:9000/hooks/deploy-dhs-frontend?token=secretdhsfrontend5476
-                  displayName: "Trigger Deploy on vps"
+          - script: |
+              curl -X POST http://72.61.174.48:9000/hooks/deploy-dhs-frontend?token=secretdhsfrontend5476
+            displayName: "Trigger Deploy on VPS"
