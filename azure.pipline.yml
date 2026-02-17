@@ -6,6 +6,12 @@ trigger:
 pool:
   name: frontend-agent
 
+variables:
+  imageName: "dreamhousestyling/dhs-frontend"
+  dockerRegistry: "docker.io"
+  dockerRegistryServiceConnection: "DockerHubConnection"
+  buildVersion: $[counter('build-version', 1)]
+
 stages:
   # -----------------------------------
   # DEV DEPLOY
@@ -63,12 +69,6 @@ stages:
     jobs:
       - job: DeployProd
         displayName: "Deploy to Hostinger - Prod"
-
-        variables:
-          imageName: "dreamhousestyling/dhs-frontend"
-          dockerRegistry: "docker.io"
-          dockerRegistryServiceConnection: "DockerHubConnection"
-          buildVersion: $[counter('build-version', 1)]
 
         steps:
           - task: Docker@2
