@@ -61,7 +61,6 @@ stages:
     displayName: "Deploy to Production"
     jobs:
       - deployment: DeployProd
-        environment: Production
         displayName: "Deploy to Hostinger - Prod"
         variables:
           imageName: "dreamhousestyling/dhs-frontend"
