@@ -2,30 +2,19 @@
 import { useAuth } from "@/Context/AuthContext";
 import { useCart } from "@/Context/CartContext";
 import { textToSlug } from "@/utills/utills";
+import { Check, Loader2, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { BsCartCheck } from "react-icons/bs";
+import ProductCard from "@/common-components/ProductCard/ProductCard";
 
 const Products = ({ products }) => {
   const { addToCart } = useCart();
   const { checkUserLoggedIn } = useAuth();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-  const handleAddToCart = async (cartdata) => {
-    try {
-      if (checkUserLoggedIn()) {
-        await addToCart(cartdata);
-        toast.success("Added into Cart");
-      } else {
-        router.push("/login");
-      }
-    } catch (error) {
-      toast.error("Something Went Wrong");
-      console.error("Error in adding products into cart:", error);
-    }
-  };
 
   return (
     <div className="">
@@ -45,72 +34,9 @@ const Products = ({ products }) => {
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {products.map((product, idx) => (
-                  <div key={idx} className="group">
-                    <div className="relative aspect-[3/4] rounded-xl overflow-hidden soft-shadow bg-[#15242a] mb-6">
-                      {/* Image */}
-
-                      <div
-                        className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                        style={{
-                          backgroundImage: `url(${product?.images[0]?.image ? product?.images[0]?.image : "/images/no-image.jpg"})`,
-                        }}
-                      />
-
-                      {/* Badge */}
-                      {product?.badge && (
-                        <div className="absolute top-4 right-4 bg-background-dark/80 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase">
-                          {product.badge}
-                        </div>
-                      )}
-
-                      {/* Hover Actions */}
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <Link
-                          href={`/category/${textToSlug(product.category_name)}/${product.Category_id}/${textToSlug(product.Product_Name)}/${product.id}`}
-                        >
-                          <button className="flex cursor-pointer bg-white text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors">
-                            <span className="material-symbols-outlined ">
-                              visibility
-                            </span>
-                          </button>
-                        </Link>
-                        <button
-                          onClick={() => handleAddToCart(product)}
-                          className="font-dm flex cursor-pointer bg-white  text-background-dark p-3 rounded-full hover:bg-(--primaryColor) text-black hover:text-white transition-colors"
-                        >
-                          <span className="material-symbols-outlined  ">
-                            {` shopping_cart`}
-                          </span>
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <h5 className="font-dm text-lg font-bold text-(--primaryColor) transition-colors">
-                      {product.Product_Name}
-                    </h5>
-                    {/* <p
-                      className="font-dm text-(--primaryColor2) text-sm mt-1 uppercase tracking-wider"
-                      dangerouslySetInnerHTML={{
-                        __html: product.Product_Description,
-                      }}
-                    /> */}
-
-                    <div className="d-flex space-x-1">
-                      <span className="text-sm font-black text-gray-600 font-normal line-through ">
-                        ₹ {product.Prices[0].Price[0].Price}
-                      </span>
-                      {product.Prices[0].Price[0].Discount && (
-                        <span className="text-sm font-black text-(--primaryGreen) font-normal ">
-                          ({product.Prices[0].Price[0].Discount}% off)
-                        </span>
-                      )}
-                    </div>
-
-                    <p className="font-dm text-(--primaryColor2) text-gray-900 font-bold mt-2">
-                      ₹{product.Prices[0].Price[0].SalePrice}
-                    </p>
-                  </div>
+                  <span key={idx}>
+                    <ProductCard productData={product} />
+                  </span>
                 ))}
               </div>
 

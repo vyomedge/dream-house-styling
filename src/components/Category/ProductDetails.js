@@ -15,29 +15,64 @@ import { textToSlug } from "@/utills/utills";
 import { useCart } from "@/Context/CartContext";
 import Button from "@mui/material/Button";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/Context/AuthContext";
 
 export default function ProductDetail({ product, category }) {
   const [activeImg, setActiveImg] = useState("/wallpaper-1.png");
   const [showQuoteForm, setShowQuoteForm] = useState(false);
-  const { addToCart } = useCart();
+  const { addToCart, items, removeFromCart } = useCart();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const [inCart, setInCart] = useState(false);
+  const { checkUserLoggedIn } = useAuth();
+  const [cartId, setCartId] = useState(null);
+
+  const handleAddToCart = async () => {
+    try {
+      if (checkUserLoggedIn()) {
+        setLoading(true);
+        await addToCart(product);
+        setInCart(true);
+        toast.success("Added into Cart");
+        setLoading(false);
+      } else {
+        router.push("/login");
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error("Something Went Wrong");
+      console.error("Error in adding products into cart:", error);
+    }
+  };
+
+  const handleRemoveCart = async () => {
+    try {
+      if (checkUserLoggedIn()) {
+        setLoading(true);
+        await removeFromCart(cartId);
+        setInCart(false);
+        toast.success("Removed from Cart");
+        setLoading(false);
+      } else {
+        router.push("/login");
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error("Something Went Wrong");
+      console.error("Error in adding products into cart:", error);
+    }
+  };
+
+  useEffect(() => {
+    const isInCart = items.find((item) => item.Product_id === product.id);
+    isInCart && setCartId(isInCart.id);
+    isInCart ? setInCart(true) : setInCart(false);
+  }, [items]);
 
   useEffect(() => {
     setActiveImg(product.images[0].image);
   }, [product]);
-
-  const handleAddToCart = async (cartdata) => {
-    try {
-      setLoading(true);
-      await addToCart(cartdata);
-      toast.success("Added into Cart");
-    } catch (error) {
-      toast.error("Something Went Wrong");
-      console.error("Error in adding products into cart:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <>
@@ -115,12 +150,12 @@ export default function ProductDetail({ product, category }) {
                         {product.Product_Name}
                       </h2>
 
-                      <p
+                      <div
                         className="font-dm text-sm text-gray-700 max-w-md mb-4"
                         dangerouslySetInnerHTML={{
                           __html: product?.Product_Description || "",
                         }}
-                      ></p>
+                      ></div>
                       <p className="font-dm text-2xl font-semibold text-[#cd6632] mb-6">
                         ₹ {product.Prices[0].Price[0].SalePrice}
                       </p>
@@ -148,7 +183,7 @@ export default function ProductDetail({ product, category }) {
                       {/* Actions */}
                       <div className="space-y-3 max-w-sm">
                         <Button
-                          onClick={() => handleAddToCart(product)}
+                          onClick={inCart ? handleRemoveCart : handleAddToCart}
                           loading={loading}
                           startIcon={<FaShoppingCart />}
                           variant="contained"
@@ -162,7 +197,7 @@ export default function ProductDetail({ product, category }) {
                             marginBottom: 1,
                           }}
                         >
-                          Add To Cart
+                          {inCart ? "Remove from Cart" : "Add to Cart"}
                         </Button>
 
                         <button

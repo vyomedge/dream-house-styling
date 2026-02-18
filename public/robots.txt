@@ -1,38 +1,29 @@
-User-agent: * 
-Allow: / 
- 
-# Block authentication & user account pages 
-Disallow: /login/ 
-Disallow: /signup/ 
-Disallow: /register/ 
-Disallow: /account/ 
-Disallow: /my-account/ 
-Disallow: /dashboard/ 
-Disallow: /profile/ 
-Disallow: /reset-password/ 
-Disallow: /forgot-password/ 
- 
+User-agent: *
+# Block authentication & user account pages
+Disallow: /login/
+Disallow: /signup/
+Disallow: /register/
+Disallow: /account/
+Disallow: /my-account/
+Disallow: /dashboard/
+Disallow: /profile/
+Disallow: /reset-password/
+Disallow: /forgot-password/
 # Block cart & checkout
-Disallow: /cart/ 
-Disallow: /checkout/ 
-Disallow: /order/ 
-Disallow: /orders/ 
- 
-# Block backend / admin / APIs 
-Disallow: /admin/ 
-Disallow: /django-admin/ 
-Disallow: /api/ 
-Disallow: /api/v1/ 
-Disallow: /api/v2/ 
- 
-# Block internal search & query pages 
-Disallow: /search/ 
-Disallow: /? 
- 
-# Allow important static assets (Next.js) 
-Allow: /_next/static/ 
-Allow: /static/ 
-Allow: /media/ 
- 
-# Sitemap 
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /order/
+Disallow: /orders/
+# Block backend & APIs
+Disallow: /admin/
+Disallow: /django-admin/
+Disallow: /api/
+Disallow: /api/v1/
+Disallow: /api/v2/
+# Block internal search
+Disallow: /search/
+# Allow static assets
+Allow: /_next/static/
+Allow: /static/
+Allow: /media/
 Sitemap: https://www.dreamhomestyling.com/sitemap.xml
