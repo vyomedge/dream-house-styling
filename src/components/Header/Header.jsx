@@ -224,7 +224,7 @@ const Header = ({ categories }) => {
                       : "text-white hover:text-[#cd6632]"
                   }`}
                 >
-                  {` Shop`}
+                  {` Shops`}
                   <span className="font-dm material-symbols-outlined text-sm">
                     expand_more
                   </span>
