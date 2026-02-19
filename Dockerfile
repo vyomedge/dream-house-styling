@@ -8,7 +8,7 @@ RUN npm install
 COPY . .
 
 ARG NEXT_PUBLIC_BACKEND_URL
-ENV NEXT_PUBLIC_BACKEND_URL=http://72.61.174.48:8000
+ENV NEXT_PUBLIC_BACKEND_URL=https://www.dreamhomestyling.com/api
 
 RUN npm run build
 
