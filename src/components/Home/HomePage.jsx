@@ -15,28 +15,33 @@ import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
 
 const faqs = [
   {
-    q: "1. Do you offer customized home décor products?",
-    a: " Yes, all our wallpapers, curtains, blinds, upholstery, and carpets are fully customized.",
+    question: "1. Do you offer customized home décor products?",
+    answer:
+      " Yes, all our wallpapers, curtains, blinds, upholstery, and carpets are fully customized.",
   },
   {
-    q: "2. Do you provide home measurement services?",
-    a: " Yes, we offer site visits and measurements in Bhopal and nearby areas.",
+    question: "2. Do you provide home measurement services?",
+    answer:
+      " Yes, we offer site visits and measurements in Bhopal and nearby areas.",
   },
   {
-    q: "3. Can I see samples before placing an order?",
-    a: " Absolutely. You can order samples to check color, texture, and quality.",
+    question: "3. Can I see samples before placing an order?",
+    answer:
+      " Absolutely. You can order samples to check color, texture, and quality.",
   },
   {
-    q: "4. Do you offer interior design services?",
-    a: " Yes, we provide interior consultation, 3D designs, and complete interior solutions.",
+    question: "4. Do you offer interior design services?",
+    answer:
+      " Yes, we provide interior consultation, 3D designs, and complete interior solutions.",
   },
   {
-    q: "5. Do you handle installation as well?",
-    a: " Yes, installation support is available for selected products.",
+    question: "5. Do you handle installation as well?",
+    answer: " Yes, installation support is available for selected products.",
   },
   {
-    q: "6. Can I visit your store without an appointment?",
-    a: " Yes, you’re welcome to visit our Neelbad, Bhopal store during working hours.",
+    question: "6. Can I visit your store without an appointment?",
+    answer:
+      " Yes, you’re welcome to visit our Neelbad, Bhopal store during working hours.",
   },
 ];
 

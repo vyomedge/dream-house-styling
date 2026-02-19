@@ -220,7 +220,7 @@ export default function ProductDetail({ product, category }) {
                   </div>
                 </div>
                 <div className="py-6">
-                  <ProductDetailDiscription />
+                  <ProductDetailDiscription product={product} />
                 </div>
               </div>
             </>

@@ -1,52 +1,6 @@
 import Categrory from "@/components/Category/Category";
+import { generateMataDataForSEO } from "@/utills/utills";
 import axios from "axios";
-
-export const metadata = {
-  title: "Contact Us | Dream Home Styling – Home Decor Store Bhopal",
-  description:
-    "Contact Dream Home Styling in Bhopal for customized wallpapers, curtains, blinds, and interior design services. Visit our Neelbad store or call us today.",
-  keywords: [
-    "contact dream home styling",
-    "home decor store contact bhopal",
-    " interior decor shop bhopal contact,",
-    "wallpaper curtain store bhopa",
-    " customized home decor bhopal",
-    "interior designer bhopal",
-    " home furnishing store madhya pradesh",
-    " home furnishing store madhya pradesh",
-    " interior decor store indore",
-  ],
-  alternates: { canonical: "https://www.dreamhomestyling.com/category" },
-  openGraph: {
-    title: "Contact Us | Dream Home Styling – Home Decor Store Bhopal",
-    description:
-      "Contact Dream Home Styling in Bhopal for customized wallpapers, curtains, blinds, and interior design services. Visit our Neelbad store or call us today.",
-    url: "https://www.dreamhomestyling.com/",
-    images: [
-      {
-        url: "https://res.cloudinary.com/dyc17zibo/image/upload/v1770710138/logo_yorkun.png",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Contact Us | Dream Home Styling – Home Decor Store Bhopal",
-    description:
-      "Contact Dream Home Styling in Bhopal for customized wallpapers, curtains, blinds, and interior design services. Visit our Neelbad store or call us today.",
-    images: [
-      {
-        url: "https://res.cloudinary.com/dyc17zibo/image/upload/v1770710138/logo_yorkun.png",
-      },
-    ],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    "max-image-preview": "large",
-    "max-snippet": -1,
-    "max-video-preview": -1,
-  },
-};
 
 const Page = async ({ params }) => {
   const { categoryid } = await params;
@@ -63,7 +17,6 @@ const Page = async ({ params }) => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`,
       ),
     ]);
-    console.log("categoryRes after call", categoryRes.data);
     products = productRes.data;
     categories = categoryRes.data;
   } catch (error) {
@@ -80,3 +33,35 @@ const Page = async ({ params }) => {
 };
 
 export default Page;
+
+export async function generateMetadata({ params }) {
+  const { categoryname, categoryid } = await params;
+
+  return generateMataDataForSEO({
+    title: "Contact Us | Dream Home Styling – Home Decor Store Bhopal",
+    description:
+      "Contact Dream Home Styling in Bhopal for customized wallpapers, curtains, blinds, and interior design services. Visit our Neelbad store or call us today.",
+    keywords: [
+      "contact dream home styling",
+      "home decor store contact bhopal",
+      " interior decor shop bhopal contact,",
+      "wallpaper curtain store bhopa",
+      " customized home decor bhopal",
+      "interior designer bhopal",
+      " home furnishing store madhya pradesh",
+      " home furnishing store madhya pradesh",
+      " interior decor store indore",
+    ],
+    canonicalEndpoint: `/${categoryname}/${categoryid}`,
+    robots: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+    ogImages: [
+      "https://res.cloudinary.com/dyc17zibo/image/upload/v1770710138/logo_yorkun.png",
+    ],
+  });
+}
