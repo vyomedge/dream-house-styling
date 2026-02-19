@@ -1,4 +1,3 @@
-import { textToSlug } from "@/utills/utills";
 import axios from "axios";
 const sitemapUrls = [
   { url: "/", priority: 1.0 },
@@ -38,7 +37,7 @@ const fetchActiveCategory = async () => {
 };
 
 export default async function sitemap() {
-  const baseUrl = "https://dream-house-styling.vercel.app";
+  const baseUrl = "https://www.dreamhomestyling.com";
 
   const lastmod = new Date().toISOString().replace("Z", "+00:00");
 
