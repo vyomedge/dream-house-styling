@@ -1,3 +1,4 @@
+import { textToSlug } from "@/utills/utills";
 import axios from "axios";
 const sitemapUrls = [
   { url: "/", priority: 1.0 },
