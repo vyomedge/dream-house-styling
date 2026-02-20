@@ -90,7 +90,7 @@ const HeaderMagaDropDown = () => {
           </span>
           <Link
             className="font-dm text-xs font-bold text-primary flex items-center gap-2 hover:gap-4 transition-all"
-            href="/category/wallpaper/3"
+            href="/categories"
           >
             View All Categories{" "}
             <span className="material-symbols-outlined text-sm">
