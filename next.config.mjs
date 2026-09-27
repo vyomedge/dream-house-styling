@@ -4,7 +4,12 @@ const nextConfig = {
   reactCompiler: true,
   output: "standalone",
   images: {
-    domains: ["res.cloudinary.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
   },
 };
 

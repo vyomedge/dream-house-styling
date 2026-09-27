@@ -2,26 +2,26 @@
 
 import { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import Cookies from "universal-cookie";
+import { useAuth } from "@/Context/AuthContext";
 
 const protectedRoutes = ["/add-to-cart"];
 
 const AuthGuard = ({ children }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const cookies = new Cookies();
+  const { session, loading } = useAuth();
 
   useEffect(() => {
-    const access_token = cookies.get("Access_Token");
+    if (loading) return;
 
     const isProtected = protectedRoutes.some((route) =>
       pathname.startsWith(route),
     );
 
-    if (isProtected && !access_token) {
+    if (isProtected && !session?.user) {
       router.replace("/login");
     }
-  }, [pathname, router]);
+  }, [pathname, router, session, loading]);
 
   return <>{children}</>;
 };

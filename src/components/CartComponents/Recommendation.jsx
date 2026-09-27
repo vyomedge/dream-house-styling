@@ -1,6 +1,7 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import RecommendationCard from "./RecommendationCard";
-import axios from "axios";
 
 const Recommendations = () => {
   const [products, setProducts] = useState([]);
@@ -9,14 +10,20 @@ const Recommendations = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Product/`,
-      );
-      setProducts(response.data);
-      setLoading(false);
+
+      const response = await fetch("/api/catalog/products");
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch products");
+      }
+
+      const data = await response.json();
+      setProducts(Array.isArray(data) ? data : []);
     } catch (error) {
-      setLoading(false);
       console.error("Error fetching products:", error);
+      setProducts([]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -37,9 +44,12 @@ const Recommendations = () => {
         <div className="text-(--primaryColor) text-center">Loading...</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {LimetedProducts.map((data) => {
-            return <RecommendationCard cardData={data} />;
-          })}
+          {LimetedProducts.map((data) => (
+            <RecommendationCard
+              key={data.id}
+              cardData={data}
+            />
+          ))}
         </div>
       )}
     </div>

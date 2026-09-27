@@ -12,6 +12,7 @@ import Customization from "./Customization/Customization";
 import VisitStore from "./VisitStore/VisitStore";
 import InteriorSolutions from "./InteriorSolutions/InteriorSolutions";
 import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
+import { getPublishedCategories, getPublishedProducts } from "@/lib/catalog";
 
 const faqs = [
   {
@@ -64,36 +65,19 @@ const testimonialData = [
   },
 ];
 
-async function getCategories() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`,
-    {
-      next: { revalidate: 3600 }, // ISR: revalidate every 1 hr
-    },
-  );
+const getCategories = async () => {
+  const categories = await getPublishedCategories();
 
-  const data = await res.json();
-
-  const newdata = data.map((item) => ({
+  return categories.map((item) => ({
     ...item,
     name: item.name,
     className: "aspect-[4/3]",
   }));
+};
 
-  return newdata;
-}
-
-async function getProducts() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Product/`,
-    {
-      next: { revalidate: 3600 }, // ISR: revalidate every 1 hr
-    },
-  );
-
-  return res.json();
-}
-
+const getProducts = async () => {
+  return getPublishedProducts();
+};
 const HomePage = async () => {
   const categories = await getCategories();
   const products = await getProducts();
@@ -121,3 +105,6 @@ const HomePage = async () => {
 };
 
 export default HomePage;
+
+
+

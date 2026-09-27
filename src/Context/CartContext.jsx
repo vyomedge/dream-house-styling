@@ -1,9 +1,7 @@
 "use client";
-import { createContext, useContext, useReducer, useState } from "react";
-import axios from "axios";
-import Cookies from "universal-cookie";
 
-const cookies = new Cookies();
+import { createContext, useContext, useReducer, useCallback } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 const CartContext = createContext();
 
@@ -15,7 +13,7 @@ const initialState = {
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "SET_LOADING":
-      return { ...state, loading: true };
+      return { ...state, loading: action.payload };
 
     case "SET_CART":
       return {
@@ -32,134 +30,276 @@ const cartReducer = (state, action) => {
   }
 };
 
-export const refetchAccessToken = (items) => {
-  const access_token = cookies.get("Access_Token");
-
-  return access_token;
+export const refetchAccessToken = () => {
+  return null;
 };
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
-  // -----------------------
-  // Helper
-  // -----------------------
+  const getUser = async () => {
+    const supabase = createClient();
 
-  // -----------------------
-  // Helper
-  // -----------------------
-  const setCartFromApi = (items) => {
-    dispatch({ type: "SET_CART", payload: items });
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    return user;
   };
 
-  // -----------------------
-  // SINGLE ITEM
-  // -----------------------
+  const getOrCreateCart = async (userId) => {
+    const supabase = createClient();
+
+    const { data: existingCart, error: fetchError } = await supabase
+      .from("carts")
+      .select("id")
+      .eq("user_id", userId)
+      .maybeSingle();
+
+    if (fetchError) throw fetchError;
+
+    if (existingCart) {
+      return existingCart;
+    }
+
+    const { data: newCart, error: createError } = await supabase
+      .from("carts")
+      .insert({ user_id: userId })
+      .select("id")
+      .single();
+
+    if (createError) throw createError;
+
+    return newCart;
+  };
+
+  const fetchCartItems = useCallback(async () => {
+    try {
+      dispatch({ type: "SET_LOADING", payload: true });
+
+      const user = await getUser();
+
+      if (!user) {
+        dispatch({ type: "SET_CART", payload: [] });
+        return [];
+      }
+
+      const cart = await getOrCreateCart(user.id);
+      const supabase = createClient();
+
+      const { data, error } = await supabase
+        .from("cart_items")
+        .select(`
+          id,
+          quantity,
+          product_id,
+          products (
+            *,
+            categories (
+              id,
+              name,
+              slug
+            ),
+            product_images (
+              id,
+              image_url,
+              alt_text,
+              sort_order,
+              is_primary
+            ),
+            product_customization (
+              id,
+              point,
+              sort_order
+            ),
+            product_faqs (
+              id,
+              question,
+              answer,
+              sort_order
+            )
+          )
+        `)
+        .eq("cart_id", cart.id)
+        .order("created_at", { ascending: true });
+
+      if (error) throw error;
+
+      const items = (data || []).map((item) => {
+        const product = item.products;
+
+        const regularPrice = Number(product?.regular_price || 0);
+        const salePrice = Number(
+          product?.sale_price ?? product?.regular_price ?? 0,
+        );
+        const discount = Number(product?.discount || 0);
+        const quantity = Number(item.quantity || 1);
+
+        const productImages = (product?.product_images || [])
+          .slice()
+          .sort(
+            (a, b) =>
+              (a.sort_order || 0) - (b.sort_order || 0),
+          );
+
+        const primaryImage =
+          productImages.find((image) => image.is_primary) ||
+          productImages[0];
+
+        const totalPrice = salePrice * quantity;
+
+        return {
+          ...(product || {}),
+
+          // Database fields
+          id: item.id,
+          product_id: product?.id,
+          cart_id: cart.id,
+          cart_item_id: item.id,
+
+          // Legacy cart compatibility
+          Product_id: product?.id,
+          ProductName: product?.name || "",
+          Product_Name: product?.name || "",
+          Product_Description: product?.description || "",
+          Short_Description: product?.short_description || "",
+          Image: primaryImage?.image_url || "",
+
+          category_id: product?.category_id,
+          Category_id: product?.category_id,
+          category_name: product?.categories?.name || "",
+
+          Price: [
+            {
+              Price: [
+                {
+                  Price: regularPrice,
+                  SalePrice: salePrice,
+                  Discount: discount,
+                },
+              ],
+            },
+          ],
+
+          Prices: [
+            {
+              Price: [
+                {
+                  Price: regularPrice,
+                  SalePrice: salePrice,
+                  Discount: discount,
+                },
+              ],
+            },
+          ],
+
+          Cart_Quantity: quantity,
+          TotalPrice: totalPrice,
+
+          images: productImages.map((image) => ({
+            id: image.id,
+            image: image.image_url,
+            alt_text: image.alt_text || product?.name || "",
+            sort_order: image.sort_order || 0,
+            is_primary: image.is_primary || false,
+          })),
+        };
+      });
+
+      dispatch({ type: "SET_CART", payload: items });
+
+      return items;
+    } catch (error) {
+      console.error("Error fetching cart:", error);
+      dispatch({ type: "SET_CART", payload: [] });
+      return [];
+    }
+  }, []);
+
   const addToCart = async (payload) => {
-    const data = {
-      Cart_Quantity: 1,
-      category: payload?.category_name,
-      Sub_Category_id: payload?.Sub_Category_id,
-      Store_id: payload?.Store_id,
-      TotalPrice: payload?.Prices[0].Price[0].SalePrice,
-      Price: payload?.Prices,
-      Image_id: payload?.images[0]?.id,
-      Country: "India",
-      State: payload?.Store_Country,
-      City: payload?.Store_City,
-      Copuon: payload?.copuon,
-      free: "no",
-      Brand_Id: payload?.Brand_id,
-      Product_id: payload?.id,
-    };
+    const user = await getUser();
 
-    try {
-      const access_token = refetchAccessToken();
-      dispatch({ type: "SET_LOADING" });
-
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Add-AddtoCart/`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
-        },
-      );
-      fetchCartItems();
-    } catch (err) {
-      console.error("Add to cart failed", err);
-      throw new Error(err);
+    if (!user) {
+      throw new Error("Please sign in before adding items to cart.");
     }
+
+    const cart = await getOrCreateCart(user.id);
+    const supabase = createClient();
+
+    dispatch({ type: "SET_LOADING", payload: true });
+
+    const { data: existingItem, error: existingItemError } = await supabase
+      .from("cart_items")
+      .select("id, quantity")
+      .eq("cart_id", cart.id)
+      .eq("product_id", payload.id)
+      .maybeSingle();
+
+    if (existingItemError) {
+      throw existingItemError;
+    }
+
+    if (existingItem) {
+      const { error } = await supabase
+        .from("cart_items")
+        .update({
+          quantity: existingItem.quantity + 1,
+        })
+        .eq("id", existingItem.id);
+
+      if (error) throw error;
+    } else {
+      const { error } = await supabase.from("cart_items").insert({
+        cart_id: cart.id,
+        product_id: payload.id,
+        quantity: 1,
+      });
+
+      if (error) throw error;
+    }
+
+    await fetchCartItems();
   };
 
-  // -----------------------
-  // BULK ITEMS ✅
-  // -----------------------
-  const fetchCartItems = async () => {
-    const access_token = refetchAccessToken();
-    try {
-      dispatch({ type: "SET_LOADING" });
-
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Addtocart/`,
-        {
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
-        },
-      );
-
-      setCartFromApi(res.data);
-    } catch (err) {
-      console.error("Error fetching products:", err);
-    }
-  };
-
-  // -----------------------
-  // UPDATE
-  // -----------------------
   const updateCartItem = async (payload, cartId) => {
-    const access_token = refetchAccessToken();
-    try {
-      dispatch({ type: "SET_LOADING" });
+    const supabase = createClient();
 
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Update-AddtoCart/${cartId}`,
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
-        },
-      );
-      fetchCartItems();
-    } catch (err) {
-      console.error("Update failed", err);
+    const quantity = Number(
+      payload?.Cart_Quantity ??
+        payload?.quantity ??
+        payload?.Quantity ??
+        1,
+    );
+
+    if (quantity <= 0) {
+      return removeFromCart(cartId);
     }
+
+    dispatch({ type: "SET_LOADING", payload: true });
+
+    const { error } = await supabase
+      .from("cart_items")
+      .update({ quantity })
+      .eq("id", cartId);
+
+    if (error) throw error;
+
+    await fetchCartItems();
   };
 
-  // -----------------------
-  // REMOVE
-  // -----------------------
   const removeFromCart = async (cartItemId) => {
-    const access_token = refetchAccessToken();
-    try {
-      dispatch({ type: "SET_LOADING" });
+    const supabase = createClient();
 
-      const res = await axios.delete(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/DeleteAddtoCart/${cartItemId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
-        },
-      );
-      fetchCartItems();
-    } catch (err) {
-      throw new Error(err);
-      console.error("Remove failed", err);
-    }
+    dispatch({ type: "SET_LOADING", payload: true });
+
+    const { error } = await supabase
+      .from("cart_items")
+      .delete()
+      .eq("id", cartItemId);
+
+    if (error) throw error;
+
+    await fetchCartItems();
   };
 
   return (

@@ -1,5 +1,9 @@
 import { textToSlug } from "@/utills/utills";
-import axios from "axios";
+import {
+  getPublishedCategories,
+  getPublishedProducts,
+} from "@/lib/catalog";
+
 const sitemapUrls = [
   { url: "/", priority: 1.0 },
   { url: "/categories", priority: 0.8 },
@@ -14,64 +18,52 @@ const sitemapUrls = [
   { url: "/signup", priority: 0.64 },
 ];
 
-const fetchProducts = async () => {
-  try {
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Product/`,
-    );
-    return response;
-  } catch (error) {
-    console.error("Error fetching products:", error);
-  }
-};
-
-const fetchActiveCategory = async () => {
-  try {
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`,
-    );
-
-    return response;
-  } catch (error) {
-    console.error("Error fetching categories:", error);
-  }
+const legacyCategoryIds = {
+  WALLPAPER: "3",
+  "WALL ART": "18",
+  CUSHIONS: "21",
 };
 
 export default async function sitemap() {
   const baseUrl = "https://www.dreamhomestyling.com";
+  const lastmod = new Date().toISOString();
 
-  const lastmod = new Date().toISOString().replace("Z", "+00:00");
+  const dynamicUrls = [];
 
-  let blogs = [];
   try {
-    const productsResponse = await fetchProducts();
-    const categoriesResponse = await fetchActiveCategory();
-    const data = productsResponse.data;
-    const categorydata = categoriesResponse.data;
+    const [products, categories] = await Promise.all([
+      getPublishedProducts(),
+      getPublishedCategories(),
+    ]);
 
-    if (Array.isArray(data)) {
-      data.forEach((item) => {
-        blogs.push({
-          url: `/category/${textToSlug(item.category_name)}/${item.Category_id}/${textToSlug(item.Product_Name)}/${item.id}`,
+    if (Array.isArray(products)) {
+      products.forEach((item) => {
+        const categoryName = item.category_name || "category";
+        const categoryId =
+          legacyCategoryIds[categoryName] || item.category_id;
+
+        dynamicUrls.push({
+          url: `/category/${textToSlug(categoryName)}/${categoryId}/${textToSlug(item.Product_Name)}/${item.id}`,
           priority: 0.64,
         });
       });
     }
-    if (Array.isArray(categorydata)) {
-      categorydata.forEach((item) => {
-        blogs.push({
-          url: `/category/${textToSlug(item.name.toLowerCase())}/${item.id}`,
+
+    if (Array.isArray(categories)) {
+      categories.forEach((item) => {
+        const categoryId = legacyCategoryIds[item.name] || item.id;
+
+        dynamicUrls.push({
+          url: `/category/${textToSlug(item.name)}/${categoryId}`,
           priority: 0.64,
         });
       });
     }
   } catch (error) {
-    console.log("Error fetching blogs:", error);
+    console.error("Error generating sitemap URLs:", error);
   }
 
-  const allUrls = sitemapUrls.concat(blogs);
-
-  return allUrls.map((item) => ({
+  return sitemapUrls.concat(dynamicUrls).map((item) => ({
     url: `${baseUrl}${item.url}`,
     lastModified: lastmod,
     priority: item.priority,

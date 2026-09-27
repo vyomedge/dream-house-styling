@@ -1,29 +1,18 @@
 import Categrory from "@/components/Category/Category";
 import { generateMataDataForSEO } from "@/utills/utills";
-import axios from "axios";
+import { getPublishedCategories, getProductsByCategory } from "@/lib/catalog";
 
 const Page = async ({ params }) => {
   const { categoryid } = await params;
 
-  let products = [];
-  let categories = [];
+  const [products, categories] = await Promise.all([
+    getProductsByCategory(categoryid),
+    getPublishedCategories(),
+  ]);
 
-  try {
-    const [productRes, categoryRes] = await Promise.all([
-      axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-ProductByCategorybyStore/${categoryid}?store_id=212`,
-      ),
-      axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`,
-      ),
-    ]);
-    products = productRes.data;
-    categories = categoryRes.data;
-  } catch (error) {
-    console.error("Error fetching data:", error.message);
-  }
-
-  const currCategory = categories.find((cat) => cat.id == categoryid);
+  const currCategory = categories.find(
+    (category) => String(category.id) === String(categoryid),
+  );
 
   return (
     <div>
@@ -36,21 +25,32 @@ export default Page;
 
 export async function generateMetadata({ params }) {
   const { categoryname, categoryid } = await params;
-  const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`,
-  );
-  const categories = res.data;
 
-  const currCategory = categories.find((cat) => cat.id == categoryid);
+  const categories = await getPublishedCategories();
+
+  const currCategory = categories.find(
+    (category) => String(category.id) === String(categoryid),
+  );
+
+  if (!currCategory) {
+    return {
+      title: "Category | Dream Home Styling",
+      description: "Explore our collection at Dream Home Styling.",
+    };
+  }
 
   const ogImage =
-    currCategory?.categoryImages ??
+    currCategory.image_url ??
     "https://res.cloudinary.com/dyc17zibo/image/upload/v1770710138/logo_yorkun.png";
+
   return generateMataDataForSEO({
-    title: currCategory.Meta_title,
-    description: currCategory.Meta_Description,
-    keywords: [currCategory.Meta_Keywords],
-    canonicalEndpoint: `/${categoryname}/${categoryid}`,
+    title: currCategory.meta_title ?? currCategory.name ?? "Dream Home Styling",
+    description:
+      currCategory.meta_description ??
+      currCategory.description ??
+      "Explore our collection at Dream Home Styling.",
+    keywords: currCategory.meta_keywords ? [currCategory.meta_keywords] : [],
+    canonicalEndpoint: `/category/${categoryname}/${categoryid}`,
     robots: {
       index: true,
       follow: true,

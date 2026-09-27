@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 
 function mapProduct(product) {
   if (!product) return null;
@@ -108,14 +108,11 @@ function mapCategory(category) {
 
     // Existing storefront compatibility
     category_name: category.name,
-    categoryImages: category.image_url
-      ? [{ image: category.image_url }]
-      : [],
+    categoryImages: category.image_url || "",
   };
 }
-
 export async function getPublishedCategories() {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const { data, error } = await supabase
     .from("categories")
@@ -133,7 +130,7 @@ export async function getPublishedCategories() {
 }
 
 export async function getPublishedProducts() {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const { data, error } = await supabase
     .from("products")
@@ -177,7 +174,7 @@ export async function getPublishedProducts() {
 export async function getPublishedProductById(id) {
   if (!id) return null;
 
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const { data, error } = await supabase
     .from("products")
@@ -222,7 +219,48 @@ export async function getPublishedProductById(id) {
 export async function getProductsByCategory(categoryId) {
   if (!categoryId) return [];
 
-  const supabase = await createClient();
+  const supabase = createPublicClient();
+
+  // Existing storefront URLs use the old numeric category IDs.
+  // Resolve those IDs to the new Supabase category UUIDs.
+  const legacyCategoryMap = {
+    "3": "WALLPAPER",
+    "18": "WALL ART",
+    "21": "CUSHIONS",
+  };
+
+  let resolvedCategoryId = categoryId;
+
+  if (!String(categoryId).includes("-")) {
+    const categoryName = legacyCategoryMap[String(categoryId)];
+
+    if (categoryName) {
+      const { data: category, error: categoryError } = await supabase
+        .from("categories")
+        .select("id")
+        .eq("name", categoryName)
+        .eq("status", "published")
+        .maybeSingle();
+
+      if (categoryError) {
+        console.error(
+          "Supabase category lookup error:",
+          categoryError,
+        );
+        return [];
+      }
+
+      if (!category) {
+        console.error(
+          "Supabase category not found:",
+          categoryName,
+        );
+        return [];
+      }
+
+      resolvedCategoryId = category.id;
+    }
+  }
 
   const { data, error } = await supabase
     .from("products")
@@ -239,9 +277,20 @@ export async function getProductsByCategory(categoryId) {
         alt_text,
         sort_order,
         is_primary
+      ),
+      product_customization (
+        id,
+        point,
+        sort_order
+      ),
+      product_faqs (
+        id,
+        question,
+        answer,
+        sort_order
       )
     `)
-    .eq("category_id", categoryId)
+    .eq("category_id", resolvedCategoryId)
     .eq("status", "published")
     .order("created_at", { ascending: false });
 
@@ -252,7 +301,6 @@ export async function getProductsByCategory(categoryId) {
 
   return (data || []).map(mapProduct);
 }
-
 export async function searchPublishedProducts(query) {
   const search = query?.trim();
 
@@ -260,7 +308,7 @@ export async function searchPublishedProducts(query) {
     return getPublishedProducts();
   }
 
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const { data, error } = await supabase
     .from("products")
@@ -296,7 +344,7 @@ export async function searchPublishedProducts(query) {
 export async function getPublishedCategoryById(id) {
   if (!id) return null;
 
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const { data, error } = await supabase
     .from("categories")
@@ -312,3 +360,6 @@ export async function getPublishedCategoryById(id) {
 
   return mapCategory(data);
 }
+
+
+

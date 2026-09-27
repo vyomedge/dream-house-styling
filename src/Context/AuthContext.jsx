@@ -1,31 +1,34 @@
 "use client";
-import { createContext, useContext, useEffect, useReducer } from "react";
-import axios from "axios";
-import Cookies from "universal-cookie";
 
-const cookies = new Cookies();
+import { createContext, useContext, useEffect, useReducer } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 const AuthContext = createContext();
 
 const initialState = {
   userData: {},
-  loading: false,
+  loading: true,
+  session: null,
 };
 
 const userReducer = (state, action) => {
   switch (action.type) {
     case "SET_LOADING":
-      return { ...state, loading: true };
+      return { ...state, loading: action.payload };
 
-    case "SET_USER":
+    case "SET_AUTH":
       return {
         ...state,
-        userData: action.payload,
+        session: action.payload.session,
+        userData: action.payload.userData || {},
         loading: false,
       };
 
     case "CLEAR_USER":
-      return initialState;
+      return {
+        ...initialState,
+        loading: false,
+      };
 
     default:
       return state;
@@ -35,56 +38,124 @@ const userReducer = (state, action) => {
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
 
-  // -----------------------
-  // Helper
-  // -----------------------
-  const refetchAccessToken = () => {
-    const access_token = cookies.get("Access_Token");
-    return access_token;
-  };
+  useEffect(() => {
+    const supabase = createClient();
 
-  const checkUserLoggedIn = () => {
-    const token = refetchAccessToken();
-    if (token) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+    const loadUser = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
 
-  const fetchUserData = async () => {
-    const access_token = refetchAccessToken();
-    try {
-      dispatch({ type: "SET_LOADING" });
+      if (!session?.user) {
+        dispatch({
+          type: "SET_AUTH",
+          payload: { session: null, userData: {} },
+        });
+        return;
+      }
 
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-GetUserProfile/`,
-        {
-          headers: {
-            Authorization: `Bearer ${access_token}`,
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", session.user.id)
+        .maybeSingle();
+
+      dispatch({
+        type: "SET_AUTH",
+        payload: {
+          session,
+          userData: profile || {
+            id: session.user.id,
+            email: session.user.email,
           },
         },
-      );
+      });
+    };
 
-      dispatch({ type: "SET_USER", payload: res.data });
-    } catch (err) {
-      console.error("Error fetching products:", err);
+    loadUser();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (!session?.user) {
+        dispatch({ type: "CLEAR_USER" });
+        return;
+      }
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", session.user.id)
+        .maybeSingle();
+
+      dispatch({
+        type: "SET_AUTH",
+        payload: {
+          session,
+          userData: profile || {
+            id: session.user.id,
+            email: session.user.email,
+          },
+        },
+      });
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const checkUserLoggedIn = () => Boolean(state.session?.user);
+
+  const fetchUserData = async () => {
+    const supabase = createClient();
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      dispatch({ type: "CLEAR_USER" });
+      return null;
     }
+
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    const userData = profile || {
+      id: user.id,
+      email: user.email,
+    };
+
+    dispatch({
+      type: "SET_AUTH",
+      payload: {
+        session: state.session,
+        userData,
+      },
+    });
+
+    return userData;
   };
 
-  useEffect(() => {
-    if (refetchAccessToken()) {
-      fetchUserData();
-    }
-  }, []);
+  const logout = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    dispatch({ type: "CLEAR_USER" });
+  };
 
   return (
     <AuthContext.Provider
       value={{
         userData: state.userData,
         loading: state.loading,
+        session: state.session,
         fetchUserData,
         checkUserLoggedIn,
+        logout,
       }}
     >
       {children}
