@@ -1,18 +1,46 @@
-import { headers } from "next/headers";
+"use client";
+
+import { useEffect, useState } from "react";
 import FloatingWhatsapp from "@/components/FloatingWhatsapp/FloatingWhatsapp";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
-import { getPublishedCategories } from "@/lib/catalog";
 
-export default async function LayoutWrapper({ children }) {
-  const requestHeaders = await headers();
-  const isAdminRoute = requestHeaders.get("x-admin-route") === "true";
+export default function LayoutWrapper({ children }) {
+  const [categories, setCategories] = useState([]);
 
-  if (isAdminRoute) {
-    return <>{children}</>;
-  }
+  useEffect(() => {
+    let cancelled = false;
 
-  const categories = await getPublishedCategories();
+    async function loadCategories() {
+      try {
+        const response = await fetch("/api/catalog/categories", {
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          throw new Error(`Categories request failed: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!cancelled) {
+          setCategories(Array.isArray(data) ? data : []);
+        }
+      } catch (error) {
+        console.error("Failed to load categories:", error);
+
+        if (!cancelled) {
+          setCategories([]);
+        }
+      }
+    }
+
+    loadCategories();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <>
