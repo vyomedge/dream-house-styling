@@ -1,22 +1,19 @@
+import { headers } from "next/headers";
 import FloatingWhatsapp from "@/components/FloatingWhatsapp/FloatingWhatsapp";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
-
-const fetchCategories = async () => {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/UserPanel/Get-Categories/`,
-      { next: { revalidate: 3600 } },
-    );
-    const data = await res.json();
-    return data || [];
-  } catch (err) {
-    console.error("Category API error:", err);
-  }
-};
+import { getPublishedCategories } from "@/lib/catalog";
 
 export default async function LayoutWrapper({ children }) {
-  const categories = await fetchCategories();
+  const requestHeaders = await headers();
+  const isAdminRoute = requestHeaders.get("x-admin-route") === "true";
+
+  if (isAdminRoute) {
+    return <>{children}</>;
+  }
+
+  const categories = await getPublishedCategories();
+
   return (
     <>
       <Header categories={categories} />

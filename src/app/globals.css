@@ -410,3 +410,22 @@ select:-webkit-autofill {
         }
     
     
+
+/* Form controls - ensure readable text on light inputs */
+input,
+textarea,
+select {
+  color: #101d22;
+  background-color: #ffffff;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280;
+  opacity: 1;
+}
+
+select option {
+  color: #101d22;
+  background-color: #ffffff;
+}
